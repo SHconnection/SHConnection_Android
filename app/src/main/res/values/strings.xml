@@ -1,0 +1,6 @@
+<resources>
+  <string name="app_name">SHConnection</string>
+
+  <string name="scan_from_actual_view">扫一扫进入班级</string>
+  <string name="scan_from_system_gallery">从系统相册读取</string>
+</resources>

@@ -1,40 +1,40 @@
-package com.example.kolibreath.shconnection
+package com.example.kolibreath.shconnection.base.ui
 
-import android.os.Bundle
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
+import com.example.kolibreath.shconnection.R.id
 import com.example.kolibreath.shconnection.extensions.findView
 import org.jetbrains.anko.find
-import org.jetbrains.anko.toolbar
 
 open class ToolbarActivity : BaseActivity() {
 
-   private val mToolbar: Toolbar by findView(R.id.toolbar)
+  private val mToolbar: Toolbar by findView(id.toolbar)
+  open fun canBack():Boolean  = true
+
 
   override fun setContentView(layoutResID: Int) {
     super.setContentView(layoutResID)
     initToolbar()
   }
 
-  private fun canBack():Boolean {
-    return true;
-  }
+
   private fun initToolbar(){
     setSupportActionBar(mToolbar)
-    mToolbar.setTitle("")
+    if(mToolbar == null)
+      Log.d("fuck","fuck")
+    mToolbar.title = ""
     if(canBack()){
       val actionBar = supportActionBar
-      if(actionBar != null){
-        actionBar.setDisplayHomeAsUpEnabled(true)
-      }
+      actionBar?.setDisplayHomeAsUpEnabled(true)
     }
   }
 
   private fun setTitle(title:String){
-    mToolbar.setTitle("")
-      val textView:TextView = mToolbar.find(R.id.tv_title)
-    textView.setText(title)
+    mToolbar.title = ""
+      val textView:TextView = mToolbar.find(id.tv_title)
+    textView.text = title
     setSupportActionBar(mToolbar)
 
   }

@@ -1,16 +1,15 @@
-package com.example.kolibreath.shconnection
+package com.example.kolibreath.shconnection.base.ui
 
 import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
-import android.text.AlteredCharSequence.make
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.View.OnClickListener
+import com.example.kolibreath.shconnection.R.color
 import rx.Subscription
 import rx.subscriptions.CompositeSubscription
 
@@ -61,39 +60,5 @@ open class BaseActivity : AppCompatActivity() {
     return LayoutInflater.from(this)
   }
 
-  fun showSnackBarLong(msg:String) {
-    Snackbar.make(window.decorView,msg,Snackbar.LENGTH_LONG).show()
-  }
 
-  fun showSnackBarShort(msg:String){
-    Snackbar.make(window.decorView,msg,Snackbar.LENGTH_SHORT).show()
-  }
-
-  fun showSnackBarShort(msg:String,listener:(view:View)->Unit){
-    Snackbar.make(window.decorView,msg,Snackbar.LENGTH_SHORT).setAction("确定",listener).show()
-  }
-
-
-  fun showSnackBarLong(msg:String,listener:(view:View)->Unit){
-    Snackbar.make(window.decorView,msg,Snackbar.LENGTH_LONG).setAction("确定",listener).show()
-  }
-
-  fun showErrorSnackbarShort(msg: String) {
-    val snackbar: Snackbar = Snackbar.make(findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT).apply{
-      setText(msg)
-    }
-    val view = snackbar.view
-    view.setBackgroundColor(resources.getColor(R.color.red))
-    snackbar.show()
-  }
-
-  fun showErrorSnackbarShort(msg: String,listener: (view: View) -> Unit) {
-    val snackbar: Snackbar = Snackbar.make(findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT).apply{
-      setText(msg)
-    }
-    val view = snackbar.view
-    view.setBackgroundColor(resources.getColor(R.color.red))
-    snackbar.setAction("确定",listener)
-    snackbar.show()
-  }
 }

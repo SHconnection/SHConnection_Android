@@ -1,17 +1,19 @@
-package com.example.kolibreath.shconnection
+package com.example.kolibreath.shconnection.ui.auth
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import com.example.kolibreath.shconnection.R.layout
+import com.example.kolibreath.shconnection.base.ui.ToolbarActivity
+import com.example.kolibreath.shconnection.extensions.showSnackBarShort
 import com.uuzuche.lib_zxing.activity.CaptureFragment
 import com.uuzuche.lib_zxing.activity.CodeUtils
 import com.uuzuche.lib_zxing.activity.CodeUtils.AnalyzeCallback
-import java.io.File
 
 class ScanActivity : ToolbarActivity(){
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_scan)
+    setContentView(layout.activity_scan)
 
     initView()
   }
@@ -33,7 +35,7 @@ class ScanActivity : ToolbarActivity(){
       }
     }
     val captureFragment = CaptureFragment().apply {
-      CodeUtils.setFragmentArgs(this,R.layout.fragment_scan)
+      CodeUtils.setFragmentArgs(this, layout.fragment_scan)
       analyzeCallback = analyzeCb
     }
   }

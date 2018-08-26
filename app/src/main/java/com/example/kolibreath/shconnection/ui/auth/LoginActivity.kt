@@ -8,26 +8,29 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import com.example.kolibreath.shconnection.R
-import com.example.kolibreath.shconnection.R.layout
-import com.example.kolibreath.shconnection.ScanActivity
-import com.example.kolibreath.shconnection.ToolbarActivity
-import com.uuzuche.lib_zxing.activity.CodeUtils
+import com.example.kolibreath.shconnection.base.net.NetFactory
+import com.example.kolibreath.shconnection.base.ui.ToolbarActivity
+import com.example.kolibreath.shconnection.extensions.showErrorSnackbarShort
+import com.example.kolibreath.shconnection.extensions.showSnackBarShort
 import com.uuzuche.lib_zxing.activity.CodeUtils.AnalyzeCallback
 import com.uuzuche.lib_zxing.activity.CodeUtils.analyzeBitmap
 import isGranted
 import requestPermissions
+import rx.Subscriber
+import rx.Subscription
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 
 class LoginActivity : ToolbarActivity(){
 
   private var mPermissionGranted = false;
-
   private val IMAGE_TYPE = "image/*";
+
+  override fun canBack(): Boolean  = false
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
     menuInflater.inflate(R.menu.menu_scan,menu)
@@ -39,7 +42,7 @@ class LoginActivity : ToolbarActivity(){
     if(mPermissionGranted) {
       when (id) {
         R.id.action_scan_from_actual_view -> {
-          val intent = Intent(this,ScanActivity::class.java)
+          val intent = Intent(this, ScanActivity::class.java)
           startActivity(intent)
         }
         R.id.action_scan_from_system_gallery ->{
@@ -55,9 +58,10 @@ class LoginActivity : ToolbarActivity(){
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(layout.activity_main)
+    setContentView(R.layout.activity_auth_login)
 
     requestPermissions(this)
+    test()
   }
 
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -102,6 +106,25 @@ class LoginActivity : ToolbarActivity(){
            }
          }
        }
+  }
+
+  private fun test(){
+    NetFactory
+        .retrofitService
+        .test(605519800)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(object:Subscriber<Any>(){
+          override fun onNext(t: Any?) {
+          }
+
+          override fun onCompleted() {
+          }
+
+          override fun onError(e: Throwable?) {
+            e?.printStackTrace()
+          }
+        })
   }
 
   private fun openAlbum(){

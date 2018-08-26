@@ -1,3 +1,5 @@
+package com.example.kolibreath.shconnection.extensions
+
 import android.Manifest
 import android.app.Activity
 import android.content.Context
@@ -20,7 +22,10 @@ fun requestPermissions(context: Activity){
   if(permission.size ==0)
     return
   else{
-    ActivityCompat.requestPermissions(context,permissions,REQUEST_CODE)
+    ActivityCompat.requestPermissions(context,
+        permissions,
+        REQUEST_CODE
+    )
   }
 }
 

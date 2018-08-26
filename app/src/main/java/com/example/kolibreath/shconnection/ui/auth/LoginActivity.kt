@@ -1,7 +1,7 @@
 package com.example.kolibreath.shconnection.ui.auth
 
 import REQUEST_CODE_IMAGE_ALBUM
-import REQUEST_CODE
+import com.example.kolibreath.shconnection.extensions.REQUEST_CODE
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
@@ -18,10 +18,9 @@ import com.example.kolibreath.shconnection.extensions.showErrorSnackbarShort
 import com.example.kolibreath.shconnection.extensions.showSnackBarShort
 import com.uuzuche.lib_zxing.activity.CodeUtils.AnalyzeCallback
 import com.uuzuche.lib_zxing.activity.CodeUtils.analyzeBitmap
-import isGranted
-import requestPermissions
+import com.example.kolibreath.shconnection.extensions.isGranted
+import com.example.kolibreath.shconnection.extensions.requestPermissions
 import rx.Subscriber
-import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
@@ -99,7 +98,10 @@ class LoginActivity : ToolbarActivity(){
     requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
        when(requestCode){
          REQUEST_CODE ->{
-           if(isGranted(grantedResult = grantResults)){
+           if(isGranted(
+                   grantedResult = grantResults
+               )
+           ){
              Log.d("SHConnection","请求成功")
            }else{
              mPermissionGranted = true

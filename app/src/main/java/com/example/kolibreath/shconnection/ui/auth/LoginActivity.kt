@@ -8,9 +8,11 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat.startActivityForResult
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.webkit.WebView.HitTestResult.IMAGE_TYPE
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.base.ui.ToolbarActivity
@@ -91,6 +93,7 @@ class LoginActivity : ToolbarActivity(){
             }
           }
         })
+
       }
     }
   }
@@ -110,6 +113,7 @@ class LoginActivity : ToolbarActivity(){
          }
        }
   }
+  }
 
 
   private fun openAlbum(){
@@ -123,5 +127,6 @@ class LoginActivity : ToolbarActivity(){
 
     startActivityForResult(intent,REQUEST_CODE_IMAGE_ALBUM)
   }
+
 
 }

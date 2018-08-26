@@ -2,6 +2,7 @@ package com.example.kolibreath.shconnection.base.net
 
 import android.support.annotation.IdRes
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 import rx.Observable
 
@@ -13,4 +14,9 @@ interface RetrofitService{
 
   @GET("{id}")
   fun test(@Path("id") idRes:Int): Observable<Any>
+
+
+  //todo modify this
+  @POST()
+  fun login():Observable<Any>
 }

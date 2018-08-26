@@ -23,6 +23,7 @@ import com.example.kolibreath.shconnection.extensions.requestPermissions
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
+import rx.schedulers.Schedulers.test
 
 class LoginActivity : ToolbarActivity(){
 
@@ -110,24 +111,6 @@ class LoginActivity : ToolbarActivity(){
        }
   }
 
-  private fun test(){
-    NetFactory
-        .retrofitService
-        .test(605519800)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(object:Subscriber<Any>(){
-          override fun onNext(t: Any?) {
-          }
-
-          override fun onCompleted() {
-          }
-
-          override fun onError(e: Throwable?) {
-            e?.printStackTrace()
-          }
-        })
-  }
 
   private fun openAlbum(){
     val intent  = Intent();

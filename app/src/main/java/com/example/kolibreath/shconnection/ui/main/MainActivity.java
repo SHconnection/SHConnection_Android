@@ -44,7 +44,7 @@ public class MainActivity extends ToolbarActivity implements
     mBtmBar.setBackgroundColor(Color.BLACK);
     mBtmBar.addItem(mItemList.get(0)).addItem(mItemList.get(1)).addItem(mItemList.get(2))
         .setFirstSelectedPosition(1)
-        .initialise();
+        .initialise();in
   }
 
   //todo set it for the new navigation item

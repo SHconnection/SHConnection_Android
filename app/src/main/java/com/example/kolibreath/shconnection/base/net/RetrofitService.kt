@@ -20,4 +20,18 @@ interface RetrofitService{
    */
   @POST()
   fun login(userName:String, userPassword:String):Observable<Any>
+
+  /**
+   * 上传图片
+   */
+  @POST()
+  fun storePicture():Observable<Any>
+
+  /**
+   * 上传一个动态
+   */
+
+  @POST()
+  fun postNews(content:String,pictures:List<String>)
+
 }

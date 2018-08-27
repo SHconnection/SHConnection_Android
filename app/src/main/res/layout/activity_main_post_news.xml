@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <RelativeLayout
+
+      android:background="@color/colorPrimary"
+      android:layout_width="match_parent"
+      android:layout_height="56dp">
+
+
+      <TextView
+          android:id="@+id/btn_cancel"
+          android:layout_centerVertical="true"
+          android:text="取消"
+          android:layout_marginLeft="20dp"
+          android:textSize="16sp"
+          android:textColor="@color/white"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+      <TextView
+          android:id="@+id/btn_activity"
+          android:background="@color/white"
+          android:textColor="@color/black"
+          android:text="动态"
+          android:gravity="center"
+          android:textSize="16sp"
+          android:layout_width="80dp"
+          android:layout_height="40dp"/>
+      <TextView
+          android:id="@+id/btn_information"
+          android:text="消息"
+          android:background="@color/black"
+          android:gravity="center"
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          android:layout_toRightOf="@id/btn_activity"
+          android:layout_width="80dp"
+          android:layout_height="40dp"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/btn_confirm_post"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_centerVertical="true"
+        android:text="发表"
+        android:textSize="16sp"
+        android:textColor="@color/gray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+  </RelativeLayout>
+
+
+  <EditText
+      android:id="@+id/tv_content"
+      android:layout_marginTop="76dp"
+      android:layout_marginLeft="20dp"
+      android:text="说点什么吧..."
+      android:textSize="16sp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"/>
+
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/rv_pictures"
+      android:layout_marginTop="100dp"
+      android:layout_below="@+id/tv_content"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"/>
+
+  <LinearLayout
+      android:layout_below="@+id/rv_pictures"
+      android:orientation="horizontal"
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="match_parent"
+      android:layout_marginLeft="10dp"
+      android:layout_marginRight="10dp"
+      android:layout_height="130dp">
+
+    <ImageView
+        android:id="@+id/btn_picture"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_launcher_background"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"/>
+    <ImageView
+        android:visibility="invisible"
+        android:id="@+id/iv_picture_2"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_launcher_background"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"/>
+    <ImageView
+        android:visibility="invisible"
+        android:id="@+id/iv_picture_3"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_launcher_background"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"/>
+
+  </LinearLayout>
+</RelativeLayout>

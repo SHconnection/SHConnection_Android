@@ -71,7 +71,14 @@ class LoginActivity : ToolbarActivity(){
           startActivity(intent)
         }
         R.id.action_scan_from_system_gallery ->{
-          openAlbum()
+          openAlbum {
+            if(Build.VERSION.SDK_INT < 19)
+              intent.action = Intent.ACTION_GET_CONTENT
+            else
+              intent.action = Intent.ACTION_OPEN_DOCUMENT
+
+            startActivityForResult(it,REQUEST_CODE_IMAGE_ALBUM)
+          }
         }
       }
     }else{

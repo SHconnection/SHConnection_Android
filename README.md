@@ -40,7 +40,9 @@ eg:
 ## extensions package 
 封装对于Activity的扩展方法，在Kotlin代码中直接使用，在Java代码中需要使用``receiver``显式声明扩展对象
 
-## main package main 内容的代码
+## main package 内容的代码
+- MainActivity 包含一个BottomNavigationBar 用于放置主要的三个Navigation Fragments
+- 发送新的动态: PostNewsActivity
 
 # 任务和进度
 - 任务依赖情况

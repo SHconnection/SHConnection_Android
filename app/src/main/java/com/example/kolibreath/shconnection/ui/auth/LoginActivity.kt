@@ -24,6 +24,7 @@ import com.example.kolibreath.shconnection.extensions.showSnackBarShort
 import com.uuzuche.lib_zxing.activity.CodeUtils.AnalyzeCallback
 import com.uuzuche.lib_zxing.activity.CodeUtils.analyzeBitmap
 import com.example.kolibreath.shconnection.extensions.isGranted
+import com.example.kolibreath.shconnection.extensions.openAlbum
 import com.example.kolibreath.shconnection.extensions.requestPermissions
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
@@ -34,7 +35,6 @@ import testing
 class LoginActivity : ToolbarActivity(){
 
   private var mPermissionGranted = false;
-  private val IMAGE_TYPE = "image/*";
 
   private val mEdvUsername  by findView< EditText>(R.id.tv_username)
   private val mEdvUserpassword  by findView<EditText>(R.id.tv_password)
@@ -137,17 +137,6 @@ class LoginActivity : ToolbarActivity(){
   }
 
 
-  private fun openAlbum(){
-    val intent  = Intent();
-    intent.addCategory(Intent.CATEGORY_OPENABLE)
-    intent.type = IMAGE_TYPE
-    if(Build.VERSION.SDK_INT < 19)
-      intent.action = Intent.ACTION_GET_CONTENT
-    else
-      intent.action = Intent.ACTION_OPEN_DOCUMENT
-
-    startActivityForResult(intent,REQUEST_CODE_IMAGE_ALBUM)
-  }
 
   private fun login(){
     //todo currently not testing the login button

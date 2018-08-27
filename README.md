@@ -3,6 +3,7 @@
           
 ## Foreword:
  + 如果需要复写ToolbarActivity 或者其他父类中的方法，需要手动标注``open`` 关键字[reference](https://www.kotlincn.net/docs/reference/classes.html)
+ 
 
 ## base Package:
 ``BaseActivity.kt`` 

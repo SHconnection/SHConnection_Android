@@ -15,8 +15,9 @@ interface RetrofitService{
   @GET("{id}")
   fun test(@Path("id") idRes:Int): Observable<Any>
 
-
-  //todo modify this
+  /***
+   * 经过加密的用户名和用户密码
+   */
   @POST()
-  fun login():Observable<Any>
+  fun login(userName:String, userPassword:String):Observable<Any>
 }

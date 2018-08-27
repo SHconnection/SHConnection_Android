@@ -8,12 +8,17 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.base.ui.ToolbarActivity
+import com.example.kolibreath.shconnection.extensions.findView
 import com.example.kolibreath.shconnection.extensions.showErrorSnackbarShort
 import com.example.kolibreath.shconnection.extensions.showSnackBarShort
 import com.uuzuche.lib_zxing.activity.CodeUtils.AnalyzeCallback
@@ -24,11 +29,31 @@ import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import rx.schedulers.Schedulers.test
+import testing
 
 class LoginActivity : ToolbarActivity(){
 
   private var mPermissionGranted = false;
   private val IMAGE_TYPE = "image/*";
+
+  private val mEdvUsername  by findView< EditText>(R.id.tv_username)
+  private val mEdvUserpassword  by findView<EditText>(R.id.tv_password)
+  private val mBtnConfirm  by findView<Button>(R.id.btn_confirm).apply {
+    this.value.setOnClickListener {
+      login()
+    }
+  }
+  private val mBtnForgetPassword by findView<TextView>(R.id.tv_forget_password).apply {
+    this.value.setOnClickListener {
+      //todo add forget password interface
+    }
+  }
+
+  private val mBtnTeacherLogin by findView<EditText>(R.id.tv_teacher_login).apply {
+    this.value.setOnClickListener{
+      //todo add teacher login
+    }
+  }
 
   override fun canBack(): Boolean  = false
 
@@ -124,4 +149,32 @@ class LoginActivity : ToolbarActivity(){
     startActivityForResult(intent,REQUEST_CODE_IMAGE_ALBUM)
   }
 
-}
+  private fun login(){
+    //todo currently not testing the login button
+    if(testing) return
+
+    val userName = mEdvUsername.text.toString()
+    val userPassword  = mEdvUserpassword.text.toString()
+
+    if(TextUtils.isEmpty(userName) || TextUtils.isEmpty(userPassword))
+      return
+
+    NetFactory.retrofitService
+        .login(userName =  userName, userPassword = userPassword)
+        .subscribeOn(AndroidSchedulers.mainThread())
+        .observeOn(Schedulers.io())
+        .subscribe(object:Subscriber<Any>(){
+          override fun onNext(t: Any?) {
+            //todo
+          }
+
+          override fun onCompleted() {
+          }
+
+          override fun onError(e: Throwable?) {
+          }
+        })
+
+  }
+
+  }

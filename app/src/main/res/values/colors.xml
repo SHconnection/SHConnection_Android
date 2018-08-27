@@ -6,7 +6,7 @@
 
   <!--basic colors-->
   <color name="red">#dc0c0c</color>
-
+  <color name="white">#ffffff</color>
   <!--color for scanner-->
   <color name="scan_corner_color">#0cdca8</color>
 

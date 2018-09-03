@@ -3,12 +3,14 @@ package com.example.kolibreath.shconnection.base.widget
 import REQUEST_CODE_IMAGE_CAPTURE
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.widget.TextView
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.extensions.createView
 import com.example.kolibreath.shconnection.extensions.openAlbum
 import com.example.kolibreath.shconnection.extensions.openCamera
+import org.jetbrains.anko._Gallery
 import org.jetbrains.anko.layoutInflater
 
 /**
@@ -27,9 +29,7 @@ class ActionSelectDialog:BottomDialogFragment(){
       val btnCamera = view.findViewById<TextView>(R.id.btn_select_from_camera)
       val btnGallery = view.findViewById<TextView>(R.id.btn_select_from_gallery)
 
-     btnGallery.setOnClickListener {  context!!.openAlbum {
-       //todo to take photo of it!
-     }  }
+     btnGallery.setOnClickListener { galleryListner.invoke(context!!)}
 
     btnCamera.setOnClickListener { context!!.openCamera {
       val activity = context as Activity

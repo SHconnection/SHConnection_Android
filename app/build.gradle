@@ -55,4 +55,8 @@ dependencies {
   implementation 'com.rengwuxian.materialedittext:library:2.1.4'
   implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
   implementation 'com.android.support:multidex:1.0.3'
+
+  //qiniu
+  implementation 'com.qiniu:qiniu-android-sdk:7.3.+'
+
 }

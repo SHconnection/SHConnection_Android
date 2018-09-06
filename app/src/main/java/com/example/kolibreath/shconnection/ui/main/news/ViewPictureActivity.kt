@@ -51,6 +51,7 @@ class ViewPictureActivity: AppCompatActivity(){
     if(requestCode == REQUEST_CODE_MAIN && resultCode == RESULT_CODE_VIEW_IMG){
       val toDeletePicList = data!!.getStringArrayListExtra(IMG_LIST)
       mPicList.clear()
+      //添加所有的路径到这里
       mPicList.addAll(toDeletePicList)
       mGridViewAdapter.notifyDataSetChanged()
     }

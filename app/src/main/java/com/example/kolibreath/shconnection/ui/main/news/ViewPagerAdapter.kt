@@ -4,10 +4,10 @@ import android.content.Context
 import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.extensions.createView
 import com.luck.picture.lib.photoview.PhotoView
-import com.squareup.picasso.Picasso
 
 /**
  * ViewPager 的Adapter
@@ -31,8 +31,8 @@ class ViewPagerAdapter(val context:Context,val imageList :List<String>): PagerAd
     position: Int
   ): Any {
     val itemView = getItemView(R.layout.view_plus_image)
-    val photoView :PhotoView = itemView.findViewById(R.id.iv_img)
-    Picasso.with(context).load(imageList[position]).into(photoView)
+    val photoView : PhotoView = itemView.findViewById(R.id.iv_img)
+    Glide.with(context).load(imageList[position]).into(photoView)
     container.addView(photoView)
     return itemView
   }

@@ -11,6 +11,8 @@ val TAG_INFOMATION = "infomation"
 /**
  * 图片选择部分
  */
-val IMG_LIST = "0XFD"
-val POSITION = "0XFC"
-val RESULT_CODE_VIEW_IMG = 0xFB
+const val IMG_LIST = "0XFD"
+const val POSITION = "0XFC"
+const val RESULT_CODE_VIEW_IMG = 0xFB
+const val MAX_SELECT_PIC_NUM  = 5
+const val REQUEST_CODE_MAIN = 0xFA

@@ -38,22 +38,11 @@ class LoginActivity : ToolbarActivity(){
 
   private val mEdvUsername  by findView< EditText>(R.id.tv_username)
   private val mEdvUserpassword  by findView<EditText>(R.id.tv_password)
-  private val mBtnConfirm  by findView<Button>(R.id.btn_confirm).apply {
-    this.value.setOnClickListener {
-      login()
-    }
-  }
-  private val mBtnForgetPassword by findView<TextView>(R.id.tv_forget_password).apply {
-    this.value.setOnClickListener {
-      //todo add forget password interface
-    }
-  }
 
-  private val mBtnTeacherLogin by findView<EditText>(R.id.tv_teacher_login).apply {
-    this.value.setOnClickListener{
-      //todo add teacher login
-    }
-  }
+  private val mBtnConfirm  by findView<Button>(R.id.btn_confirm)
+  private val mBtnForgetPassword by findView<TextView>(R.id.tv_forget_password)
+
+  private val mBtnTeacherLogin by findView<EditText>(R.id.tv_teacher_login)
 
   override fun canBack(): Boolean  = false
 
@@ -95,6 +84,20 @@ class LoginActivity : ToolbarActivity(){
     requestPermissions(this)
     test()
   }
+
+  private fun initView(){
+    mBtnConfirm.setOnClickListener {
+        login()
+      }
+
+    mBtnForgetPassword.setOnClickListener {
+        //todo add forget password interface
+      }
+
+    mBtnTeacherLogin.setOnClickListener {
+      //todo add teacher login
+    }
+    }
 
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     super.onActivityResult(requestCode, resultCode, data)

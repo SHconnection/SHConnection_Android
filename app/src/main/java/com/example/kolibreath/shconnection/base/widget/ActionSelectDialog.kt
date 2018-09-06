@@ -29,7 +29,8 @@ class ActionSelectDialog:BottomDialogFragment(){
       val btnCamera = view.findViewById<TextView>(R.id.btn_select_from_camera)
       val btnGallery = view.findViewById<TextView>(R.id.btn_select_from_gallery)
 
-     btnGallery.setOnClickListener { galleryListner.invoke(context!!)}
+    //todo missing listener
+     btnGallery.setOnClickListener {}
 
     btnCamera.setOnClickListener { context!!.openCamera {
       val activity = context as Activity

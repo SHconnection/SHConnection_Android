@@ -81,7 +81,7 @@ fun Context.openCamera(action: (intent:Intent) -> Unit){
   if(intent.resolveActivity(packageManager) != null){
     val imageUri = Uri.fromFile(getTempFile())
     intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri)
-    action()
+    action(intent)
   }
 }
 

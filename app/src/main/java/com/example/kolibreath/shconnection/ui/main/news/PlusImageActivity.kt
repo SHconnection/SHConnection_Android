@@ -28,7 +28,7 @@ class PlusImageActivity : AppCompatActivity(), ViewPager.OnPageChangeListener,Vi
    * 初始view 设置 照片的位置
    */
   private fun initView(){
-    mViewPager = findViewById(R.id.viewpager)
+    mViewPager = findViewById(R.id.viewPager)
 
     findViewById<ImageView>(R.id.iv_back).setOnClickListener(this)
     findViewById<ImageView>(R.id.iv_delete).setOnClickListener(this)

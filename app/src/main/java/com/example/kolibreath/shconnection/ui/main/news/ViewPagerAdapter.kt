@@ -16,6 +16,7 @@ import com.luck.picture.lib.photoview.PhotoView
 class ViewPagerAdapter(val context:Context,val imageList :List<String>): PagerAdapter() {
 
 
+
   override fun getItemPosition(`object`: Any): Int {
     return POSITION_NONE
   }
@@ -26,6 +27,7 @@ class ViewPagerAdapter(val context:Context,val imageList :List<String>): PagerAd
 
 
   //返回一个object 对象
+  //todo 浏览大图有点问题
   override fun instantiateItem(
     container: ViewGroup,
     position: Int

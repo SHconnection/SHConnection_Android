@@ -6,6 +6,8 @@
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+    <!--修改toolbar上面字体的颜色-->
+    <item name="android:textColorSecondary">@android:color/white</item>
   </style>
 
   <style name="BottomDialogStyle" parent="@android:style/Theme.Dialog">

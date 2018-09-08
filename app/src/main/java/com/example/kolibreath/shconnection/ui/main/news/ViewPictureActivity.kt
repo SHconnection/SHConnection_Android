@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.WindowId
 import android.widget.AdapterView
@@ -33,6 +34,7 @@ import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.entity.LocalMedia
 import org.jetbrains.anko.find
 import org.jetbrains.anko.gridView
+import java.util.LinkedList
 
 class ViewPictureActivity: AppCompatActivity(){
 
@@ -65,7 +67,10 @@ class ViewPictureActivity: AppCompatActivity(){
   private val mBtnSwitchActivity by findView<TextView>(R.id.btn_activity)
   private val mBtnSwitchInformation by findView<TextView>(R.id.btn_information)
 
-
+  /**
+   * 生成的urls
+   */
+  private lateinit var mPicUrls : LinkedList<String>
 
   @RequiresApi(VERSION_CODES.M)
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -176,7 +181,9 @@ class ViewPictureActivity: AppCompatActivity(){
     }
 
     mBtnConfirm.setOnClickListener {
+      //todo 异步 ！！！！
       QiniuExtension.getUrls(pictures = mPicList)
+      mPicUrls = QiniuExtension.urls
     }
 
     mBtnCancel.setOnClickListener {  finish()}

@@ -38,7 +38,7 @@ class QiniuExtension{
     )
         .uploadToken("android")
 
-    fun upload(
+    private fun upload(
       data: File,
       name: String,
       completionHandler: (key: String, info: ResponseInfo, response: JSONObject) -> Unit
@@ -48,7 +48,7 @@ class QiniuExtension{
           name,
           token,
           { key, info, response ->
-            completionHandler.invoke(key, info, response)
+            completionHandler(key,info, response)
           }, null
       )
     }
@@ -56,8 +56,12 @@ class QiniuExtension{
     /**
      * 将一个有文件路径的list 转换成一个包含名称和file object 的 hashmap 最后将这些list 包装为一个整体的Observable
      * 返回所有生成的外链的url
+     * 这个是一个异步的过程
      */
-    fun getUrls(pictures: ArrayList<String>): LinkedList<String> {
+
+    //todo 这个是一个异步的操作 如果上传所有东西写好了最好改成flatmap的形式
+    var urls : LinkedList<String> = LinkedList()
+    fun getUrls(pictures: ArrayList<String>) {
       val map = HashMap<String, File>()
       pictures.forEachIndexed { index, picture ->
         try {
@@ -76,7 +80,7 @@ class QiniuExtension{
         val observable = Observable.create(Observable.OnSubscribe<String> {
           upload(data = data, name = name) { key, _, _ ->
             run {
-              urls.add(key)
+              Log.d("qiniu","fuck$key")
               it.onNext(key)
               it.onCompleted()
             }
@@ -90,7 +94,11 @@ class QiniuExtension{
           .observeOn(AndroidSchedulers.mainThread())
           .subscribe(object : Subscriber<String>() {
             override fun onNext(t: String?) {
-              Log.d("qiniu", t)
+              urls.add("http://http://ogbvujd8z.bkt.clouddn.com/$t")
+              urls.forEach{
+                Log.d("qiniu key", it)
+
+              }
             }
 
             override fun onCompleted() {
@@ -101,7 +109,6 @@ class QiniuExtension{
               e?.printStackTrace()
             }
           })
-      return urls
     }
   }
 }

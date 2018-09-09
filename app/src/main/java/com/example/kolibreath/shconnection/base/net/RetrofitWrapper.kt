@@ -28,5 +28,6 @@ object RetrofitWrapper{
     }.build()
 
     return retrofit.create(RetrofitService::class.java)
+
   }
 }

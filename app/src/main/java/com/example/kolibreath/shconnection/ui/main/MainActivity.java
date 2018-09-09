@@ -5,6 +5,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toolbar;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -14,13 +17,19 @@ import com.example.kolibreath.shconnection.R;
 import com.example.kolibreath.shconnection.base.ui.ToolbarActivity;
 import java.util.ArrayList;
 import java.util.List;
+import org.jetbrains.anko.appcompat.v7.AppcompatAlertBuilder;
 
-public class MainActivity extends ToolbarActivity implements
+  /**
+   * 没有使用系统提供的Toolbar 构建 自定义了layout引入
+   */
+public class MainActivity extends AppCompatActivity implements
     BottomNavigationBar.OnTabSelectedListener {
 
   private BottomNavigationBar mBtmBar;
   private ViewPager mViewPager;
   private List<BottomNavigationItem> mItemList = new ArrayList<>();
+
+  private ImageView mBtnProfile;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +54,13 @@ public class MainActivity extends ToolbarActivity implements
     mBtmBar.addItem(mItemList.get(0)).addItem(mItemList.get(1)).addItem(mItemList.get(2))
         .setFirstSelectedPosition(1)
         .initialise();
+
+    mBtnProfile = findViewById(R.id.btn_profile);
+    mBtnProfile.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View view) {
+
+      }
+    });
   }
 
   //todo set it for the new navigation item

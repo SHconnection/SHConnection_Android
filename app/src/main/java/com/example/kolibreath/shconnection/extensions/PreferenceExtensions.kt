@@ -2,11 +2,14 @@ package com.example.kolibreath.shconnection.extensions
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.kolibreath.shconnection.base.App
 import kotlinx.coroutines.experimental.withTimeout
 import kotlin.reflect.KProperty
 
-class Preference<T> (private val context: Context, private val name:String,
+class Preference<T> (private val name:String,
     private val default:T) {
+
+  private val context:Context = App.getContext()
   private val prefs: SharedPreferences  by lazy {
     context.getSharedPreferences("default",Context.MODE_PRIVATE)
   }

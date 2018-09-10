@@ -1,5 +1,6 @@
 package com.example.kolibreath.shconnection.ui.auth
 
+import LOGIN_TOKEN
 import REQUEST_CODE_IMAGE_ALBUM
 import com.example.kolibreath.shconnection.extensions.REQUEST_CODE
 import android.app.Activity
@@ -16,14 +17,20 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.example.kolibreath.shconnection.R
+import com.example.kolibreath.shconnection.base.data.TeacherLoginBody
+import com.example.kolibreath.shconnection.base.data.TeacherLoginToken
+import com.example.kolibreath.shconnection.base.data.TeacherSignupBody
+import com.example.kolibreath.shconnection.base.data.TeacherSignupToken
 import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.base.ui.ToolbarActivity
+import com.example.kolibreath.shconnection.extensions.Preference
 import com.example.kolibreath.shconnection.extensions.findView
 import com.example.kolibreath.shconnection.extensions.showErrorSnackbarShort
 import com.example.kolibreath.shconnection.extensions.showSnackBarShort
 import com.uuzuche.lib_zxing.activity.CodeUtils.AnalyzeCallback
 import com.uuzuche.lib_zxing.activity.CodeUtils.analyzeBitmap
 import com.example.kolibreath.shconnection.extensions.isGranted
+import com.example.kolibreath.shconnection.extensions.logger
 import com.example.kolibreath.shconnection.extensions.openAlbum
 import com.example.kolibreath.shconnection.extensions.requestPermissions
 import rx.Subscriber
@@ -95,7 +102,7 @@ class LoginActivity : ToolbarActivity(){
       }
 
     mBtnTeacherLogin.setOnClickListener {
-      //todo add teacher login
+      //todo add teacher teacherLogin
     }
     }
 
@@ -149,7 +156,7 @@ class LoginActivity : ToolbarActivity(){
 
 
   private fun login(){
-    //todo currently not testing the login button
+    //todo currently not testing the teacherLogin button
     if(testing) return
 
     val userName = mEdvUsername.text.toString()
@@ -158,19 +165,22 @@ class LoginActivity : ToolbarActivity(){
     if(TextUtils.isEmpty(userName) || TextUtils.isEmpty(userPassword))
       return
 
+    val teacherLoginBody = TeacherLoginBody(userName,userPassword)
     NetFactory.retrofitService
-        .login(userName =  userName, userPassword = userPassword)
+        .teacherLogin(teacherLoginBody)
         .subscribeOn(AndroidSchedulers.mainThread())
         .observeOn(Schedulers.io())
-        .subscribe(object:Subscriber<Any>(){
-          override fun onNext(t: Any?) {
-            //todo
+        .subscribe(object:Subscriber<TeacherLoginToken>(){
+          override fun onNext(t: TeacherLoginToken?) {
+            Preference(LOGIN_TOKEN,"")
           }
 
           override fun onCompleted() {
+            logger("login complete")
           }
 
           override fun onError(e: Throwable?) {
+            e?.printStackTrace()
           }
         })
 

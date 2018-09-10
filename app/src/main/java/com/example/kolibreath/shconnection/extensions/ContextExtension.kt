@@ -15,6 +15,7 @@ import android.support.annotation.RequiresApi
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat.startActivityForResult
 import android.text.Layout
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
@@ -136,3 +137,11 @@ fun Context.createView(resId:Int):View{
   return LayoutInflater.from(this).inflate(resId,null,false)
 }
 
+/**
+ * logger extentsion
+ */
+
+fun Context.logger(key:String ="kolibreath",msg:String){
+  Log.d(key,msg
+  )
+}

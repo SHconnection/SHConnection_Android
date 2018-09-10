@@ -10,10 +10,12 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.example.kolibreath.shconnection.R.color
+import org.slf4j.LoggerFactory
 import rx.Subscription
 import rx.subscriptions.CompositeSubscription
 
 open class BaseActivity : AppCompatActivity() {
+
 
   private val mMenu: Menu? = null
   private var mActionBar: ActionBar? = null

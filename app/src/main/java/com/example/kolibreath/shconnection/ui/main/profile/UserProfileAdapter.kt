@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.kolibreath.shconnection.R
-import com.example.kolibreath.shconnection.base.data.UserProfile
+import com.example.kolibreath.shconnection.base.data.TeacherInfoData
 import com.example.kolibreath.shconnection.extensions.createView
 import com.example.kolibreath.shconnection.ui.main.profile.UserProfileAdapter.ViewHolder
 
 //todo 加上divider
-class UserProfileAdapter constructor(mType:Int,userProfile:UserProfile) : RecyclerView.Adapter<ViewHolder>(){
+class UserProfileAdapter constructor(mType:Int,userProfile:TeacherInfoData) : RecyclerView.Adapter<ViewHolder>(){
 
   /**
    * 定义两种类型 一种是自己 一种是别人
@@ -26,17 +26,17 @@ class UserProfileAdapter constructor(mType:Int,userProfile:UserProfile) : Recycl
   private lateinit var mContext : Context
 
   private val mType = mType;
-  private val mUserProfile:UserProfile = userProfile
+  private val mUserProfile:TeacherInfoData = userProfile
 
   private var mStartList : List<String>? = null
   private var mCommentList : List<String>? = null
 
   private var mNameValueMap = ArrayList<Pair<String,String>>()
 
-  private fun initProfile(userProfile: UserProfile){
-    val phone:Pair<String,String> = Pair("电话",userProfile.phone)
+  private fun initProfile(userProfile: TeacherInfoData){
+    val phone:Pair<String,String> = Pair("电话",userProfile.tel)
     val name:Pair<String,String> = Pair("名称",userProfile.name)
-    val description:Pair<String,String> = Pair("简介",userProfile.description)
+    val description:Pair<String,String> = Pair("简介",userProfile.intro)
 
     mNameValueMap = arrayListOf(name,phone,description)
 

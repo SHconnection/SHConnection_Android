@@ -16,3 +16,15 @@ const val POSITION = "0XFC"
 const val RESULT_CODE_VIEW_IMG = 0xFB
 const val MAX_SELECT_PIC_NUM  = 5
 const val REQUEST_CODE_MAIN = 0xFA
+
+/**
+ * 确定是自己或者是别人的user profile
+ */
+
+const val PROFILE_TYPE=  "user_profile"
+
+
+/**
+ * preference
+ */
+const val LOGIN_TOKEN = "sLoginToken"

@@ -1,6 +1,6 @@
 package com.example.kolibreath.shconnection.base.data
 
- class UserProfile(
+data class UserProfile(
    var name:String,
     var phone:String,
     var description:String,

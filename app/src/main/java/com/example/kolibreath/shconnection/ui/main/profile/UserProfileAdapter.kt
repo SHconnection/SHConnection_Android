@@ -95,6 +95,9 @@ class UserProfileAdapter constructor(mType:Int,userProfile:UserProfile) : Recycl
       holder.mTvName.text = mNameValueMap[position].first
       holder.mTvValue?.text = mNameValueMap[position].second
     }else{
+      holder.getHoldingView().setOnClickListener {
+        navigate(type = position)
+      }
       when(position){
         4 ->{
           holder.mTvName.text = "收藏"
@@ -102,6 +105,18 @@ class UserProfileAdapter constructor(mType:Int,userProfile:UserProfile) : Recycl
         5 -> {
           holder.mTvName.text = "评论"
         }
+      }
+    }
+  }
+
+  private fun navigate(type:Int){
+    //todo navigate by the type/position
+    when(type){
+      4 ->{
+        //收藏
+      }
+      5 ->{
+        //评论
       }
     }
   }
@@ -114,5 +129,9 @@ class UserProfileAdapter constructor(mType:Int,userProfile:UserProfile) : Recycl
      */
     var mTvName : TextView = view.findViewById((R.id.tv_item_name))
     var mTvValue: TextView? = view.findViewById(R.id.tv_item_value)
+
+    fun getHoldingView():View{
+      return view
+    }
   }
 }

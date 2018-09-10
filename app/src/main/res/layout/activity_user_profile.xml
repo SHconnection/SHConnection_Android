@@ -6,6 +6,7 @@
   <include
     layout="@layout/view_toolbar"/>
   <de.hdodenhof.circleimageview.CircleImageView
+      android:id="@+id/iv_avatar"
       android:src="@drawable/ic_launcher_background"
       android:layout_centerHorizontal="true"
       android:layout_marginTop="100dp"
@@ -22,6 +23,7 @@
       android:layout_marginRight="20dp"/>
 
   <android.support.v7.widget.RecyclerView
+      android:id="@+id/rv_items"
       android:layout_below="@+id/divider"
       android:layout_marginTop="80dp"
       android:layout_marginLeft="10dp"

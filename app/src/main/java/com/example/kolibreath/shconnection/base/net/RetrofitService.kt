@@ -1,18 +1,15 @@
 package com.example.kolibreath.shconnection.base.net
 
-import android.support.annotation.IdRes
-import com.example.kolibreath.shconnection.base.data.TeacherLoginBody
-import com.example.kolibreath.shconnection.base.data.TeacherLoginToken
-import com.example.kolibreath.shconnection.base.data.TeacherProfile
+import com.example.kolibreath.shconnection.base.data.LoginBody
+import com.example.kolibreath.shconnection.base.data.LoginToken
+import com.example.kolibreath.shconnection.base.data.Profile
 import com.example.kolibreath.shconnection.base.data.TeacherSignupBody
 import com.example.kolibreath.shconnection.base.data.TeacherSignupToken
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
-import retrofit2.http.Path
 import rx.Observable
-import java.net.PasswordAuthentication
 
 interface RetrofitService{
 
@@ -25,7 +22,7 @@ interface RetrofitService{
    * 经过加密的用户名和用户密码
    */
   @POST("teacher/login/")
-  fun teacherLogin(@Body loginInfo:TeacherLoginBody):Observable<TeacherLoginToken>
+  fun teacherLogin(@Body loginInfo:LoginBody):Observable<LoginToken>
 
   /**
    * 老师注册
@@ -37,18 +34,37 @@ interface RetrofitService{
    * 老师修改个人资料
    */
   @POST("teacher/profile/")
-  fun teacherChangeProfile(@Header("token") token:String,@Body teacherProfile: TeacherProfile):Observable<Any>
+  fun teacherChangeProfile(@Header("token") token:String,@Body profile: Profile):Observable<Any>
 
   /**
    * 获取老师的通讯录信息
    */
   @GET("teacher/info/")
-  fun teacherProfile(tid:String,token: String):Observable<TeacherProfile>
+  fun teacherProfile(tid:String,token: String):Observable<Profile>
   /**
    * 上传图片
    */
   @POST()
   fun storePicture():Observable<Any>
+
+  /**
+   * 家长登录
+   */
+  @POST("parent/login/")
+  fun parentLogin(@Body loginBody: LoginBody):Observable<LoginToken>
+
+  /**
+   * 家长修改资料
+   */
+  @POST("parent/profile/")
+  fun parentChangeProfile(@Header("token") token :String,@Body profile: Profile):Observable<Any>
+
+  /**
+   * 获取家长资料
+   */
+  @POST("parent/info/")
+  fun parentProfile(@Header("token") token:String,pid:String):Observable<Profile>
+
 
   /**
    * 上传一个动态

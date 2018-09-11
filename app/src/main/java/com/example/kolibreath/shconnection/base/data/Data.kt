@@ -3,14 +3,14 @@ package com.example.kolibreath.shconnection.base.data
 /**
  * 教师登录 的 body
  */
-data class TeacherLoginBody (
+data class LoginBody (
     val tel:String,
     val password:String)
 
 /**
  * 登录成功之后返回的token
  */
-data class TeacherLoginToken(
+data class LoginToken(
   val token :String
 )
 /**
@@ -32,7 +32,7 @@ data class TeacherSignupToken(
  * 老师修改个人资料（通讯录）
  * 需要token
  */
-data class TeacherProfile(
+data class Profile(
   val tel: String,
     val name:String,
     val wechat:String,

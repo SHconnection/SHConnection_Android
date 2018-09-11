@@ -141,7 +141,6 @@ fun Context.createView(resId:Int):View{
  * logger extentsion
  */
 
-fun Context.logger(key:String ="kolibreath",msg:String){
-  Log.d(key,msg
-  )
+fun Context.logger(msg:String,key:String ="kolibreath"){
+  Log.d(key,msg)
 }

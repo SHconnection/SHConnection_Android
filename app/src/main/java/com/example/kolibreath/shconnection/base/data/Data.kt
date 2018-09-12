@@ -44,6 +44,15 @@ data class TeacherInfoBody(
   val tid:String,
     val token: String
 )
+
+/**
+ * 班主任导入孩子
+ */
+data class child(
+    val name:String,
+    val sid:String
+    )
+
 /**
  * 老师的个人
  * 显示个人界面的信息相关

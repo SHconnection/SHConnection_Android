@@ -5,7 +5,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.kolibreath.shconnection"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -59,5 +59,7 @@ dependencies {
   implementation 'com.qiniu:qiniu-android-sdk:7.3.+'
   implementation 'de.hdodenhof:circleimageview:2.2.0'
   // https://mvnrepository.com/artifact/org.apache.poi/poi
-  implementation 'org.apache.poi:poi:4.0.0'
+  implementation "com.github.SUPERCILEX.poi-android:poi:$poiVersion"
+  implementation "com.github.SUPERCILEX.poi-android:proguard:$poiVersion"
+
 }

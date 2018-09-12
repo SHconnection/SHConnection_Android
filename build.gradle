@@ -35,5 +35,6 @@ task clean(type: Delete) {
 }
 
 ext{
+  poiVersion = '3.17'
   anko_version='0.10.5'
 }

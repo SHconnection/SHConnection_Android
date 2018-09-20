@@ -1,9 +1,10 @@
-package com.example.kolibreath.shconnection.ui.auth
+package com.example.kolibreath.shconnection.ui.auth.teacher
 
 import LOGIN_TOKEN
 import REQUEST_CODE_IMAGE_ALBUM
 import com.example.kolibreath.shconnection.extensions.REQUEST_CODE
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -31,13 +32,14 @@ import com.example.kolibreath.shconnection.extensions.isGranted
 import com.example.kolibreath.shconnection.extensions.logger
 import com.example.kolibreath.shconnection.extensions.openAlbum
 import com.example.kolibreath.shconnection.extensions.requestPermissions
+import com.example.kolibreath.shconnection.ui.auth.ScanActivity
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import rx.schedulers.Schedulers.test
 import testing
 
-class LoginActivity : ToolbarActivity(){
+class TeacherLoginActivity : ToolbarActivity(){
 
   private var mPermissionGranted = false;
 
@@ -50,6 +52,12 @@ class LoginActivity : ToolbarActivity(){
   private val mBtnTeacherLogin by findView<EditText>(R.id.tv_teacher_login)
 
   override fun canBack(): Boolean  = false
+
+  companion object {
+    fun start(context: Context){
+      context.startActivity(Intent(context,this::class.java))
+    }
+  }
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
     menuInflater.inflate(R.menu.menu_scan,menu)
@@ -84,7 +92,7 @@ class LoginActivity : ToolbarActivity(){
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_auth_login)
+    setContentView(R.layout.activity_auth_teacher_login)
 
     requestPermissions(this)
     test()
@@ -184,4 +192,4 @@ class LoginActivity : ToolbarActivity(){
 
   }
 
-  }
+}

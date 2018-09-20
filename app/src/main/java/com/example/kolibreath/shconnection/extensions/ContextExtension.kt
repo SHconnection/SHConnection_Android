@@ -21,6 +21,7 @@ import android.view.View
 import android.view.WindowManager
 import android.webkit.WebView.HitTestResult.IMAGE_TYPE
 import com.example.kolibreath.shconnection.R.color
+import com.example.kolibreath.shconnection.base.ui.BaseActivity
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.layoutInflater
 import java.io.File
@@ -144,3 +145,4 @@ fun Context.createView(resId:Int):View{
 fun Context.logger(msg:String,key:String ="kolibreath"){
   Log.d(key,msg)
 }
+

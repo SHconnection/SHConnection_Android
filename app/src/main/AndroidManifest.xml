@@ -20,8 +20,8 @@
     <activity android:name=".base.ui.ToolbarActivity"/>
     <activity android:name=".base.ui.BaseActivity"/>
     <!--auth-->
-    <activity android:name=".ui.auth.RegisterActivity"/>
-    <activity android:name=".ui.auth.LoginActivity">
+    <activity android:name=".ui.auth.teacher.TeacherRegisterActivity"/>
+    <activity android:name=".ui.auth.teacher.TeacherLoginActivity">
     </activity>
 
     <activity android:name=".ui.auth.ScanActivity"/>

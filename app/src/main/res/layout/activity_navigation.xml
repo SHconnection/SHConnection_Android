@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <include layout="@layout/view_toolbar"/>
+
+  <Button
+      android:id="@+id/btn_teacher_access"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="200dp"
+      android:text="老师登录"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"/>
+
+  <Button
+      android:id="@+id/btn_parent_access"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="10dp"
+      android:text="家长登录"
+      android:layout_below="@+id/btn_teacher_access"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"/>
+</RelativeLayout>

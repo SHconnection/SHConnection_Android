@@ -6,14 +6,14 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.ImageView
 import com.example.kolibreath.shconnection.R
-import com.example.kolibreath.shconnection.base.data.TeacherInfoData
+import com.example.kolibreath.shconnection.base.TeacherInfoData
 import com.example.kolibreath.shconnection.base.ui.ToolbarActivity
 import com.example.kolibreath.shconnection.extensions.findView
 
 class UserProfileActivity:ToolbarActivity() {
 
   //todo 需要新增条目 ： 微信
-  private lateinit var mUserProfile :TeacherInfoData
+  private lateinit var mUserProfile : TeacherInfoData
 
   private var TYPE :Int  = UserProfileAdapter.MINE_PROFILE
 

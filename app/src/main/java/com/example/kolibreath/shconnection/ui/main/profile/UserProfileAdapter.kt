@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.kolibreath.shconnection.R
-import com.example.kolibreath.shconnection.base.data.TeacherInfoData
+import com.example.kolibreath.shconnection.base.TeacherInfoData
 import com.example.kolibreath.shconnection.extensions.createView
 import com.example.kolibreath.shconnection.ui.main.profile.UserProfileAdapter.ViewHolder
 
 //todo 加上divider
-class UserProfileAdapter constructor(mType:Int,userProfile:TeacherInfoData) : RecyclerView.Adapter<ViewHolder>(){
+class UserProfileAdapter constructor(mType:Int,userProfile: TeacherInfoData) : RecyclerView.Adapter<ViewHolder>(){
 
   /**
    * 定义两种类型 一种是自己 一种是别人
@@ -26,7 +26,7 @@ class UserProfileAdapter constructor(mType:Int,userProfile:TeacherInfoData) : Re
   private lateinit var mContext : Context
 
   private val mType = mType;
-  private val mUserProfile:TeacherInfoData = userProfile
+  private val mUserProfile: TeacherInfoData = userProfile
 
   private var mStartList : List<String>? = null
   private var mCommentList : List<String>? = null

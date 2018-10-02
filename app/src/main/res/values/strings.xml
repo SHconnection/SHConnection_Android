@@ -1,6 +1,12 @@
 <resources>
   <string name="app_name">SHConnection</string>
 
+  <!--登录页面-->
+  <string name="input_parent_number">输入学号</string>
+  <string name="input_teacher_number">输入工号</string>
+  <string name="text__confirm">确定</string>
+  <string name="create_class">创建班级</string>
+
   <string name="scan_from_actual_view">扫一扫进入班级</string>
   <string name="scan_from_system_gallery">从系统相册读取</string>
 </resources>

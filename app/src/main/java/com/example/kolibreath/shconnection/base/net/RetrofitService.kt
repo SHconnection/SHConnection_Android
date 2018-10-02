@@ -1,10 +1,10 @@
 package com.example.kolibreath.shconnection.base.net
 
-import com.example.kolibreath.shconnection.base.data.LoginBody
-import com.example.kolibreath.shconnection.base.data.LoginToken
-import com.example.kolibreath.shconnection.base.data.Profile
-import com.example.kolibreath.shconnection.base.data.TeacherSignupBody
-import com.example.kolibreath.shconnection.base.data.TeacherSignupToken
+import com.example.kolibreath.shconnection.base.LoginBody
+import com.example.kolibreath.shconnection.base.LoginToken
+import com.example.kolibreath.shconnection.base.Profile
+import com.example.kolibreath.shconnection.base.TeacherSignupBody
+import com.example.kolibreath.shconnection.base.TeacherSignupToken
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -22,7 +22,7 @@ interface RetrofitService{
    * 经过加密的用户名和用户密码
    */
   @POST("teacher/login/")
-  fun teacherLogin(@Body loginInfo:LoginBody):Observable<LoginToken>
+  fun teacherLogin(@Body loginInfo: LoginBody):Observable<LoginToken>
 
   /**
    * 老师注册

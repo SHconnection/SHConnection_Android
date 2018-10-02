@@ -30,7 +30,6 @@ fun Activity.requestPermissions(){
     )
   }
 }
-}
 /**
  * 检测需要请求的权限 如果没有请求的权限放到另外的String[]
  */

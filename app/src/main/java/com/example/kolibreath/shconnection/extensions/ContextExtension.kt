@@ -1,29 +1,22 @@
 package com.example.kolibreath.shconnection.extensions
 
-import REQUEST_CODE_IMAGE_ALBUM
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.os.Build
 import android.os.Build.VERSION_CODES
 import android.os.Environment
 import android.provider.MediaStore
 import android.support.annotation.RequiresApi
 import android.support.design.widget.Snackbar
-import android.support.v4.app.ActivityCompat.startActivityForResult
-import android.text.Layout
+import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
-import android.webkit.WebView.HitTestResult.IMAGE_TYPE
 import com.example.kolibreath.shconnection.R.color
-import com.example.kolibreath.shconnection.base.ui.BaseActivity
-import org.jetbrains.anko.ctx
-import org.jetbrains.anko.layoutInflater
 import java.io.File
 import java.lang.Exception
 
@@ -146,3 +139,20 @@ fun Context.logger(msg:String,key:String ="kolibreath"){
   Log.d(key,msg)
 }
 
+/**
+ * 读取string.xml 中的文字
+ */
+
+fun Context.text(id:Int) = resources.getString(id)
+
+@RequiresApi(VERSION_CODES.O)
+    /**
+ *字符串的加密和解密
+ */
+
+fun Activity.encrypt(string:String):String =
+  java.util.Base64.getEncoder().encodeToString(string.toByteArray(Charsets.UTF_8))
+
+@RequiresApi(VERSION_CODES.O)
+fun Activity.decode(encrypted:String):String = String(
+    java.util.Base64.getDecoder().decode(encrypted),Charsets.UTF_8)

@@ -1,4 +1,4 @@
-package com.example.kolibreath.shconnection.base.data
+package com.example.kolibreath.shconnection.base
 
 /**
  * 教师登录 的 body

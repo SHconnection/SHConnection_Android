@@ -17,8 +17,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.example.kolibreath.shconnection.R
-import com.example.kolibreath.shconnection.base.data.LoginBody
-import com.example.kolibreath.shconnection.base.data.LoginToken
+import com.example.kolibreath.shconnection.base.LoginBody
+import com.example.kolibreath.shconnection.base.LoginToken
 import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.base.ui.ToolbarActivity
 import com.example.kolibreath.shconnection.extensions.Preference
@@ -169,7 +169,8 @@ class ParentLoginActivity:ToolbarActivity(){
     if(TextUtils.isEmpty(userName) || TextUtils.isEmpty(userPassword))
       return
 
-    val teacherLoginBody = LoginBody(userName,userPassword)
+    val teacherLoginBody =
+      LoginBody(userName, userPassword)
     NetFactory.retrofitService
         .teacherLogin(teacherLoginBody)
         .subscribeOn(AndroidSchedulers.mainThread())

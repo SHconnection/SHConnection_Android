@@ -1,7 +1,6 @@
 package com.example.kolibreath.shconnection.extensions
 
-import com.example.kolibreath.shconnection.base.data.child
-import org.apache.poi.poifs.property.Child
+import com.example.kolibreath.shconnection.base.child
 import org.apache.poi.ss.usermodel.Cell
 import org.apache.poi.ss.usermodel.Row
 import org.apache.poi.xssf.usermodel.XSSFRow
@@ -45,7 +44,7 @@ class XlsExtensions(private val path:String){
           }
         }
       }
-      child = child(name,sid)
+      child = child(name, sid)
       children.add(child)
     }
   }

@@ -9,7 +9,9 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
+import android.os.Build.VERSION_CODES
 import android.os.Bundle
+import android.support.annotation.RequiresApi
 import android.text.TextUtils
 import android.util.Log
 import android.view.Menu
@@ -18,8 +20,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.example.kolibreath.shconnection.R
-import com.example.kolibreath.shconnection.base.data.LoginBody
-import com.example.kolibreath.shconnection.base.data.LoginToken
+import com.example.kolibreath.shconnection.base.LoginBody
+import com.example.kolibreath.shconnection.base.LoginToken
 import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.base.ui.ToolbarActivity
 import com.example.kolibreath.shconnection.extensions.Preference
@@ -31,7 +33,6 @@ import com.uuzuche.lib_zxing.activity.CodeUtils.analyzeBitmap
 import com.example.kolibreath.shconnection.extensions.isGranted
 import com.example.kolibreath.shconnection.extensions.logger
 import com.example.kolibreath.shconnection.extensions.openAlbum
-import com.example.kolibreath.shconnection.extensions.requestPermissions
 import com.example.kolibreath.shconnection.ui.auth.ScanActivity
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
@@ -90,11 +91,12 @@ class TeacherLoginActivity : ToolbarActivity(){
   }
 
 
+  @RequiresApi(VERSION_CODES.M)
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_auth_teacher_login)
 
-    requestPermissions(this)
+    this.requestPermissions(this)
     test()
   }
 
@@ -171,7 +173,8 @@ class TeacherLoginActivity : ToolbarActivity(){
     if(TextUtils.isEmpty(userName) || TextUtils.isEmpty(userPassword))
       return
 
-    val teacherLoginBody = LoginBody(userName,userPassword)
+    val teacherLoginBody =
+      LoginBody(userName, userPassword)
     NetFactory.retrofitService
         .teacherLogin(teacherLoginBody)
         .subscribeOn(AndroidSchedulers.mainThread())

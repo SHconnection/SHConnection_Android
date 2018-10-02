@@ -12,6 +12,7 @@ import java.security.GeneralSecurityException;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
+//七牛云相关的内容
 public final class Auth {
 
   /**

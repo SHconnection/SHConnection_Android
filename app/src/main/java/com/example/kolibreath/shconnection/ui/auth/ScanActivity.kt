@@ -1,15 +1,28 @@
 package com.example.kolibreath.shconnection.ui.auth
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
+import android.os.Build.VERSION_CODES
 import android.os.Bundle
+import android.support.annotation.RequiresApi
 import com.example.kolibreath.shconnection.R.layout
+import com.example.kolibreath.shconnection.base.RxBus
+import com.example.kolibreath.shconnection.base.ScanEvent
 import com.example.kolibreath.shconnection.base.ui.ToolbarActivity
+import com.example.kolibreath.shconnection.extensions.encrypt
 import com.example.kolibreath.shconnection.extensions.showSnackBarShort
 import com.uuzuche.lib_zxing.activity.CaptureFragment
 import com.uuzuche.lib_zxing.activity.CodeUtils
 import com.uuzuche.lib_zxing.activity.CodeUtils.AnalyzeCallback
 
 class ScanActivity : ToolbarActivity(){
+
+  companion object {
+    fun start(context:Context){
+      context.startActivity(Intent(context,this::class.java))
+    }
+  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -23,15 +36,16 @@ class ScanActivity : ToolbarActivity(){
    */
   private fun initView(){
     val analyzeCb = object: AnalyzeCallback{
-      override fun onAnalyzeSuccess(mBitmap: Bitmap?, result: String?) {
-        //todo 显示成功的结果
-        showSnackBarShort("成功"){
 
-        }
+      @RequiresApi(VERSION_CODES.O)
+      override fun onAnalyzeSuccess(mBitmap: Bitmap?, result: String?) {
+        //如果扫描成功的话会返回班级id的String（加密之后）
+        RxBus.getDefault().send(ScanEvent(this@ScanActivity.encrypt(result!!)))
+        showSnackBarShort("成功")
       }
 
       override fun onAnalyzeFailed() {
-        //todo 显示失败的结果
+        showSnackBarShort("失败")
       }
     }
     val captureFragment = CaptureFragment().apply {

@@ -2,7 +2,6 @@ package com.example.kolibreath.shconnection.base;
 
 import android.app.Application;
 import android.content.Context;
-import com.example.kolibreath.shconnection.extensions.Preference;
 
 public class App extends Application {
 

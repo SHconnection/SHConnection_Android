@@ -36,7 +36,7 @@
     <activity android:name=".ui.main.news.PlusImageActivity">
     </activity>
     <activity android:name=".ui.main.navigation.LoginActivity"/>
-
+    <activity android:name=".ui.main.navigation.NavigationActivity"/>
     <!--解决7.0照相机崩溃问题-->
     <provider
         android:name="android.support.v4.content.FileProvider"

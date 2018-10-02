@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <include layout="@layout/view_toolbar"/>
+
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/edt_teacher_name"
+        android:inputType="text"
+        android:hint="@string/teacher_name"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginLeft="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/edt_teacher_number"
+        android:hint="@string/teacher_number"
+        android:inputType="text"
+        android:layout_marginTop="130dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginLeft="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+  </ScrollView>
+
+</RelativeLayout>

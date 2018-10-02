@@ -3,6 +3,8 @@ package com.example.kolibreath.shconnection.ui.main.navigation
 import USER_PARENT
 import USER_TEACHER
 import USER_TYPE
+import android.content.Context
+import android.content.Intent
 import android.opengl.Visibility
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -26,6 +28,15 @@ class LoginActivity:ToolbarActivity(){
   //todo 添加家长和老师请求数据库的api
   private val mTeacherApi = View.OnClickListener { }
   private val mParentApi = View.OnClickListener {  }
+
+
+  companion object {
+    fun start(context : Context, userType: Int){
+      context.startActivity(Intent(context,LoginActivity::class.java).apply {
+        this.putExtra(USER_TYPE,userType)
+      })
+    }
+  }
 
   private fun initView(){
     mEdtInputNumber = findViewById(R.id.edt_number)

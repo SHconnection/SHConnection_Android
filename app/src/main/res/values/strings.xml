@@ -7,6 +7,14 @@
   <string name="text__confirm">确定</string>
   <string name="create_class">创建班级</string>
 
+  <!--创建班级-->
+  <string name="teacher_name">班主任姓名</string>
+  <string name="teacher_number">班主任工号</string>
+  <string name="class_number">班级名称</string>
+  <string name="import_students_info">导入学生信息</string>
+  <string name="import_teacher_info">导入科任老师信息</string>
+
+
   <string name="scan_from_actual_view">扫一扫进入班级</string>
   <string name="scan_from_system_gallery">从系统相册读取</string>
 </resources>

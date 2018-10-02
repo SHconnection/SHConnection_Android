@@ -1,5 +1,8 @@
 package com.example.kolibreath.shconnection.ui.main.navigation
 
+import USER_PARENT
+import USER_TEACHER
+import android.content.Context
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
@@ -44,14 +47,12 @@ class NavigationActivity:ToolbarActivity(){
   private  fun initView(){
     findView<Button>(R.id.btn_teacher_access)
         .value.setOnClickListener{
-      TeacherLoginActivity.start(this)
-
+      LoginActivity.start(this@NavigationActivity,USER_TEACHER)
     }
 
     findView<Button>(R.id.btn_parent_access)
         .value.setOnClickListener{
-      ParentLoginActivity.start(this)
-
+      LoginActivity.start(this@NavigationActivity, USER_PARENT)
     }
   }
 }

@@ -22,13 +22,15 @@ const val REQUEST_CODE_MAIN = 0xFA
  */
 const val CLASS_ID  = "sClassID"
 /**
- * 老师或者是家长
+ * 老师或者是家长 默认的类型没有
  */
 
 const val USER_TYPE = "mUserType"
 
 const val USER_PARENT = 0x1
 const val USER_TEACHER = 0x2
+//没有选择任何一个类型
+const val USER_NONE = 0x03
 
 
 /**
@@ -42,3 +44,9 @@ const val PROFILE_TYPE=  "user_profile"
  * preference
  */
 const val LOGIN_TOKEN = "sLoginToken"
+
+/**
+ * 所有出现过的表名
+ */
+
+val names:List<String> = arrayListOf("classId")

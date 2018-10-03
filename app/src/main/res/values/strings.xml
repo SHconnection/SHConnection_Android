@@ -1,11 +1,21 @@
 <resources>
   <string name="app_name">SHConnection</string>
 
+  <!--引导页面-->
+  <string name="login_directly">直接登录</string>
+  <string name="add_new_class">加入班级</string>
+
   <!--登录页面-->
+  <string name="input_number_">输入工号或者学号</string>
   <string name="input_parent_number">输入学号</string>
   <string name="input_teacher_number">输入工号</string>
   <string name="text__confirm">确定</string>
   <string name="create_class">创建班级</string>
+  <string name="input_password">输入密码</string>
+  <string name="txt_teacher">我是老师</string>
+  <string name="txt_student">我是学生</string>
+  <string name="txt_name">输入姓名</string>
+  <string name="txt_subject">输入科目</string>
 
   <!--创建班级-->
   <string name="teacher_name">班主任姓名</string>

@@ -156,3 +156,9 @@ fun Activity.encrypt(string:String):String =
 @RequiresApi(VERSION_CODES.O)
 fun Activity.decode(encrypted:String):String = String(
     java.util.Base64.getDecoder().decode(encrypted),Charsets.UTF_8)
+
+/****
+ * 扩展属性
+ */
+val Context.database
+ get() = DatabaseHelper.getInstance(this.applicationContext)

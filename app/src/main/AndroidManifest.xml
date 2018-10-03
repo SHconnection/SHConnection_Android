@@ -22,6 +22,8 @@
 
     <activity android:name=".ui.scan.ScanActivity"/>
 
+    <activity android:name=".ui.auth.JoinClassActivity"/>
+
     <activity android:name=".ui.main.news.ViewPictureActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>

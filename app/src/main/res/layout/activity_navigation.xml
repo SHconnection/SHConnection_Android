@@ -7,19 +7,27 @@
   <include layout="@layout/view_toolbar"/>
 
   <Button
-      android:id="@+id/btn_teacher_access"
+      android:id="@+id/btn_login_directly"
       android:layout_centerHorizontal="true"
       android:layout_marginTop="200dp"
-      android:text="我是老师"
+      android:text="@string/login_directly"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"/>
 
   <Button
-      android:id="@+id/btn_parent_access"
+      android:id="@+id/btn_join_new_class"
       android:layout_centerHorizontal="true"
       android:layout_marginTop="10dp"
-      android:text="我是家长"
-      android:layout_below="@+id/btn_teacher_access"
+      android:text="@string/add_new_class"
+      android:layout_below="@+id/btn_login_directly"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"/>
+  <Button
+      android:id="@+id/btn_create_class"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="10dp"
+      android:text="@string/create_class"
+      android:layout_below="@+id/btn_login_directly"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"/>
 </RelativeLayout>

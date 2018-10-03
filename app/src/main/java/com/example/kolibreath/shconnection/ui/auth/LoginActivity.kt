@@ -1,5 +1,6 @@
 package com.example.kolibreath.shconnection.ui.auth
 
+import USER_NONE
 import USER_PARENT
 import USER_TEACHER
 import USER_TYPE
@@ -10,19 +11,25 @@ import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.base.ui.ToolbarActivity
+import com.example.kolibreath.shconnection.extensions.showErrorSnackbarShort
 import com.example.kolibreath.shconnection.extensions.text
+import com.example.kolibreath.shconnection.ui.main.TeacherCreateClassActivity
 
 class LoginActivity:ToolbarActivity(){
 
-  private var mUserType :Int = USER_TEACHER
+  private var mUserType :Int = USER_NONE
 
   private lateinit var mEdtInputNumber: EditText
-  private lateinit var mBtnCreateClass :TextView
+  private lateinit var mEdtInputPassword: EditText
   private lateinit var mBtnConfirm :Button
+
+  private lateinit var mCbTeacher:CheckBox
+  private lateinit var mCbStudent:CheckBox
 
   //todo 添加家长和老师请求数据库的api
   //家长和老师的api的返回值
@@ -33,47 +40,50 @@ class LoginActivity:ToolbarActivity(){
 
 
   companion object {
-    fun start(context : Context, userType: Int){
+    fun start(context : Context){
       context.startActivity(Intent(context,
-          LoginActivity::class.java).apply {
-        this.putExtra(USER_TYPE,userType)
-      })
+          LoginActivity::class.java))
     }
   }
 
   private fun initView(){
     mEdtInputNumber = findViewById(R.id.edt_number)
-    mBtnCreateClass = findViewById(R.id.btn_create_class)
+    mEdtInputPassword = findViewById(R.id.edt_password)
     mBtnConfirm     = findViewById(R.id.btn_confirm)
 
-    mBtnConfirm.setOnClickListener{
-      if(TextUtils.isEmpty(mEdtInputNumber.editableText.toString())) return@setOnClickListener
+    mCbStudent = findViewById(R.id.cb_student)
+    mCbTeacher = findViewById(R.id.cb_teacher)
 
+
+    mBtnConfirm.setOnClickListener{
+      if(TextUtils.isEmpty(mEdtInputNumber.editableText.toString())||
+          TextUtils.isEmpty(mEdtInputPassword.editableText.toString()))
+        return@setOnClickListener
+
+      mUserType = checkUserType()
       when(mUserType){
         USER_TEACHER -> {
-          //todo Teacher login
+          //todo Teacher login api
         }
         USER_PARENT ->{
-          // todo Parent login
-        }
+          // todo Parent login api
+        }else -> {
+        showErrorSnackbarShort("需要选择一个用户类型")
+      }
       }
     }
   }
 
-  private fun updateView(userType:Int){
-    when(userType){
-      USER_PARENT ->{
-        mEdtInputNumber.hint = text(R.string.input_parent_number)
-        mBtnCreateClass.visibility = View.GONE
-      }
-      USER_TEACHER ->{
-        mEdtInputNumber.hint = text(R.string.input_teacher_number)
-        mBtnCreateClass.setOnClickListener {
-          //todo goto 创建班级
-        }
-      }
+  private fun checkUserType():Int =
+    if(mCbStudent.isChecked && !mCbTeacher.isChecked){
+       USER_PARENT
+    }else if(!mCbStudent.isChecked && mCbTeacher.isChecked){
+       USER_TEACHER
+    }else if(mCbStudent.isChecked && mCbTeacher.isChecked){
+      USER_NONE
+    }else{ USER_NONE
     }
-  }
+
 
    override fun onCreate(
     savedInstanceState: Bundle?
@@ -81,9 +91,7 @@ class LoginActivity:ToolbarActivity(){
     super.onCreate(savedInstanceState)
      setContentView(R.layout.activity_login)
 
-     mUserType = intent.getIntExtra(USER_TYPE,-1)
      initView()
-     updateView(userType =  mUserType)
   }
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {

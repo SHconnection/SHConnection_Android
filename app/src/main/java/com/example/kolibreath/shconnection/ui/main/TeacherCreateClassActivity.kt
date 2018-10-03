@@ -1,5 +1,7 @@
 package com.example.kolibreath.shconnection.ui.main
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
@@ -17,6 +19,11 @@ class TeacherCreateClassActivity :ToolbarActivity() {
   private lateinit var mBtnImportStudent:Button
   private lateinit var mBtnImportTeacher:Button
 
+  companion object{
+    fun start(context:Context){
+      context.startActivity(Intent(context,this::class.java))
+    }
+  }
   //todo 需要在弄清楚child和 teacher的数据格式之后进行读取的测试
   private val mTeacherCreateClassApi = View.OnClickListener { }
   //todo 在创建完成的回调之后生成二维码

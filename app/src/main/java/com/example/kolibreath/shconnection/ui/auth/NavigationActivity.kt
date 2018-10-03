@@ -1,7 +1,6 @@
 package com.example.kolibreath.shconnection.ui.auth
 
 import USER_PARENT
-import USER_TEACHER
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -11,8 +10,7 @@ import com.example.kolibreath.shconnection.extensions.REQUEST_CODE
 import com.example.kolibreath.shconnection.extensions.findView
 import com.example.kolibreath.shconnection.extensions.isGranted
 import com.example.kolibreath.shconnection.extensions.requestPermissions
-import com.example.kolibreath.shconnection.ui.auth.`package`.ParentLoginActivity
-import com.example.kolibreath.shconnection.ui.auth.teacher.TeacherLoginActivity
+import com.example.kolibreath.shconnection.ui.main.TeacherCreateClassActivity
 
 class NavigationActivity:ToolbarActivity(){
 
@@ -43,18 +41,19 @@ class NavigationActivity:ToolbarActivity(){
   }
 
   private  fun initView(){
-    findView<Button>(R.id.btn_teacher_access)
+    findView<Button>(R.id.btn_login_directly)
         .value.setOnClickListener{
       LoginActivity.start(
-          this@NavigationActivity, USER_TEACHER
-      )
+          this@NavigationActivity)
     }
 
-    findView<Button>(R.id.btn_parent_access)
+    findView<Button>(R.id.btn_join_new_class)
         .value.setOnClickListener{
-      LoginActivity.start(
-          this@NavigationActivity, USER_PARENT
-      )
+      JoinClassActivity.start(this@NavigationActivity)
+    }
+
+    findView<Button>(R.id.btn_create_class).value.setOnClickListener{
+      TeacherCreateClassActivity.start(this@NavigationActivity)
     }
   }
 }

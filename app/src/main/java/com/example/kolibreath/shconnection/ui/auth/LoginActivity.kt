@@ -45,6 +45,7 @@ class LoginActivity:ToolbarActivity(){
 
   private fun initView(){
 
+    enableBack(boolean =  false)
 
     mEdtInputNumber = findViewById(R.id.edt_number)
     mEdtInputPassword = findViewById(R.id.edt_password)
@@ -102,5 +103,6 @@ class LoginActivity:ToolbarActivity(){
     }
     return super.onOptionsItemSelected(item)
   }
+
 }
 

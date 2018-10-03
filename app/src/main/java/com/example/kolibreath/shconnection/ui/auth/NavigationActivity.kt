@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import com.example.kolibreath.shconnection.R
+import com.example.kolibreath.shconnection.base.ui.BaseActivity
 import com.example.kolibreath.shconnection.base.ui.ToolbarActivity
 import com.example.kolibreath.shconnection.extensions.REQUEST_CODE
 import com.example.kolibreath.shconnection.extensions.findView
@@ -12,7 +13,7 @@ import com.example.kolibreath.shconnection.extensions.isGranted
 import com.example.kolibreath.shconnection.extensions.requestPermissions
 import com.example.kolibreath.shconnection.ui.main.TeacherCreateClassActivity
 
-class NavigationActivity:ToolbarActivity(){
+class NavigationActivity:BaseActivity(){
 
   override fun onCreate(
     savedInstanceState: Bundle?
@@ -40,7 +41,6 @@ class NavigationActivity:ToolbarActivity(){
   }
 
   private  fun initView(){
-
     findView<Button>(R.id.btn_login_directly)
         .value.setOnClickListener{
       LoginActivity.start(

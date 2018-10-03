@@ -4,6 +4,7 @@ import CLASS_ID
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.support.annotation.RequiresApi
+import android.support.v7.app.ActionBar
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
@@ -16,7 +17,6 @@ import com.example.kolibreath.shconnection.base.RxBus
 import com.example.kolibreath.shconnection.base.ScanEvent
 import com.example.kolibreath.shconnection.extensions.Preference
 import com.example.kolibreath.shconnection.extensions.decode
-import com.example.kolibreath.shconnection.extensions.findView
 import com.example.kolibreath.shconnection.ui.scan.ScanActivity
 import org.jetbrains.anko.find
 import rx.Subscriber
@@ -29,7 +29,7 @@ open class ToolbarActivity : BaseActivity() {
 
   private lateinit var mToolbar: Toolbar
 
-  open fun canBack():Boolean  = true
+  private lateinit var mActionBar : ActionBar
 
   override fun setContentView(layoutResID: Int) {
     super.setContentView(layoutResID)
@@ -44,11 +44,11 @@ open class ToolbarActivity : BaseActivity() {
 
     mToolbar.title = ""
 
-    if(canBack()){
-      val actionBar = supportActionBar
-      actionBar?.setDisplayHomeAsUpEnabled(true)
-    }
+    mActionBar = supportActionBar!!
+    enableBack()
   }
+
+  protected fun enableBack(boolean: Boolean = true) = mActionBar.setDisplayHomeAsUpEnabled(boolean)
 
   private fun setTitle(title:String){
     mToolbar.title = ""

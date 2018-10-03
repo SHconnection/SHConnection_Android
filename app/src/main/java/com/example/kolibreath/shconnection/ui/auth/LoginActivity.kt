@@ -1,42 +1,43 @@
 package com.example.kolibreath.shconnection.ui.auth
 
 import CLASSED_IDS
+import CUR_CLASS
+import LOGIN_TOKEN
 import USER_NONE
 import USER_PARENT
 import USER_TEACHER
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.provider.SyncStateContract.Helpers.insert
-import android.support.v7.widget.Toolbar
 import android.text.TextUtils
 import android.view.MenuItem
-import android.view.View
+import android.view.View.OnClickListener
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import com.example.kolibreath.shconnection.R
-import com.example.kolibreath.shconnection.base.LoginBody
-import com.example.kolibreath.shconnection.base.LoginToken
+import com.example.kolibreath.shconnection.base.TeacherLoginBody
+import com.example.kolibreath.shconnection.base.TeacherLoginToken
+import com.example.kolibreath.shconnection.base.ParentLoginBody
+import com.example.kolibreath.shconnection.base.ParentLoginToken
 import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.base.ui.ToolbarActivity
 import com.example.kolibreath.shconnection.extensions.Preference
 import com.example.kolibreath.shconnection.extensions.database
 import com.example.kolibreath.shconnection.extensions.showErrorSnackbarShort
-import com.example.kolibreath.shconnection.extensions.wdb
 import org.jetbrains.anko.db.INTEGER
-import org.jetbrains.anko.db.PRIMARY_KEY
-import org.jetbrains.anko.db.TEXT
-import org.jetbrains.anko.db.UNIQUE
 import org.jetbrains.anko.db.createTable
-import retrofit2.Retrofit
+import org.jetbrains.anko.db.insert
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
 class LoginActivity:ToolbarActivity(){
 
-  private var mToken :String by Preference<String>(name = "token",default = "")
+  private var mToken :String by Preference<String>(name = LOGIN_TOKEN,default = "")
+
+  //保存当前所在地班级id
+  private var mCurrentId:Int by Preference(name = CUR_CLASS,default = -1)
 
   private var mUserType :Int = USER_NONE
 
@@ -47,12 +48,11 @@ class LoginActivity:ToolbarActivity(){
   private lateinit var mCbTeacher:CheckBox
   private lateinit var mCbStudent:CheckBox
 
-  //todo 添加家长和老师请求数据库的api
   //家长和老师的api的返回值
   //老师会保存班级信息 老师交了那几个班级
   //家长会保存现在是那个班级 curClassId
-  private val mTeacherApi = View.OnClickListener {
-    val loginBody = LoginBody(
+  private val mTeacherApi :()->Unit= {
+    val loginBody = TeacherLoginBody(
         wid = mEdtInputNumber.editableText.toString(),
         password = mEdtInputPassword.editableText.toString())
 
@@ -61,8 +61,8 @@ class LoginActivity:ToolbarActivity(){
         .teacherLogin(loginInfo = loginBody)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
-        .subscribe(object:Subscriber<LoginToken>(){
-          override fun onNext(t: LoginToken?) {
+        .subscribe(object:Subscriber<TeacherLoginToken>(){
+          override fun onNext(t: TeacherLoginToken?) {
             mToken = t!!.getToken()!!
             //如果不存在就会创建这个table
             //todo test 是否需要drop掉原来的那个表
@@ -73,25 +73,46 @@ class LoginActivity:ToolbarActivity(){
             //覆盖掉之前的那个表
             for(i in t.getClasses_id()!!) {
               this@LoginActivity.database.use{
-                this@LoginActivity.wdb.insert(CLASSED_IDS,"id" to i)
+                insert(CLASSED_IDS,"id" to i)
               }
             }
+
+            //储存老师当前地班级
+            mCurrentId = t.getClasses_id()!!.last()
           }
 
-          override fun onCompleted() {
-            TODO(
-                "not implemented"
-            ) //To change body of created functions use File | Settings | File Templates.
-          }
+          override fun onCompleted() {}
 
           override fun onError(e: Throwable?) {
-            TODO(
-                "not implemented"
-            ) //To change body of created functions use File | Settings | File Templates.
+            e!!.printStackTrace()
+            showErrorSnackbarShort("等落失败")
           }
         })
   }
-  private val mParentApi = View.OnClickListener {  }
+
+  private val mParentApi :()->Unit = {
+    val loginBody = ParentLoginBody(password = mEdtInputPassword.editableText.toString(),
+        sid = mEdtInputNumber.editableText.toString())
+
+    NetFactory
+        .retrofitService
+        .parentLogin(loginBody = loginBody)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(object:Subscriber<ParentLoginToken>(){
+          override fun onNext(t: ParentLoginToken?) {
+            mCurrentId = t!!.getClass_id()
+            mToken = t.getToken()!!
+          }
+
+          override fun onCompleted() {}
+
+          override fun onError(e: Throwable?) {
+            e!!.printStackTrace()
+            showErrorSnackbarShort("登录失败")
+          }
+        })
+  }
 
 
   companion object {
@@ -121,10 +142,10 @@ class LoginActivity:ToolbarActivity(){
       mUserType = checkUserType()
       when(mUserType){
         USER_TEACHER -> {
-          //todo Teacher login api
+          mTeacherApi()
         }
         USER_PARENT ->{
-          // todo Parent login api
+          mParentApi()
         }else -> {
         showErrorSnackbarShort("需要选择一个用户类型")
       }

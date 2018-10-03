@@ -43,7 +43,9 @@ const val PROFILE_TYPE=  "user_profile"
 /**
  * preference
  */
+
 const val LOGIN_TOKEN = "sLoginToken"
+const val CUR_CLASS = "sCurrentClassId"
 
 /**
  * 所有出现过的表名

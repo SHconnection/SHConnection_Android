@@ -1,24 +1,25 @@
 package com.example.kolibreath.shconnection.base
 
-import android.content.Context
-import com.example.kolibreath.shconnection.extensions.database
-import org.jetbrains.anko.db.INTEGER
-import org.jetbrains.anko.db.PRIMARY_KEY
-import org.jetbrains.anko.db.TEXT
-import org.jetbrains.anko.db.UNIQUE
-import org.jetbrains.anko.db.createTable
-
 /**
  * 教师登录 的 body
  */
-data class LoginBody (
+data class TeacherLoginBody (
     val wid:String,
     val password:String){}
 
 /**
- * 登录成功之后返回的token
+ * 家长登录的login body
  */
-class LoginToken(){
+
+data class ParentLoginBody(
+  val sid:String,
+    val password: String
+)
+/**
+ * 登录成功之后返回的token
+ * 老师和家长的登录之后地地返回指有区别
+ */
+class TeacherLoginToken(){
 
   /**
    * classes_id : [0]
@@ -45,6 +46,34 @@ class LoginToken(){
   }
 }
 
+/**
+ * 家长登录完成之后地返回值
+ */
+class ParentLoginToken(){
+  /**
+   * class_id : 0
+   * token : string
+   */
+
+  private var class_id: Int = 0
+  private var token: String? = null
+
+  fun getClass_id(): Int {
+    return class_id
+  }
+
+  fun setClass_id(class_id: Int) {
+    this.class_id = class_id
+  }
+
+  fun getToken(): String? {
+    return token
+  }
+
+  fun setToken(token: String) {
+    this.token = token
+  }
+}
 /**
  * 老师注册
  */

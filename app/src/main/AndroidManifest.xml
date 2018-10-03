@@ -19,12 +19,8 @@
 
     <activity android:name=".base.ui.ToolbarActivity"/>
     <activity android:name=".base.ui.BaseActivity"/>
-    <!--auth-->
-    <activity android:name=".ui.auth.teacher.TeacherRegisterActivity"/>
-    <activity android:name=".ui.auth.teacher.TeacherLoginActivity">
-    </activity>
 
-    <activity android:name=".ui.auth.ScanActivity"/>
+    <activity android:name=".ui.scan.ScanActivity"/>
 
     <activity android:name=".ui.main.news.ViewPictureActivity">
       <intent-filter>
@@ -35,8 +31,8 @@
     </activity>
     <activity android:name=".ui.main.news.PlusImageActivity">
     </activity>
-    <activity android:name=".ui.main.navigation.LoginActivity"/>
-    <activity android:name=".ui.main.navigation.NavigationActivity"/>
+    <activity android:name=".ui.auth.LoginActivity"/>
+    <activity android:name=".ui.auth.NavigationActivity"/>
     <activity android:name=".ui.main.TeacherCreateClassActivity"/>
     <!--解决7.0照相机崩溃问题-->
     <provider

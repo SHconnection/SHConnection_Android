@@ -1,4 +1,4 @@
-package com.example.kolibreath.shconnection.ui.auth
+package com.example.kolibreath.shconnection.ui.scan
 
 import android.content.Context
 import android.content.Intent

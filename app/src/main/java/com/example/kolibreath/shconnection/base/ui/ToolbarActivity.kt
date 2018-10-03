@@ -5,7 +5,6 @@ import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
@@ -18,12 +17,10 @@ import com.example.kolibreath.shconnection.base.ScanEvent
 import com.example.kolibreath.shconnection.extensions.Preference
 import com.example.kolibreath.shconnection.extensions.decode
 import com.example.kolibreath.shconnection.extensions.findView
-import com.example.kolibreath.shconnection.ui.auth.ScanActivity
-import org.apache.poi.hpsf.ClassID
+import com.example.kolibreath.shconnection.ui.scan.ScanActivity
 import org.jetbrains.anko.find
 import rx.Subscriber
 import rx.Subscription
-import rx.functions.Action
 
 open class ToolbarActivity : BaseActivity() {
 

@@ -50,3 +50,6 @@ const val LOGIN_TOKEN = "sLoginToken"
  */
 
 val names:List<String> = arrayListOf("classId")
+
+//表名 只有一个item ：id string
+const val CLASSED_IDS  = "sClassesIDs"

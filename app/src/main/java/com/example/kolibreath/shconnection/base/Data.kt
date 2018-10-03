@@ -12,15 +12,39 @@ import org.jetbrains.anko.db.createTable
  * 教师登录 的 body
  */
 data class LoginBody (
-    val tel:String,
-    val password:String)
+    val wid:String,
+    val password:String){}
 
 /**
  * 登录成功之后返回的token
  */
-data class LoginToken(
-  val token :String
-)
+class LoginToken(){
+
+  /**
+   * classes_id : [0]
+   * token : string
+   */
+
+  private var token: String? = null
+  private var classes_id: List<Int>? = null
+
+  fun getToken(): String? {
+    return token
+  }
+
+  fun setToken(token: String) {
+    this.token = token
+  }
+
+  fun getClasses_id(): List<Int>? {
+    return classes_id
+  }
+
+  fun setClasses_id(classes_id: List<Int>) {
+    this.classes_id = classes_id
+  }
+}
+
 /**
  * 老师注册
  */

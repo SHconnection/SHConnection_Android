@@ -21,7 +21,7 @@ interface RetrofitService{
   /***
    * 经过加密的用户名和用户密码
    */
-  @POST("teacher/login/")
+  @POST("teacher/signin/")
   fun teacherLogin(@Body loginInfo: LoginBody):Observable<LoginToken>
 
   /**

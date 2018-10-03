@@ -162,3 +162,6 @@ fun Activity.decode(encrypted:String):String = String(
  */
 val Context.database
  get() = DatabaseHelper.getInstance(this.applicationContext)
+
+val Context.wdb
+get() = this.database.writableDatabase

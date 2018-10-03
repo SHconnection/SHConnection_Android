@@ -24,17 +24,17 @@
 
     <activity android:name=".ui.auth.JoinClassActivity"/>
 
-    <activity android:name=".ui.main.news.ViewPictureActivity">
+    <activity android:name=".ui.main.news.ViewPictureActivity"/>
+    <activity android:name=".ui.main.news.PlusImageActivity">
+    </activity>
+    <activity android:name=".ui.auth.LoginActivity"/>
+    <activity android:name=".ui.auth.NavigationActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-    <activity android:name=".ui.main.news.PlusImageActivity">
-    </activity>
-    <activity android:name=".ui.auth.LoginActivity"/>
-    <activity android:name=".ui.auth.NavigationActivity"/>
     <activity android:name=".ui.main.TeacherCreateClassActivity"/>
     <!--解决7.0照相机崩溃问题-->
     <provider

@@ -27,7 +27,7 @@ open class ToolbarActivity : BaseActivity() {
   private lateinit var mSubscription: Subscription
   private var mClassId : String by Preference(name = CLASS_ID, default = "")
 
-  private val mToolbar: Toolbar by findView(R.id.toolbar)
+  private lateinit var mToolbar: Toolbar
 
   open fun canBack():Boolean  = true
 
@@ -38,8 +38,12 @@ open class ToolbarActivity : BaseActivity() {
 
 
   private fun initToolbar(){
+
+    mToolbar = findViewById<Toolbar>(R.id.toolbar)
     setSupportActionBar(mToolbar)
+
     mToolbar.title = ""
+
     if(canBack()){
       val actionBar = supportActionBar
       actionBar?.setDisplayHomeAsUpEnabled(true)
@@ -73,7 +77,6 @@ open class ToolbarActivity : BaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_login)
 
     //listen to the scan result
     mSubscription = RxBus.getDefault().toObservable(ScanEvent::class.java)

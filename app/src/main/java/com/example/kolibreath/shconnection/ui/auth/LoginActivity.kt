@@ -3,22 +3,19 @@ package com.example.kolibreath.shconnection.ui.auth
 import USER_NONE
 import USER_PARENT
 import USER_TEACHER
-import USER_TYPE
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.widget.Toolbar
 import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
-import android.widget.TextView
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.base.ui.ToolbarActivity
 import com.example.kolibreath.shconnection.extensions.showErrorSnackbarShort
-import com.example.kolibreath.shconnection.extensions.text
-import com.example.kolibreath.shconnection.ui.main.TeacherCreateClassActivity
 
 class LoginActivity:ToolbarActivity(){
 
@@ -47,6 +44,8 @@ class LoginActivity:ToolbarActivity(){
   }
 
   private fun initView(){
+
+
     mEdtInputNumber = findViewById(R.id.edt_number)
     mEdtInputPassword = findViewById(R.id.edt_password)
     mBtnConfirm     = findViewById(R.id.btn_confirm)

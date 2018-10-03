@@ -19,7 +19,6 @@ class NavigationActivity:ToolbarActivity(){
   ) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_navigation)
-
     initView()
 
     this.requestPermissions()
@@ -41,6 +40,7 @@ class NavigationActivity:ToolbarActivity(){
   }
 
   private  fun initView(){
+
     findView<Button>(R.id.btn_login_directly)
         .value.setOnClickListener{
       LoginActivity.start(

@@ -8,7 +8,7 @@ import java.io.FileInputStream
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.util.LinkedList
 
-class XlsExtensions(private val path:String){
+class XlsUtils(private val path:String){
 
   private var mPath :String = path
 

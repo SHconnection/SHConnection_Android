@@ -53,6 +53,10 @@ eg:
              -> MainActivity 开发 -> 各个Fragment开发 
                 
 - 封装基本的内容，引入依赖 完成
-- MainActivity开发：    未完成
+- MainActivity开发：    完成
+
+- 用户注册登录（通过第二次讨论 修改逻辑） 完成
+这部分逻辑可以参考[doc](https://github.com/SHconnection/SHConnection_doc/tree/master/android_doc)
+中的草图和class_reference 参考每一个类 做的具体的功能
 
 完成上面两步之后就可以独立开发，模块之间不再互相耦合

@@ -89,6 +89,21 @@ data class TeacherSignupBody(
 data class TeacherSignupToken(
   val tid:String
 )
+
+data class TeacherInit(
+  val wid:String,
+    val password: String,
+    val name:String,
+    val subject:String
+)
+
+/**
+ * 家长加入一个班级
+ */
+data class ParentInit(
+  val sid:String,
+    val password:String
+)
 /**
  * 老师修改个人资料（通讯录）
  * 需要token

@@ -44,7 +44,7 @@ const val PROFILE_TYPE=  "user_profile"
  * preference
  */
 
-const val LOGIN_TOKEN = "sLoginToken"
+const val LOGIN_TOKENp = "sLoginToken"
 const val CUR_CLASS = "sCurrentClassId"
 
 /**
@@ -55,3 +55,12 @@ val names:List<String> = arrayListOf("classId")
 
 //表名 只有一个item ：id string
 const val CLASSED_IDS  = "sClassesIDs"
+
+/**
+ * 从ScanActivity 到另外地一个ACtivity 中
+ * 路由 表示从那一个Activity 中 路由过来的值
+ */
+   //表示这个Intent 键地名字
+const val ROUTER_NAME = "sRouterNamne"
+const val SCAN_RESULT = "sScanResult"
+ const val JOIN_CLASS_ACTIVITY = 0xFF

@@ -1,5 +1,6 @@
 package com.example.kolibreath.shconnection.ui.auth
 
+import JOIN_CLASS_ACTIVITY
 import USER_PARENT
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import com.example.kolibreath.shconnection.extensions.findView
 import com.example.kolibreath.shconnection.extensions.isGranted
 import com.example.kolibreath.shconnection.extensions.requestPermissions
 import com.example.kolibreath.shconnection.ui.main.TeacherCreateClassActivity
+import com.example.kolibreath.shconnection.ui.scan.ScanActivity
 
 class NavigationActivity:BaseActivity(){
 
@@ -49,7 +51,7 @@ class NavigationActivity:BaseActivity(){
 
     findView<Button>(R.id.btn_join_new_class)
         .value.setOnClickListener{
-      JoinClassActivity.start(this@NavigationActivity)
+      ScanActivity.start(this@NavigationActivity,JOIN_CLASS_ACTIVITY)
     }
 
     findView<Button>(R.id.btn_create_class).value.setOnClickListener{

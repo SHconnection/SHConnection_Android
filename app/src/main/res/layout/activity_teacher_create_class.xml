@@ -58,5 +58,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+  <Button
+      android:id="@+id/btn_confirm"
+      android:hint="@string/import_teacher_info"
+      android:layout_below="@+id/btn_import_teacher_info"
+      android:layout_marginTop="30dp"
+      android:layout_marginRight="100dp"
+      android:layout_marginLeft="100dp"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"/>
+
 
 </RelativeLayout>

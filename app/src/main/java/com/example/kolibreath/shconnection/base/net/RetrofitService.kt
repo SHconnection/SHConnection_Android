@@ -53,7 +53,7 @@ interface RetrofitService{
    * 老师注册并且加入一个班级
    * 此时老师是没有注册的
    */
-  @POST("/teacher/init/addclass/{classid}/")
+  @POST("teacher/init/addclass/{classid}/")
   fun teacherInitJoinClass(@Path("classid") classId:String,
       @Body teacherInit: TeacherInit):Observable<Any>
 
@@ -61,14 +61,14 @@ interface RetrofitService{
    * 家长在没有注册的情况下
    * 同时初始化并且加入一个班级
    */
-  @POST("/parent/addclass/{classid}/")
+  @POST("parent/addclass/{classid}/")
   fun parentInitJoinClass(@Path("classid") classId: String,
       @Body parentInit: ParentInit):Observable<Any>
 
   /**
    * 老师创建一个班级
    */
-  @POST("/init/class/")
+  @POST("init/class/")
   fun teacherCreateClass(@Body teacherCreateClassBody: TeacherCreateClassBody):Observable<CreatedClassId>
   /**
    * 上传图片

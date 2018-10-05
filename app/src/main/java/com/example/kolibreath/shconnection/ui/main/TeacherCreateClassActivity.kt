@@ -10,31 +10,45 @@ import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.os.Environment
 import android.support.annotation.RequiresApi
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.base.CreatedClassId
 import com.example.kolibreath.shconnection.base.TeacherCreateClassBody
+import com.example.kolibreath.shconnection.base.TeacherCreateClassBody.ChildrenListBean
 import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.base.ui.ToolbarActivity
 import com.example.kolibreath.shconnection.extensions.Preference
 import com.example.kolibreath.shconnection.extensions.QRCodeUtil
 import com.example.kolibreath.shconnection.extensions.XlsUtils
+import com.example.kolibreath.shconnection.extensions.bgContext
 import com.example.kolibreath.shconnection.extensions.encrypt
+import com.example.kolibreath.shconnection.extensions.findView
 import com.example.kolibreath.shconnection.extensions.showSnackBarShort
+import com.example.kolibreath.shconnection.extensions.uiContext
 import com.example.kolibreath.shconnection.ui.auth.LoginActivity
 import com.example.kolibreath.shconnection.ui.auth.isEmpty
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.launch
+import org.jetbrains.anko.toast
+import rx.Observable.OnSubscribe
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import java.io.File
 import java.io.FileOutputStream
 import java.util.LinkedList
+import kotlin.coroutines.experimental.CoroutineContext
 
 class TeacherCreateClassActivity :ToolbarActivity() {
-
   private val IMPORT_STUDENT = 1
   private val IMPORT_TEACHER = 2
+
+  private var mTeacherFlag = false
+  private var mStudentFlag = false
 
   private lateinit var mUri: Uri
 
@@ -45,6 +59,7 @@ class TeacherCreateClassActivity :ToolbarActivity() {
   private lateinit var mEdtClassName:EditText
   private lateinit var mBtnImportStudent:Button
   private lateinit var mBtnImportTeacher:Button
+  private lateinit var mBtnConfirm :Button
 
   private  var mClassId:String by Preference(CLASS_ID,"")
   companion object{
@@ -65,9 +80,22 @@ class TeacherCreateClassActivity :ToolbarActivity() {
     val wid = mEdtTeacherNumber.editableText.toString()
     val className = mEdtClassName.editableText.toString()
 
+    Log.d("fuck","way")
     if(name.isEmpty || wid.isEmpty || className.isEmpty)
       return@label
 
+    if(!mStudentFlag) {
+      toast("学生信息导入失败")
+      return@label
+    }
+
+    if(!mTeacherFlag){
+      toast("老师信息导入失败")
+      return@label
+    }
+
+    if(mTeachers.isEmpty() || mChildren.isEmpty())
+      throw IllegalArgumentException("老师或者学生的信息为空")
 
     val teacherCreateClassBody = TeacherCreateClassBody(
         wid = wid,class_name = className,
@@ -134,6 +162,11 @@ class TeacherCreateClassActivity :ToolbarActivity() {
     mBtnImportStudent.setOnClickListener{
       browseDoc(type = IMPORT_STUDENT)
     }
+
+    mBtnConfirm =   findViewById<Button>(R.id.btn_confirm)
+    mBtnConfirm.setOnClickListener{
+      mTeacherCreateClassApi()
+    }
   }
 
   override fun onActivityResult(
@@ -142,11 +175,17 @@ class TeacherCreateClassActivity :ToolbarActivity() {
     data: Intent?
   ) {
     when(requestCode){
-      IMPORT_STUDENT ->{
-        if(resultCode == Activity.RESULT_OK){
+      IMPORT_STUDENT -> {
+        if (resultCode == Activity.RESULT_OK) {
           mUri = data!!.data
-          xlsUtils = XlsUtils(getPath(mUri)!!)
-          mChildren = xlsUtils.getChildren()
+          launch(uiContext){
+            mChildren = async(bgContext){
+              xlsUtils = XlsUtils(getPath(mUri)!!)
+              xlsUtils.getChildren()
+            }.await()
+            Log.d("fuck",mChildren.toString())
+            mStudentFlag = true
+          }
         }
       }
 
@@ -155,6 +194,14 @@ class TeacherCreateClassActivity :ToolbarActivity() {
           mUri = data!!.data
           xlsUtils = XlsUtils(getPath(mUri)!!)
           mTeachers = xlsUtils.getTeachers()
+          launch(uiContext){
+            mTeachers = async(bgContext){
+              xlsUtils = XlsUtils(getPath(mUri)!!)
+              xlsUtils.getTeachers()
+            }.await()
+            mTeacherFlag = true
+            Log.d("fuck you",mTeachers.toString())
+          }
         }
       }
     }
@@ -190,6 +237,7 @@ class TeacherCreateClassActivity :ToolbarActivity() {
 
       }
     }
+
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {

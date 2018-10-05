@@ -17,8 +17,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
 import com.example.kolibreath.shconnection.R.color
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.android.UI
 import java.io.File
 import java.lang.Exception
+import kotlin.coroutines.experimental.CoroutineContext
 
 fun Activity.showSnackBarLong(msg:String) {
   Snackbar.make(window.decorView,msg, Snackbar.LENGTH_LONG).show()
@@ -165,3 +168,8 @@ val Context.database
 
 val Context.wdb
 get() = this.database.writableDatabase
+
+ val Context.uiContext: CoroutineContext
+    get() = UI
+ val Context.bgContext: CoroutineContext
+    get() = CommonPool

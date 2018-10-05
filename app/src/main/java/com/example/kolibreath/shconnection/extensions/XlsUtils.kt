@@ -41,7 +41,7 @@ class XlsUtils(path:String){
         val cell = cellIterator.next()
         when(cell.cellType){
           Cell.CELL_TYPE_NUMERIC -> {
-            sid = cell.numericCellValue.toString()
+            sid = cell.numericCellValue.toInt().toString()
           }
           Cell.CELL_TYPE_STRING -> {
               name = cell.stringCellValue
@@ -83,7 +83,7 @@ class XlsUtils(path:String){
         val cell = cellIterator.next()
         when(cell.cellType){
           Cell.CELL_TYPE_NUMERIC -> {
-            sid = cell.numericCellValue.toString()
+            sid = cell.numericCellValue.toInt().toString()
           }
           Cell.CELL_TYPE_STRING -> {
               name = cell.stringCellValue

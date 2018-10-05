@@ -44,7 +44,7 @@ const val PROFILE_TYPE=  "user_profile"
  * preference
  */
 
-const val LOGIN_TOKENp = "sLoginToken"
+const val LOGIN_TOKEN = "sLoginToken"
 const val CUR_CLASS = "sCurrentClassId"
 
 /**
@@ -54,7 +54,7 @@ const val CUR_CLASS = "sCurrentClassId"
 val names:List<String> = arrayListOf("classId")
 
 //表名 只有一个item ：id string
-const val CLASSED_IDS  = "sClassesIDs"
+const val CLASSES_IDS  = "sClassesIDs"
 
 /**
  * 从ScanActivity 到另外地一个ACtivity 中

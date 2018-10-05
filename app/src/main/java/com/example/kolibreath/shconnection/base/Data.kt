@@ -120,15 +120,6 @@ data class TeacherInfoBody(
   val tid:String,
     val token: String
 )
-
-/**
- * 班主任导入孩子
- */
-data class child(
-    val name:String,
-    val sid:String
-    )
-
 /**
  * 老师的个人
  * 显示个人界面的信息相关
@@ -143,3 +134,90 @@ data class TeacherInfoData(
     var comment:List<String>?
 )
 
+/**
+ * 班主任创建班级
+ */
+
+class TeacherCreateClassBody{
+  /**
+   * main_teacher_wid : string
+   * class_name : string
+   * teachers_list : [{"name":"string","wid":"string"}]
+   * children_list : [{"name":"string","sid":"string"}]
+   */
+
+  private var main_teacher_wid: String? = null
+  private var class_name: String? = null
+  private var teachers_list: List<TeachersListBean>? = null
+  private var children_list: List<ChildrenListBean>? = null
+
+  constructor(wid: String,class_name: String,teachers_list: List<TeachersListBean>,
+      children_list: List<ChildrenListBean>){
+    this.children_list = children_list;
+    this.main_teacher_wid = wid
+    this.class_name = class_name
+    this.teachers_list= teachers_list
+  }
+  fun getMain_teacher_wid(): String? {
+    return main_teacher_wid
+  }
+
+  fun setMain_teacher_wid(main_teacher_wid: String) {
+    this.main_teacher_wid = main_teacher_wid
+  }
+
+  fun getClass_name(): String? {
+    return class_name
+  }
+
+  fun setClass_name(class_name: String) {
+    this.class_name = class_name
+  }
+
+  fun getTeachers_list(): List<TeachersListBean>? {
+    return teachers_list
+  }
+
+  fun setTeachers_list(teachers_list: List<TeachersListBean>) {
+    this.teachers_list = teachers_list
+  }
+
+  fun getChildren_list(): List<ChildrenListBean>? {
+    return children_list
+  }
+
+  fun setChildren_list(children_list: List<ChildrenListBean>) {
+    this.children_list = children_list
+  }
+
+  class TeachersListBean
+  /**
+   * name : string
+   * wid : string
+   */(
+    name: String,
+    wid: String
+  ) {
+
+    var name: String? = name
+    var wid: String? = wid
+  }
+
+  class ChildrenListBean
+  /**
+   * name : string
+   * sid : string
+   */(
+    name: String,
+    sid: String
+  ) {
+
+    var name: String? = name
+    var sid: String? = sid
+  }
+}
+
+/**
+ * 老师创建班级之后地返回值
+ */
+data class CreatedClassId(val class_id: Int)

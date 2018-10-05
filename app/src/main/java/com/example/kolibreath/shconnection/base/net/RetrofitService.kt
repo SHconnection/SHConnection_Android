@@ -1,11 +1,13 @@
 package com.example.kolibreath.shconnection.base.net
 
+import com.example.kolibreath.shconnection.base.CreatedClassId
 import com.example.kolibreath.shconnection.base.ParentInit
 import com.example.kolibreath.shconnection.base.TeacherLoginBody
 import com.example.kolibreath.shconnection.base.TeacherLoginToken
 import com.example.kolibreath.shconnection.base.ParentLoginBody
 import com.example.kolibreath.shconnection.base.ParentLoginToken
 import com.example.kolibreath.shconnection.base.Profile
+import com.example.kolibreath.shconnection.base.TeacherCreateClassBody
 import com.example.kolibreath.shconnection.base.TeacherInit
 import com.example.kolibreath.shconnection.base.TeacherSignupBody
 import com.example.kolibreath.shconnection.base.TeacherSignupToken
@@ -62,6 +64,12 @@ interface RetrofitService{
   @POST("/parent/addclass/{classid}/")
   fun parentInitJoinClass(@Path("classid") classId: String,
       @Body parentInit: ParentInit):Observable<Any>
+
+  /**
+   * 老师创建一个班级
+   */
+  @POST("/init/class/")
+  fun teacherCreateClass(@Body teacherCreateClassBody: TeacherCreateClassBody):Observable<CreatedClassId>
   /**
    * 上传图片
    */

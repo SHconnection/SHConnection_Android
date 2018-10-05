@@ -1,6 +1,6 @@
 package com.example.kolibreath.shconnection.ui.auth
 
-import CLASSED_IDS
+import CLASSES_IDS
 import CUR_CLASS
 import LOGIN_TOKEN
 import USER_NONE
@@ -11,7 +11,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.MenuItem
-import android.view.View.OnClickListener
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -67,13 +66,13 @@ class LoginActivity:ToolbarActivity(){
             //如果不存在就会创建这个table
             //todo test 是否需要drop掉原来的那个表
             this@LoginActivity.database.use {
-              createTable(CLASSED_IDS, true,
+              createTable(CLASSES_IDS, true,
                   "id" to INTEGER) }
 
             //覆盖掉之前的那个表
             for(i in t.getClasses_id()!!) {
               this@LoginActivity.database.use{
-                insert(CLASSED_IDS,"id" to i)
+                insert(CLASSES_IDS,"id" to i)
               }
             }
 

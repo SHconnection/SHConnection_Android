@@ -9,9 +9,8 @@ import android.graphics.Bitmap
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.support.annotation.RequiresApi
+import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.R.layout
-import com.example.kolibreath.shconnection.base.RxBus
-import com.example.kolibreath.shconnection.base.ScanEvent
 import com.example.kolibreath.shconnection.base.ui.ToolbarActivity
 import com.example.kolibreath.shconnection.extensions.encrypt
 import com.example.kolibreath.shconnection.extensions.showSnackBarShort
@@ -19,7 +18,6 @@ import com.example.kolibreath.shconnection.ui.auth.JoinClassActivity
 import com.uuzuche.lib_zxing.activity.CaptureFragment
 import com.uuzuche.lib_zxing.activity.CodeUtils
 import com.uuzuche.lib_zxing.activity.CodeUtils.AnalyzeCallback
-import org.apache.poi.ss.formula.functions.T
 
 class ScanActivity : ToolbarActivity(){
 
@@ -28,11 +26,11 @@ class ScanActivity : ToolbarActivity(){
   companion object {
 
     fun start(context:Context){
-      context.startActivity(Intent(context,this::class.java))
+      context.startActivity(Intent(context,ScanActivity::class.java))
     }
 
     fun start(context: Context, routerValue:Int){
-      val intent = Intent(context,this::class.java)
+      val intent = Intent(context,ScanActivity::class.java)
       intent.putExtra(ROUTER_NAME,routerValue)
       context.startActivity(intent)
     }
@@ -41,7 +39,7 @@ class ScanActivity : ToolbarActivity(){
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(layout.activity_scan)
+    setContentView(R.layout.activity_scan)
 
     mRouter = intent.getIntExtra(ROUTER_NAME,-1)
 

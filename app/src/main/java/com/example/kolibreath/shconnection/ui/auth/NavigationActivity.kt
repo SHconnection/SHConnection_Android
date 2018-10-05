@@ -51,7 +51,8 @@ class NavigationActivity:BaseActivity(){
 
     findView<Button>(R.id.btn_join_new_class)
         .value.setOnClickListener{
-      ScanActivity.start(this@NavigationActivity,JOIN_CLASS_ACTIVITY)
+//      ScanActivity.start(this@NavigationActivity,JOIN_CLASS_ACTIVITY)
+      JoinClassActivity.start(this@NavigationActivity)
     }
 
     findView<Button>(R.id.btn_create_class).value.setOnClickListener{

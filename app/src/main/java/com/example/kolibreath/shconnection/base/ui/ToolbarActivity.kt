@@ -63,9 +63,7 @@ open class ToolbarActivity : BaseActivity() {
       android.R.id.home ->{
         onBackPressed()
       }
-      action_scan_from_actual_view or   action_scan_from_system_gallery  ->{
-        ScanActivity.start(this)
-      }
+
     }
     return super.onOptionsItemSelected(item)
   }

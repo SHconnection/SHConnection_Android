@@ -1,30 +1,40 @@
 package com.example.kolibreath.shconnection.ui.auth
 
-import SCAN_RESULT
 import USER_NONE
 import USER_PARENT
 import USER_TEACHER
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.os.Build.VERSION_CODES
 import android.os.Bundle
+import android.support.annotation.RequiresApi
 import android.text.TextUtils
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import com.example.kolibreath.shconnection.R
+import com.example.kolibreath.shconnection.R.id.action_scan_from_actual_view
+import com.example.kolibreath.shconnection.R.id.action_scan_from_system_gallery
 import com.example.kolibreath.shconnection.base.ParentInit
 import com.example.kolibreath.shconnection.base.TeacherInit
 import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.base.ui.ToolbarActivity
-import com.luck.picture.lib.rxbus2.Subscribe
-import rx.Scheduler
+import com.example.kolibreath.shconnection.extensions.decode
+import com.example.kolibreath.shconnection.extensions.showSnackBarShort
+import com.uuzuche.lib_zxing.activity.CaptureActivity
+import com.uuzuche.lib_zxing.activity.CodeUtils
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
 class JoinClassActivity:ToolbarActivity() {
 
+
+  private val REQUEST_IMAGE = 0xFF
+  private val REQUEST_SCAN=  0xFA
 
   private lateinit var mEdtNumber:EditText
   private lateinit var mEdtPassword:EditText
@@ -56,6 +66,58 @@ class JoinClassActivity:ToolbarActivity() {
     }else{ USER_NONE
     }
 
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    when(item.itemId){
+       action_scan_from_actual_view  ->{
+        val intent = Intent(this@JoinClassActivity,CaptureActivity::class.java)
+        startActivityForResult(intent,REQUEST_SCAN)
+      }
+      action_scan_from_system_gallery ->{
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        intent.type = "image/*"
+        startActivityForResult(intent,REQUEST_IMAGE)
+      }
+    }
+    return super.onOptionsItemSelected(item)
+  }
+
+  @RequiresApi(VERSION_CODES.O)
+  override fun onActivityResult(
+    requestCode: Int,
+    resultCode: Int,
+    data: Intent?
+  ) {
+    when(requestCode){
+      REQUEST_SCAN ->{
+        val bundle = data!!.extras
+        if(bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS){
+          val result = bundle.getString(CodeUtils.RESULT_STRING )
+          mClassId =decode(result)
+        }
+      }
+
+      REQUEST_IMAGE ->{
+        if(data != null){
+          val uri = data.data
+
+          CodeUtils.analyzeBitmap(uri.path,object:CodeUtils.AnalyzeCallback{
+            override fun onAnalyzeSuccess(
+              mBitmap: Bitmap?,
+              result: String?
+            ) {
+              mClassId = decode(result!!)
+            }
+
+            override fun onAnalyzeFailed() {
+              showSnackBarShort("解析失败")
+            }
+          })
+        }
+      }
+    }
+    super.onActivityResult(requestCode, resultCode, data)
+  }
   private fun initView(){
     mEdtName = findViewById(R.id.edt_name)
     mEdtNumber = findViewById(R.id.edt_number)
@@ -65,6 +127,8 @@ class JoinClassActivity:ToolbarActivity() {
     mBtnConfirm = findViewById(R.id.btn_confirm)
 
     mCbStudent = findViewById(R.id.cb_student)
+    mCbTeacher = findViewById(R.id.cb_teacher)
+
     mCbStudent.setOnClickListener{
       mEdtSubject.visibility = View.INVISIBLE
       mCbTeacher.isChecked = false
@@ -132,8 +196,6 @@ class JoinClassActivity:ToolbarActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_join_class)
-
-    mClassId = intent.getStringExtra(SCAN_RESULT)
 
     initView()
   }

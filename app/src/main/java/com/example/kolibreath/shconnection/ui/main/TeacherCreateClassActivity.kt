@@ -4,8 +4,11 @@ import CLASS_ID
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
+import android.os.Build.VERSION_CODES
 import android.os.Bundle
-import android.view.View
+import android.os.Environment
+import android.support.annotation.RequiresApi
 import android.widget.Button
 import android.widget.EditText
 import com.example.kolibreath.shconnection.R
@@ -20,10 +23,12 @@ import com.example.kolibreath.shconnection.extensions.encrypt
 import com.example.kolibreath.shconnection.extensions.showSnackBarShort
 import com.example.kolibreath.shconnection.ui.auth.LoginActivity
 import com.example.kolibreath.shconnection.ui.auth.isEmpty
-import rx.Scheduler
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
+import java.io.File
+import java.io.FileOutputStream
+import java.util.LinkedList
 
 class TeacherCreateClassActivity :ToolbarActivity() {
 
@@ -43,7 +48,9 @@ class TeacherCreateClassActivity :ToolbarActivity() {
   //todo get path of xlxs
   private lateinit var mPath:String
 
-  //todo 需要在弄清楚child和 teacher的数据格式之后进行读取的测试
+  private lateinit var mTeachers :LinkedList<TeacherCreateClassBody.TeachersListBean>
+  private lateinit var mChildren :LinkedList<TeacherCreateClassBody.ChildrenListBean>
+
   private val mTeacherCreateClassApi: () ->Unit = label@{
     val name = mEdtTeacherName.editableText.toString()
     val wid = mEdtTeacherNumber.editableText.toString()
@@ -52,13 +59,10 @@ class TeacherCreateClassActivity :ToolbarActivity() {
     if(name.isEmpty || wid.isEmpty || className.isEmpty)
       return@label
 
-    //解析老师的xls
-    val xlsUtils = XlsUtils(mPath)
-    val teachers = xlsUtils.getTeachers()
-    val children = xlsUtils.getChildren()
 
     val teacherCreateClassBody = TeacherCreateClassBody(
-        wid = wid,class_name = className,teachers_list = teachers,children_list = children
+        wid = wid,class_name = className,
+        teachers_list = mTeachers,children_list = mChildren
     )
 
     NetFactory.retrofitService
@@ -73,18 +77,38 @@ class TeacherCreateClassActivity :ToolbarActivity() {
             finish()
           }
 
+          @RequiresApi(VERSION_CODES.O)
           override fun onCompleted() {
             val encrypted=  encrypt(mClassId)
             val bitmap = createQRcode(encrypted = encrypted)
+            bitmap!!.saveBitmap2Local()
           }
 
           override fun onError(e: Throwable?) {e!!.printStackTrace()}
         })
 
   }
-  //todo 在创建完成的回调之后生成二维码
   //创建一个加密过了的二维码图片
   private fun createQRcode(encrypted:String):Bitmap? = QRCodeUtil.createQRCodeBitmap(encrypted,480,480)
+
+  private val name:String get() =  "SHConnection${System.currentTimeMillis()}"
+
+  private fun Bitmap.saveBitmap2Local(){
+    val file = File("${Environment.getExternalStorageDirectory().path}/${name}.jpg" )
+    if(file.exists())
+      file.delete()
+    val out = FileOutputStream(file)
+    if(this.compress(Bitmap.CompressFormat.PNG,90,out)){
+      out.flush()
+      out.close()
+
+      val intent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
+      val uri = Uri.fromFile(file)
+      intent.data = uri
+      this@TeacherCreateClassActivity.sendBroadcast(intent)
+      showSnackBarShort("保存成功")
+    }
+  }
 
   private fun createClass(){
     mEdtTeacherName = findViewById(R.id.edt_teacher_name)
@@ -94,11 +118,13 @@ class TeacherCreateClassActivity :ToolbarActivity() {
     mBtnImportStudent = findViewById(R.id.btn_import_students_info)
     mBtnImportTeacher = findViewById(R.id.btn_import_teacher_info)
 
+      val xlsUtils = XlsUtils(mPath)
     mBtnImportTeacher.setOnClickListener{
-      //todo 读取教师的信息
+      //解析老师的xls
+       mTeachers = xlsUtils.getTeachers()
     }
     mBtnImportStudent.setOnClickListener{
-      //todo 读取学生的信息
+       mChildren = xlsUtils.getChildren()
     }
   }
   override fun onCreate(savedInstanceState: Bundle?) {

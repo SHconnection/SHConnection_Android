@@ -21,7 +21,7 @@ import rx.Observable
 interface RetrofitService{
 
   companion object {
-    const val BASE_URL = "https://api.douban.com/v2/book/"
+    const val BASE_URL = "http://112.74.88.136：2000/"
   }
 
 

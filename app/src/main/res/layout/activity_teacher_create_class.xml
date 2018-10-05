@@ -6,10 +6,6 @@
 
   <include layout="@layout/view_toolbar"/>
 
-  <ScrollView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent">
-
     <EditText
         android:id="@+id/edt_teacher_name"
         android:inputType="text"
@@ -24,7 +20,8 @@
         android:id="@+id/edt_teacher_number"
         android:hint="@string/teacher_number"
         android:inputType="number"
-        android:layout_marginTop="130dp"
+        android:layout_below="@+id/edt_teacher_name"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="70dp"
         android:layout_marginLeft="70dp"
         android:layout_width="match_parent"
@@ -34,7 +31,8 @@
         android:id="@+id/edt_class_name"
         android:hint="@string/class_name"
         android:inputType="text"
-        android:layout_marginTop="160dp"
+        android:layout_below="@id/edt_teacher_number"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="70dp"
         android:layout_marginLeft="70dp"
         android:layout_width="match_parent"
@@ -42,8 +40,9 @@
 
     <Button
         android:id="@+id/btn_import_students_info"
-        android:hint="@string/teacher_number"
-        android:layout_marginTop="190dp"
+        android:hint="@string/import_students_info"
+        android:layout_below="@+id/edt_class_name"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="70dp"
         android:layout_marginLeft="70dp"
         android:layout_width="match_parent"
@@ -52,12 +51,12 @@
     <Button
         android:id="@+id/btn_import_teacher_info"
         android:hint="@string/import_teacher_info"
-        android:layout_marginTop="220dp"
+        android:layout_below="@+id/btn_import_students_info"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="70dp"
         android:layout_marginLeft="70dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-  </ScrollView>
 
 </RelativeLayout>

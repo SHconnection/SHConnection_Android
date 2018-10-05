@@ -25,6 +25,7 @@
     <activity android:name=".ui.auth.JoinClassActivity"/>
 
     <activity android:name=".ui.main.news.ViewPictureActivity"/>
+    <activity android:name=".ui.main.TeacherCreateClassActivity"/>
     <activity android:name=".ui.main.news.PlusImageActivity">
     </activity>
     <activity android:name=".ui.auth.LoginActivity"/>
@@ -35,7 +36,6 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-    <activity android:name=".ui.main.TeacherCreateClassActivity"/>
     <!--解决7.0照相机崩溃问题-->
     <provider
         android:name="android.support.v4.content.FileProvider"

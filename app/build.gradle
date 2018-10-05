@@ -59,7 +59,8 @@ dependencies {
   implementation 'com.qiniu:qiniu-android-sdk:7.3.+'
   implementation 'de.hdodenhof:circleimageview:2.2.0'
   // https://mvnrepository.com/artifact/org.apache.poi/poi
-  implementation "com.github.SUPERCILEX.poi-android:poi:$poiVersion"
-  implementation "com.github.SUPERCILEX.poi-android:proguard:$poiVersion"
+
+  //dependencies to make apache poi to get up and fuck
+//  implementation 'com.fasterxml:aalto-xml:1.0.0'
 
 }

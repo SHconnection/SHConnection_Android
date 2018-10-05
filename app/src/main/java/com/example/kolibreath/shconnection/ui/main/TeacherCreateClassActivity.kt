@@ -1,6 +1,7 @@
 package com.example.kolibreath.shconnection.ui.main
 
 import CLASS_ID
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -32,21 +33,29 @@ import java.util.LinkedList
 
 class TeacherCreateClassActivity :ToolbarActivity() {
 
+  private val IMPORT_STUDENT = 1
+  private val IMPORT_TEACHER = 2
+
+  private lateinit var mUri: Uri
+
+  private lateinit var xlsUtils: XlsUtils
+
   private lateinit var mEdtTeacherName:EditText
   private lateinit var mEdtTeacherNumber:EditText
   private lateinit var mEdtClassName:EditText
   private lateinit var mBtnImportStudent:Button
   private lateinit var mBtnImportTeacher:Button
 
-  private  var mClassId:String by Preference<String>(CLASS_ID,"")
+  private  var mClassId:String by Preference(CLASS_ID,"")
   companion object{
     fun start(context:Context){
-      context.startActivity(Intent(context,this::class.java))
+      context.startActivity(Intent(context,TeacherCreateClassActivity::class.java))
     }
   }
 
   //todo get path of xlxs
-  private lateinit var mPath:String
+  private lateinit var mTeacherPath:String
+  private lateinit var mStudentPath :String
 
   private lateinit var mTeachers :LinkedList<TeacherCreateClassBody.TeachersListBean>
   private lateinit var mChildren :LinkedList<TeacherCreateClassBody.ChildrenListBean>
@@ -118,15 +127,71 @@ class TeacherCreateClassActivity :ToolbarActivity() {
     mBtnImportStudent = findViewById(R.id.btn_import_students_info)
     mBtnImportTeacher = findViewById(R.id.btn_import_teacher_info)
 
-      val xlsUtils = XlsUtils(mPath)
     mBtnImportTeacher.setOnClickListener{
       //解析老师的xls
-       mTeachers = xlsUtils.getTeachers()
+      browseDoc(type = IMPORT_TEACHER)
     }
     mBtnImportStudent.setOnClickListener{
-       mChildren = xlsUtils.getChildren()
+      browseDoc(type = IMPORT_STUDENT)
     }
   }
+
+  override fun onActivityResult(
+    requestCode: Int,
+    resultCode: Int,
+    data: Intent?
+  ) {
+    when(requestCode){
+      IMPORT_STUDENT ->{
+        if(resultCode == Activity.RESULT_OK){
+          mUri = data!!.data
+          xlsUtils = XlsUtils(getPath(mUri)!!)
+          mChildren = xlsUtils.getChildren()
+        }
+      }
+
+      IMPORT_TEACHER ->{
+        if(resultCode == Activity.RESULT_OK){
+          mUri = data!!.data
+          xlsUtils = XlsUtils(getPath(mUri)!!)
+          mTeachers = xlsUtils.getTeachers()
+        }
+      }
+    }
+    super.onActivityResult(requestCode, resultCode, data)
+  }
+
+  private fun getPath(uri: Uri):String?{
+    if("content" == uri.scheme.toLowerCase()){
+      val projection:Array<String> = arrayOf("_data")
+      val cursor = this@TeacherCreateClassActivity.contentResolver
+          .query(uri,projection, null,null,null)
+
+      val column_index = cursor.getColumnIndexOrThrow("_data")
+      if(cursor.moveToFirst()){
+        return cursor.getString(column_index)
+      }
+    }else if("file" == uri.scheme.toLowerCase()){
+      return uri.path
+    }
+    return null
+  }
+
+  private fun browseDoc(type:Int){
+    val intent = Intent(Intent.ACTION_GET_CONTENT)
+    intent.type = "*/*"
+    intent.addCategory(Intent.CATEGORY_OPENABLE)
+    when(type){
+      IMPORT_TEACHER ->{
+        startActivityForResult(Intent.createChooser(intent,"选择应用打开"),IMPORT_TEACHER)
+      }
+      IMPORT_STUDENT -> {
+        startActivityForResult(Intent.createChooser(intent,"选择应用打开"),IMPORT_STUDENT)
+
+      }
+    }
+  }
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_teacher_create_class)

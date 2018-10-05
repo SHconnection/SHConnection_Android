@@ -38,7 +38,7 @@ class LoginActivity:ToolbarActivity(){
   //保存当前所在地班级id
   private var mCurrentId:Int by Preference(name = CUR_CLASS,default = -1)
 
-  private var mUserType :Int = USER_NONE
+  private var mUserType :Int = USER_TEACHER
 
   private lateinit var mEdtInputNumber: EditText
   private lateinit var mEdtInputPassword: EditText
@@ -47,6 +47,8 @@ class LoginActivity:ToolbarActivity(){
   private lateinit var mCbTeacher:CheckBox
   private lateinit var mCbStudent:CheckBox
 
+
+  //todo 写一个老师地默认状态
   //家长和老师的api的返回值
   //老师会保存班级信息 老师交了那几个班级
   //家长会保存现在是那个班级 curClassId
@@ -63,6 +65,10 @@ class LoginActivity:ToolbarActivity(){
         .subscribe(object:Subscriber<TeacherLoginToken>(){
           override fun onNext(t: TeacherLoginToken?) {
             mToken = t!!.getToken()!!
+
+            if(t.getClasses_id()!!.isEmpty())
+              return
+
             //如果不存在就会创建这个table
             //todo test 是否需要drop掉原来的那个表
             this@LoginActivity.database.use {
@@ -132,6 +138,8 @@ class LoginActivity:ToolbarActivity(){
     mCbStudent = findViewById(R.id.cb_student)
     mCbTeacher = findViewById(R.id.cb_teacher)
 
+
+    mCbTeacher.isChecked = true
 
     mBtnConfirm.setOnClickListener{
       if(TextUtils.isEmpty(mEdtInputNumber.editableText.toString())||

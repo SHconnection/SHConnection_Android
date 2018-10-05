@@ -8,18 +8,23 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import java.io.FileInputStream
 import java.util.LinkedList
 
-class XlsUtils(private val path:String){
+class XlsUtils(path:String){
 
   private var mPath :String = path
 
 
-    private val fileInputStream:FileInputStream = FileInputStream(mPath)
-    private val workbook = XSSFWorkbook(fileInputStream)
-    //默认只有一个sheet
-    private val xssfSheet = workbook.getSheetAt(0)
-    private val rowIterator:Iterator<Row> = xssfSheet.iterator()
 
   fun getChildren():LinkedList<TeacherCreateClassBody.ChildrenListBean>{
+    val fileInputStream = FileInputStream(mPath)
+    lateinit var workbook:XSSFWorkbook
+    try{
+      workbook = XSSFWorkbook(fileInputStream)
+    }catch (e:Exception){
+      e.printStackTrace()
+    }
+    val xssfSheet = workbook.getSheetAt(0)
+    val rowIterator:Iterator<Row> = xssfSheet.iterator()
+
     lateinit var row:XSSFRow
     val children =  LinkedList<TeacherCreateClassBody.ChildrenListBean>()
     lateinit var child: TeacherCreateClassBody.ChildrenListBean
@@ -27,7 +32,6 @@ class XlsUtils(private val path:String){
     lateinit var sid :String
 
     //孩子格式为 ： 张三 0123
-    var flag = true
     //行迭代
     while(rowIterator.hasNext()){
       row = rowIterator.next() as XSSFRow
@@ -37,16 +41,10 @@ class XlsUtils(private val path:String){
         val cell = cellIterator.next()
         when(cell.cellType){
           Cell.CELL_TYPE_NUMERIC -> {
-
+            sid = cell.numericCellValue.toString()
           }
           Cell.CELL_TYPE_STRING -> {
-            if (flag) {
               name = cell.stringCellValue
-              flag = false
-            } else {
-              sid = cell.stringCellValue
-              flag = true
-            }
           }
         }
       }
@@ -57,14 +55,25 @@ class XlsUtils(private val path:String){
   }
 
   fun getTeachers():LinkedList<TeacherCreateClassBody.TeachersListBean> {
+
+    val fileInputStream = FileInputStream(mPath)
+    lateinit var workbook:XSSFWorkbook
+    try{
+      workbook = XSSFWorkbook(fileInputStream)
+    }catch (e:Exception){
+      e.printStackTrace()
+    }
+
     lateinit var row:XSSFRow
     val teachers =  LinkedList<TeacherCreateClassBody.TeachersListBean>()
     lateinit var teacher: TeacherCreateClassBody.TeachersListBean
     lateinit var name :String
     lateinit var sid :String
 
+    val xssfSheet = workbook.getSheetAt(0)
+    val rowIterator:Iterator<Row> = xssfSheet.iterator()
+
     //孩子格式为 ： 张三 0123
-    var flag = true
     //行迭代
     while(rowIterator.hasNext()){
       row = rowIterator.next() as XSSFRow
@@ -74,16 +83,10 @@ class XlsUtils(private val path:String){
         val cell = cellIterator.next()
         when(cell.cellType){
           Cell.CELL_TYPE_NUMERIC -> {
-
+            sid = cell.numericCellValue.toString()
           }
           Cell.CELL_TYPE_STRING -> {
-            if (flag) {
               name = cell.stringCellValue
-              flag = false
-            } else {
-              sid = cell.stringCellValue
-              flag = true
-            }
           }
         }
       }

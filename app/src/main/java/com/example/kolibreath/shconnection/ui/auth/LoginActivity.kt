@@ -2,6 +2,7 @@ package com.example.kolibreath.shconnection.ui.auth
 
 import CLASSES_IDS
 import CLASS_ID
+import ID
 import LOGIN_TOKEN
 import USER_NONE
 import USER_PARENT
@@ -87,6 +88,8 @@ class LoginActivity:ToolbarActivity(){
 
             //储存老师当前地班级
             mCurrentId = t.getClasses_id()!!.last()
+
+            this@LoginActivity.putValue(ID,mEdtInputNumber.editableText.toString())
             this@LoginActivity.putValue(CLASS_ID,mCurrentId)
 
             this@LoginActivity.finish()
@@ -116,6 +119,7 @@ class LoginActivity:ToolbarActivity(){
             mCurrentId = t!!.getClass_id()
             mToken = t.getToken()!!
 
+            this@LoginActivity.putValue(ID,mEdtInputNumber.editableText.toString())
             this@LoginActivity.putValue(LOGIN_TOKEN,mToken)
             this@LoginActivity.putValue(CLASS_ID,mCurrentId)
 

@@ -16,7 +16,7 @@ import com.example.kolibreath.shconnection.extensions.putValue
 import com.example.kolibreath.shconnection.ui.auth.JoinClassActivity
 import java.util.LinkedList
 
-class UserProfileAdapter(val list: LinkedList<String>) : Adapter<ViewHolder>(){
+class UserProfileAdapter(val list: ArrayList<String>) : Adapter<ViewHolder>(){
 
   private lateinit var mCtx :Context
   private val PROFILE_DETAIL = 1

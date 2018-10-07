@@ -37,6 +37,10 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
+
+    <activity android:name=".ui.main.profile.UserProfileActivity"/>
+    <activity android:name=".ui.main.profile.UserProfileDetailActivity"/>
+
     <!--解决7.0照相机崩溃问题-->
     <provider
         android:name="android.support.v4.content.FileProvider"

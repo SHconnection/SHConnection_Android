@@ -9,10 +9,13 @@ import android.widget.TextView
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.extensions.createView
 import com.example.kolibreath.shconnection.ui.main.profile.UserProfileDetailAdapter.DetailViewHolder
+import org.apache.xmlbeans.UserType
 import java.util.LinkedList
 
 //需要区分是自己的还是别人地
-class UserProfileDetailAdapter(val names:LinkedList<String>,val values:LinkedList<String> ): Adapter<DetailViewHolder>() {
+class UserProfileDetailAdapter
+(val names:LinkedList<String>,
+  val values:LinkedList<String>, val isMyProfile:Boolean): Adapter<DetailViewHolder>() {
 
   private lateinit var mCtx: Context
 
@@ -28,6 +31,12 @@ class UserProfileDetailAdapter(val names:LinkedList<String>,val values:LinkedLis
   ) {
     viewHolder.mItemName.text = names[position]
     viewHolder.mItemValue.text = values[position]
+
+    if(isMyProfile){
+      if(position == names.size){
+        //todo 修改个人资料页面
+      }
+    }
 //    when()
   }
   override fun onCreateViewHolder(

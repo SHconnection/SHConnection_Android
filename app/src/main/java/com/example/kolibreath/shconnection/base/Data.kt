@@ -113,7 +113,8 @@ data class Profile(
     val name:String,
     val wechat:String,
     val intro:String,
-    val avatar:String
+    val avatar:String,
+    val subject: String
 )
 
 data class TeacherInfoBody(

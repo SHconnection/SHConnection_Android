@@ -47,7 +47,7 @@ interface RetrofitService{
    * 获取老师的通讯录信息
    */
   @GET("teacher/info/")
-  fun teacherProfile(tid:String,token: String):Observable<Profile>
+  fun teacherProfile(@Header("token") token: String):Observable<Profile>
 
   /**
    * 老师注册并且加入一个班级

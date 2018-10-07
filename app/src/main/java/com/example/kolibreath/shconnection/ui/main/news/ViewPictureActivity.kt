@@ -8,21 +8,17 @@ import RESULT_CODE_VIEW_IMG
 import TAG_INFOMATION
 import TAG_NEWS
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import android.view.View
-import android.view.WindowId
 import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.GridView
-import android.widget.ImageView
 import android.widget.TextView
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.extensions.QiniuExtension
@@ -32,12 +28,16 @@ import com.example.kolibreath.shconnection.extensions.setTxColor
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.entity.LocalMedia
-import org.jetbrains.anko.find
-import org.jetbrains.anko.gridView
 import java.util.LinkedList
 
+//发送一张新的动态
 class ViewPictureActivity: AppCompatActivity(){
 
+  companion object {
+    fun start(context: Context){
+      context.startActivity(Intent(context,ViewPictureActivity::class.java))
+    }
+  }
   private val mContext = this
   private lateinit var mGridView: GridView
   private val mPicList = ArrayList<String>()

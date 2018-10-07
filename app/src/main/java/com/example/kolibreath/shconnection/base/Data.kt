@@ -24,9 +24,11 @@ class TeacherLoginToken(){
   /**
    * classes_id : [0]
    * token : string
+   * name : string
    */
 
   private var token: String? = null
+  private var name: String? = null
   private var classes_id: List<Int>? = null
 
   fun getToken(): String? {
@@ -35,6 +37,14 @@ class TeacherLoginToken(){
 
   fun setToken(token: String) {
     this.token = token
+  }
+
+  fun getName(): String? {
+    return name
+  }
+
+  fun setName(name: String) {
+    this.name = name
   }
 
   fun getClasses_id(): List<Int>? {

@@ -3,7 +3,6 @@ package com.example.kolibreath.shconnection.ui.main.profile
 import ID
 import LOGIN_TOKEN
 import PROFILE_TYPE
-import USER_TYPE
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +10,6 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.RecyclerView.ItemDecoration
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.base.Profile
 import com.example.kolibreath.shconnection.base.net.NetFactory
@@ -64,6 +62,7 @@ class UserProfileDetailActivity :ToolbarActivity(){
               linkedList.apply {
                 add(t.name)
                 add(t.tel)
+
                 add(t.wechat)
                 add(t.intro)
                 add(t.avatar)

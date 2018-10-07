@@ -14,14 +14,15 @@ import com.example.kolibreath.shconnection.R.layout
 import com.example.kolibreath.shconnection.extensions.createView
 import com.example.kolibreath.shconnection.extensions.putValue
 import com.example.kolibreath.shconnection.ui.auth.JoinClassActivity
+import com.example.kolibreath.shconnection.ui.auth.NavigationActivity
 import java.util.LinkedList
 
 class UserProfileAdapter(val list: ArrayList<String>) : Adapter<ViewHolder>(){
 
   private lateinit var mCtx :Context
-  private val PROFILE_DETAIL = 1
-  private val JOIN_CLASS = 2;
-  private val LOG_OUT = 3
+  private val PROFILE_DETAIL = 0
+  private val JOIN_CLASS = 1
+  private val LOG_OUT = 2
 
   override fun getItemCount(): Int {
     return list.size
@@ -34,12 +35,13 @@ class UserProfileAdapter(val list: ArrayList<String>) : Adapter<ViewHolder>(){
     (viewholder as UserProfileAdapter).mItemName.text = list[position]
     when(position){
       //todo 个人资料具体界面
-//      PROFILE_DETAIL
+      PROFILE_DETAIL -> UserProfileDetailActivity.start(mCtx)
       JOIN_CLASS -> JoinClassActivity.start(mCtx)
       LOG_OUT ->{
         //清除token 和 班级id
         mCtx.putValue(LOGIN_TOKEN,"")
         mCtx.putValue(CLASS_ID,"")
+        NavigationActivity.start(mCtx)
       }
     }
   }

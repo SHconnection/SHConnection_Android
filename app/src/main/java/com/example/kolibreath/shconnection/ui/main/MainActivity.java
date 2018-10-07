@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,6 +13,8 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.ashokvarma.bottomnavigation.TextBadgeItem;
 import com.example.kolibreath.shconnection.R;
+import com.example.kolibreath.shconnection.ui.main.news.ViewPictureActivity;
+import com.example.kolibreath.shconnection.ui.main.profile.UserProfileActivity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,13 +24,12 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements
     BottomNavigationBar.OnTabSelectedListener {
 
+  private FloatingActionButton mFab;
   private BottomNavigationBar mBtmBar;
   private ViewPager mViewPager;
   private List<BottomNavigationItem> mItemList = new ArrayList<>();
 
-  private ImageView mBtnProfile;
-
-  @Override
+    @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements
   }
 
   private void initView(){
+
+     mFab   = findViewById(R.id.fab);
     mBtmBar = findViewById(R.id.bottom_navigation_bar);
     mViewPager = findViewById(R.id.viewpager);
 
@@ -55,10 +59,16 @@ public class MainActivity extends AppCompatActivity implements
         .setFirstSelectedPosition(1)
         .initialise();
 
-    mBtnProfile = findViewById(R.id.btn_profile);
+    ImageView mBtnProfile = findViewById(R.id.btn_profile);
     mBtnProfile.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
+        UserProfileActivity.Companion.start(MainActivity.this);
+      }
+    });
 
+    mFab.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View view) {
+        ViewPictureActivity.Companion.start(MainActivity.this);
       }
     });
   }

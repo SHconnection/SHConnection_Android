@@ -166,6 +166,7 @@ class LoginActivity:ToolbarActivity(){
       mUserType = checkUserType()
 
       this@LoginActivity.putValue(USER_TYPE,mUserType)
+
       when(mUserType){
         USER_TEACHER -> {
           mTeacherApi()

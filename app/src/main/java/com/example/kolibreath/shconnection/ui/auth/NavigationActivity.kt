@@ -2,6 +2,8 @@ package com.example.kolibreath.shconnection.ui.auth
 
 import JOIN_CLASS_ACTIVITY
 import USER_PARENT
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -17,6 +19,12 @@ import com.example.kolibreath.shconnection.ui.scan.ScanActivity
 
 class NavigationActivity:BaseActivity(){
 
+
+  companion object {
+    fun start(context:Context){
+      context.startActivity(Intent(context,NavigationActivity::class.java))
+    }
+  }
   override fun onCreate(
     savedInstanceState: Bundle?
   ) {

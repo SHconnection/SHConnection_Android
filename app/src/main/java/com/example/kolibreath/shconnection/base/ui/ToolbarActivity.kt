@@ -19,9 +19,6 @@ import rx.Subscription
 
 open class ToolbarActivity : BaseActivity() {
 
-  private lateinit var mSubscription: Subscription
-  private lateinit var mClassId : String
-
   private lateinit var mToolbar: Toolbar
 
   private lateinit var mActionBar : ActionBar
@@ -73,7 +70,6 @@ open class ToolbarActivity : BaseActivity() {
   }
 
   override fun onDestroy() {
-    mSubscription.unsubscribe()
     super.onDestroy()
   }
   override fun onBackPressed() {

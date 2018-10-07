@@ -1,6 +1,5 @@
 package com.example.kolibreath.shconnection.base.ui
 
-import CLASS_ID
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.support.annotation.RequiresApi
@@ -11,13 +10,9 @@ import android.view.MenuItem
 import android.widget.TextView
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.R.id
-import com.example.kolibreath.shconnection.R.id.action_scan_from_actual_view
-import com.example.kolibreath.shconnection.R.id.action_scan_from_system_gallery
 import com.example.kolibreath.shconnection.base.RxBus
 import com.example.kolibreath.shconnection.base.ScanEvent
-import com.example.kolibreath.shconnection.extensions.Preference
 import com.example.kolibreath.shconnection.extensions.decode
-import com.example.kolibreath.shconnection.ui.scan.ScanActivity
 import org.jetbrains.anko.find
 import rx.Subscriber
 import rx.Subscription
@@ -25,7 +20,7 @@ import rx.Subscription
 open class ToolbarActivity : BaseActivity() {
 
   private lateinit var mSubscription: Subscription
-  private var mClassId : String by Preference(name = CLASS_ID, default = "")
+  private lateinit var mClassId : String
 
   private lateinit var mToolbar: Toolbar
 
@@ -75,14 +70,6 @@ open class ToolbarActivity : BaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-
-    //listen to the scan result
-    mSubscription = RxBus.getDefault().toObservable(ScanEvent::class.java)
-        .subscribe(object:Subscriber<ScanEvent>(){
-          @RequiresApi(VERSION_CODES.O)
-          override fun onNext(t: ScanEvent?) {mClassId = this@ToolbarActivity.decode(t!!.classId!!)}
-          override fun onCompleted() {}
-          override fun onError(e: Throwable?) {e?.printStackTrace()} })
   }
 
   override fun onDestroy() {

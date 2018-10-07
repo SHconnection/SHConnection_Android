@@ -1,5 +1,6 @@
 package com.example.kolibreath.shconnection.extensions
 
+import CLASS_ID
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -17,6 +18,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
 import com.example.kolibreath.shconnection.R.color
+import com.example.kolibreath.shconnection.ui.auth.isEmpty
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.android.UI
 import java.io.File
@@ -153,12 +155,13 @@ fun Context.text(id:Int) = resources.getString(id)
  *字符串的加密和解密
  */
 
+//todo fuck encrypt and decode
 fun Activity.encrypt(string:String):String =
   java.util.Base64.getEncoder().encodeToString(string.toByteArray(Charsets.UTF_8))
 
 @RequiresApi(VERSION_CODES.O)
-fun Activity.decode(encrypted:String):String = String(
-    java.util.Base64.getDecoder().decode(encrypted),Charsets.UTF_8)
+fun Activity.decode(encrypted:String):String = String(java.util.Base64.getDecoder().decode(encrypted),Charsets.UTF_8)
+//encrypted
 
 /****
  * 扩展属性
@@ -173,3 +176,12 @@ get() = this.database.writableDatabase
     get() = UI
  val Context.bgContext: CoroutineContext
     get() = CommonPool
+
+
+//Todo 可能会有错误
+var Context.isLogin :Boolean
+  set(value) {
+
+  }
+  get() = this.getValue(CLASS_ID,"").isEmpty
+

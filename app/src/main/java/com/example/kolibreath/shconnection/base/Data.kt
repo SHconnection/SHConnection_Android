@@ -220,4 +220,18 @@ class TeacherCreateClassBody{
 /**
  * 老师创建班级之后地返回值
  */
-data class CreatedClassId(val class_id: Int)
+class CreatedClassId(){
+  /**
+   * class_id : 8
+   */
+
+  private var class_id: Int = 0
+
+  fun getClass_id(): Int {
+    return class_id
+  }
+
+  fun setClass_id(class_id: Int) {
+    this.class_id = class_id
+  }
+}

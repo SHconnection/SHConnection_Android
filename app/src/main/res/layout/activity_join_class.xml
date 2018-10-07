@@ -29,7 +29,7 @@
 
   <EditText
       android:id="@+id/edt_name"
-      android:inputType="textPassword"
+      android:inputType="text"
       android:layout_below="@id/edt_password"
       android:hint="@string/txt_name"
       android:layout_marginTop="20dp"
@@ -40,7 +40,7 @@
 
   <EditText
       android:id="@+id/edt_subject"
-      android:inputType="textPassword"
+      android:inputType="text"
       android:layout_below="@id/edt_name"
       android:hint="@string/txt_subject"
       android:layout_marginTop="20dp"

@@ -23,7 +23,8 @@ public class QRCodeUtil {
    * @return
    */
   @Nullable
-  public static Bitmap createQRCodeBitmap(String content, int width, int height){
+  public static Bitmap createQRCodeBitmap(String content, int width, int height)
+      throws WriterException {
     return createQRCodeBitmap(content, width, height, "UTF-8", "H", "2", Color.BLACK, Color.WHITE);
   }
 
@@ -41,7 +42,7 @@ public class QRCodeUtil {
   @Nullable
   public static Bitmap createQRCodeBitmap(String content, int width, int height,
       @Nullable String character_set, @Nullable String error_correction, @Nullable String margin,
-      @ColorInt int color_black, @ColorInt int color_white){
+      @ColorInt int color_black, @ColorInt int color_white) throws WriterException {
 
     /** 1.参数合法性判断 */
     if(TextUtils.isEmpty(content)){ // 字符串内容判空
@@ -52,7 +53,6 @@ public class QRCodeUtil {
       return null;
     }
 
-    try {
       /** 2.设置二维码相关配置,生成BitMatrix(位矩阵)对象 */
       Hashtable<EncodeHintType, String> hints = new Hashtable<>();
 
@@ -67,6 +67,7 @@ public class QRCodeUtil {
       if(!TextUtils.isEmpty(margin)){
         hints.put(EncodeHintType.MARGIN, margin); // 空白边距设置
       }
+
       BitMatrix
           bitMatrix = new QRCodeWriter().encode(content, BarcodeFormat.QR_CODE, width, height, hints);
 
@@ -86,10 +87,6 @@ public class QRCodeUtil {
       Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
       bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
       return bitmap;
-    } catch (WriterException e) {
-      e.printStackTrace();
     }
-
-    return null;
   }
-}
+

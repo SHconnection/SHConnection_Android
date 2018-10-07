@@ -1,11 +1,12 @@
 package com.example.kolibreath.shconnection.ui.auth
 
 import CLASSES_IDS
-import CUR_CLASS
+import CLASS_ID
 import LOGIN_TOKEN
 import USER_NONE
 import USER_PARENT
 import USER_TEACHER
+import USER_TYPE
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -15,15 +16,16 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import com.example.kolibreath.shconnection.R
-import com.example.kolibreath.shconnection.base.TeacherLoginBody
-import com.example.kolibreath.shconnection.base.TeacherLoginToken
 import com.example.kolibreath.shconnection.base.ParentLoginBody
 import com.example.kolibreath.shconnection.base.ParentLoginToken
+import com.example.kolibreath.shconnection.base.TeacherLoginBody
+import com.example.kolibreath.shconnection.base.TeacherLoginToken
 import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.base.ui.ToolbarActivity
-import com.example.kolibreath.shconnection.extensions.Preference
 import com.example.kolibreath.shconnection.extensions.database
+import com.example.kolibreath.shconnection.extensions.putValue
 import com.example.kolibreath.shconnection.extensions.showErrorSnackbarShort
+import com.example.kolibreath.shconnection.ui.main.MainActivity
 import org.jetbrains.anko.db.INTEGER
 import org.jetbrains.anko.db.createTable
 import org.jetbrains.anko.db.insert
@@ -33,10 +35,10 @@ import rx.schedulers.Schedulers
 
 class LoginActivity:ToolbarActivity(){
 
-  private var mToken :String by Preference<String>(name = LOGIN_TOKEN,default = "")
+  private lateinit  var mToken :String
 
   //保存当前所在地班级id
-  private var mCurrentId:Int by Preference(name = CUR_CLASS,default = -1)
+  private  var mCurrentId:Int = -1
 
   private var mUserType :Int = USER_TEACHER
 
@@ -65,6 +67,7 @@ class LoginActivity:ToolbarActivity(){
         .subscribe(object:Subscriber<TeacherLoginToken>(){
           override fun onNext(t: TeacherLoginToken?) {
             mToken = t!!.getToken()!!
+            this@LoginActivity.putValue(LOGIN_TOKEN,mToken)
 
             if(t.getClasses_id()!!.isEmpty())
               return
@@ -84,13 +87,17 @@ class LoginActivity:ToolbarActivity(){
 
             //储存老师当前地班级
             mCurrentId = t.getClasses_id()!!.last()
+            this@LoginActivity.putValue(CLASS_ID,mCurrentId)
+
+            this@LoginActivity.finish()
+            MainActivity.start(this@LoginActivity)
           }
 
           override fun onCompleted() {}
 
           override fun onError(e: Throwable?) {
             e!!.printStackTrace()
-            showErrorSnackbarShort("等落失败")
+            showErrorSnackbarShort("登录失败")
           }
         })
   }
@@ -108,6 +115,12 @@ class LoginActivity:ToolbarActivity(){
           override fun onNext(t: ParentLoginToken?) {
             mCurrentId = t!!.getClass_id()
             mToken = t.getToken()!!
+
+            this@LoginActivity.putValue(LOGIN_TOKEN,mToken)
+            this@LoginActivity.putValue(CLASS_ID,mCurrentId)
+
+            MainActivity.start(this@LoginActivity)
+            this@LoginActivity.finish()
           }
 
           override fun onCompleted() {}
@@ -147,6 +160,8 @@ class LoginActivity:ToolbarActivity(){
         return@setOnClickListener
 
       mUserType = checkUserType()
+
+      this@LoginActivity.putValue(USER_TYPE,mUserType)
       when(mUserType){
         USER_TEACHER -> {
           mTeacherApi()

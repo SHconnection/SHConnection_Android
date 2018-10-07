@@ -46,7 +46,7 @@ class JoinClassActivity:ToolbarActivity() {
   private lateinit var mCbStudent:CheckBox
   private lateinit var mCbTeacher:CheckBox
 
-  private var mUserType:Int = USER_NONE
+  private var mUserType:Int = USER_TEACHER
 
   private lateinit var mClassId :String
 
@@ -128,6 +128,8 @@ class JoinClassActivity:ToolbarActivity() {
 
     mCbStudent = findViewById(R.id.cb_student)
     mCbTeacher = findViewById(R.id.cb_teacher)
+
+    mCbTeacher.isChecked = true
 
     mCbStudent.setOnClickListener{
       mEdtSubject.visibility = View.INVISIBLE

@@ -35,7 +35,7 @@ class GridViewAdapter(
     return p0.toLong()
   }
 
-  @SuppressLint("ViewHolder")
+  @SuppressLint("UserProfileAdapter")
   override fun getView(
     position: Int,
     convertView: View?,

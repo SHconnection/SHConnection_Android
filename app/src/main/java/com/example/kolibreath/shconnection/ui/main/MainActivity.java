@@ -1,23 +1,19 @@
 package com.example.kolibreath.shconnection.ui.main;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toolbar;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
-import com.ashokvarma.bottomnavigation.ShapeBadgeItem;
 import com.ashokvarma.bottomnavigation.TextBadgeItem;
 import com.example.kolibreath.shconnection.R;
-import com.example.kolibreath.shconnection.base.ui.ToolbarActivity;
 import java.util.ArrayList;
 import java.util.List;
-import org.jetbrains.anko.appcompat.v7.AppcompatAlertBuilder;
 
   /**
    * 没有使用系统提供的Toolbar 构建 自定义了layout引入
@@ -37,6 +33,10 @@ public class MainActivity extends AppCompatActivity implements
     setContentView(R.layout.activity_main);
 
     initView();
+  }
+
+  public static void start(Context context){
+    context.startActivity(new Intent(context,MainActivity.class));
   }
 
   private void initView(){

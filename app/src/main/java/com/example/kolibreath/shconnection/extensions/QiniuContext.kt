@@ -1,5 +1,7 @@
 package com.example.kolibreath.shconnection.extensions
 
+import android.content.Context
+import android.support.annotation.VisibleForTesting
 import android.util.Log
 import com.qiniu.android.common.FixedZone
 import com.qiniu.android.http.ResponseInfo
@@ -8,10 +10,14 @@ import com.qiniu.android.storage.UpCompletionHandler
 import com.qiniu.android.storage.UpProgressHandler
 import com.qiniu.android.storage.UploadManager
 import com.qiniu.android.storage.UploadOptions
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.launch
 import org.json.JSONObject
 import rx.Observable
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
+import rx.functions.FuncN
 import rx.schedulers.Schedulers
 import java.io.File
 import java.util.LinkedList
@@ -61,7 +67,8 @@ class QiniuExtension{
 
     //todo 这个是一个异步的操作 如果上传所有东西写好了最好改成flatmap的形式
     var urls : LinkedList<String> = LinkedList()
-    fun getUrls(pictures: ArrayList<String>) {
+
+    fun postPictures(pictures: ArrayList<String>,context:Context):LinkedList<String> {
       val map = HashMap<String, File>()
       pictures.forEachIndexed { index, picture ->
         try {
@@ -72,7 +79,6 @@ class QiniuExtension{
           e.printStackTrace()
         }
       }
-      val urls = LinkedList<String>()
       val observables = ArrayList<Observable<String>>()
       map.forEach {
         val data = it.value
@@ -89,26 +95,28 @@ class QiniuExtension{
         observables.add(observable)
       }
 
-      Observable.merge(observables)
-          .subscribeOn(Schedulers.io())
-          .observeOn(AndroidSchedulers.mainThread())
-          .subscribe(object : Subscriber<String>() {
-            override fun onNext(t: String?) {
-              urls.add("http://http://ogbvujd8z.bkt.clouddn.com/$t")
-              urls.forEach{
-                Log.d("qiniu key", it)
+      val urls = LinkedList<String>()
+      map.forEach {
+        val data = it.value
+        val name = it.key
+        lateinit var value: String
 
+        launch(context = UI) {
+
+          value = async(context = context.bgContext) {
+            lateinit var reponse: String
+            upload(data = data, name = name) { key, _, _ ->
+              run {
+                reponse = "http://http://ogbvujd8z.bkt.clouddn.com/$key"
               }
             }
+            reponse
+          }.await()
+        }
+        urls.add(value)
+      }
 
-            override fun onCompleted() {
-              Log.d("qiniu", "上传完成")
-            }
-
-            override fun onError(e: Throwable?) {
-              e?.printStackTrace()
-            }
-          })
+      return urls;
     }
   }
 }

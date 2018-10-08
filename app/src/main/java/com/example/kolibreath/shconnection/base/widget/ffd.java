@@ -1,40 +1,96 @@
 package com.example.kolibreath.shconnection.base.widget;
 
+import com.example.kolibreath.shconnection.extensions.QiniuExtension;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import rx.Observable;
+import rx.Subscriber;
+import rx.functions.Func1;
+import rx.functions.FuncN;
 
 public class ffd {
 
   /**
-   * classes_id : [0]
-   * token : string
-   * name : string
+   * classId : 0
+   * teacherId : 0
+   * type : string
+   * content : string
+   * picture_urls : ["string"]
    */
 
-  private String token;
-  private String name;
-  private List<Integer> classes_id;
+  private int classId;
+  private int teacherId;
+  private String type;
+  private String content;
+  private List<String> picture_urls;
 
-  public String getToken() {
-    return token;
+  public int getClassId() {
+    return classId;
   }
 
-  public void setToken(String token) {
-    this.token = token;
+  public void setClassId(int classId) {
+    this.classId = classId;
   }
 
-  public String getName() {
-    return name;
+  public int getTeacherId() {
+    return teacherId;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setTeacherId(int teacherId) {
+    this.teacherId = teacherId;
   }
 
-  public List<Integer> getClasses_id() {
-    return classes_id;
+  public String getType() {
+    return type;
   }
 
-  public void setClasses_id(List<Integer> classes_id) {
-    this.classes_id = classes_id;
+  public void setType(String type) {
+    this.type = type;
+  }
+
+  public String getContent() {
+    return content;
+  }
+
+  public void setContent(String content) {
+    this.content = content;
+  }
+
+  public List<String> getPicture_urls() {
+    return picture_urls;
+  }
+
+  public void setPicture_urls(List<String> picture_urls) {
+    this.picture_urls = picture_urls;
+  }
+
+  public void test(){
+    QiniuExtension.Companion.postPictures(new ArrayList<String>())
+        .flatMap(new Func1<String, Observable<LinkedList<String>>>() {
+          @Override public Observable<LinkedList<String>> call(String s) {
+
+          }
+        };
+
+        ArrayList<String> list = new ArrayList<>();
+
+    Observable.zip(list, new FuncN(){
+      public String call(java.lang.Object... args){
+        //ReturnType result; //to be made
+        //preparatory code for using the args
+        for (Object obj : args){
+          //ReturnType retObj = (ReturnType)obj;
+          //code to use the arg once at a time to combine N of them into one.
+        }
+        return null;
+      }
+    });
+
+    Observable.create(new Observable.OnSubscribe<Object>() {
+      @Override public void call(Subscriber<? super Object> subscriber) {
+
+      }
+    });
   }
 }

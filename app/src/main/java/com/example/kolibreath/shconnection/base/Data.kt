@@ -246,3 +246,66 @@ class CreatedClassId(){
     this.class_id = class_id
   }
 }
+
+
+/**
+ * 发送一个新的feed
+ */
+class FeedBody(
+    /**
+     * classId : 0
+     * teacherId : 0
+     * type : string
+     * content : string
+     * picture_urls : ["string"]
+     */
+  private var classId: Int,
+  private var teacherId: Int,
+  type: String,
+  content: String,
+  picture_urls: List<String>
+) {
+  private var type: String? = type
+  private var content: String? = content
+  private var picture_urls: List<String>? = picture_urls
+
+  fun getClassId(): Int {
+    return classId
+  }
+
+  fun setClassId(classId: Int) {
+    this.classId = classId
+  }
+
+  fun getTeacherId(): Int {
+    return teacherId
+  }
+
+  fun setTeacherId(teacherId: Int) {
+    this.teacherId = teacherId
+  }
+
+  fun getType(): String? {
+    return type
+  }
+
+  fun setType(type: String) {
+    this.type = type
+  }
+
+  fun getContent(): String? {
+    return content
+  }
+
+  fun setContent(content: String) {
+    this.content = content
+  }
+
+  fun getPicture_urls(): List<String>? {
+    return picture_urls
+  }
+
+  fun setPicture_urls(picture_urls: List<String>) {
+    this.picture_urls = picture_urls
+  }
+}

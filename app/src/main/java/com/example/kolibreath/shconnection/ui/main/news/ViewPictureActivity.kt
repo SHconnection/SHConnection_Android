@@ -1,6 +1,9 @@
 package com.example.kolibreath.shconnection.ui.main.news
 
+import CLASS_ID
+import ID
 import IMG_LIST
+import LOGIN_TOKEN
 import MAX_SELECT_PIC_NUM
 import POSITION
 import REQUEST_CODE_MAIN
@@ -15,20 +18,33 @@ import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.GridView
 import android.widget.TextView
 import com.example.kolibreath.shconnection.R
+import com.example.kolibreath.shconnection.base.FeedBody
+import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.extensions.QiniuExtension
 import com.example.kolibreath.shconnection.extensions.findView
+import com.example.kolibreath.shconnection.extensions.getValue
 import com.example.kolibreath.shconnection.extensions.setBgColor
 import com.example.kolibreath.shconnection.extensions.setTxColor
+import com.example.kolibreath.shconnection.extensions.showSnackBarShort
+import com.example.kolibreath.shconnection.ui.main.MainActivity
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.entity.LocalMedia
+import com.luck.picture.lib.rxbus2.Subscribe
+import rx.Scheduler
+import rx.Subscriber
+import rx.android.schedulers.AndroidSchedulers
+import rx.functions.Func1
+import rx.schedulers.Schedulers
 import java.util.LinkedList
+import java.util.Observable
 
 //发送一张新的动态
 class ViewPictureActivity: AppCompatActivity(){
@@ -38,6 +54,11 @@ class ViewPictureActivity: AppCompatActivity(){
       context.startActivity(Intent(context,ViewPictureActivity::class.java))
     }
   }
+
+  private val teacherId = getValue(ID,-1)
+  private val token = getValue(LOGIN_TOKEN,"")
+  private val classid = getValue(CLASS_ID,"")
+
   private val mContext = this
   private lateinit var mGridView: GridView
   private val mPicList = ArrayList<String>()
@@ -181,9 +202,29 @@ class ViewPictureActivity: AppCompatActivity(){
     }
 
     mBtnConfirm.setOnClickListener {
+      if(TextUtils.isEmpty(mContent))
+        return@setOnClickListener
+
       //todo 异步 ！！！！
-      QiniuExtension.getUrls(pictures = mPicList)
-      mPicUrls = QiniuExtension.urls
+      val pictures = QiniuExtension.postPictures(pictures = mPicList,
+          context = this@ViewPictureActivity)
+
+      val feedBody = FeedBody(classId = classid.toInt()
+      ,teacherId = teacherId,type = mTag, content = mContent!!, picture_urls = pictures)
+      NetFactory.retrofitService
+          .postFeed(token = token, feedBody = feedBody  )
+          .subscribeOn(Schedulers.io())
+          .observeOn(AndroidSchedulers.mainThread())
+          .subscribe(object : Subscriber<Any> (){
+            override fun onNext(t: Any?) {}
+
+            override fun onCompleted() {
+              showSnackBarShort("发送成功")
+              MainActivity.start(this@ViewPictureActivity)
+            }
+
+            override fun onError(e: Throwable?) {e!!.printStackTrace()}
+          })
     }
 
     mBtnCancel.setOnClickListener {  finish()}

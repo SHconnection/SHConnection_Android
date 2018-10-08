@@ -1,6 +1,7 @@
 package com.example.kolibreath.shconnection.base.net
 
 import com.example.kolibreath.shconnection.base.CreatedClassId
+import com.example.kolibreath.shconnection.base.FeedBody
 import com.example.kolibreath.shconnection.base.ParentInit
 import com.example.kolibreath.shconnection.base.TeacherLoginBody
 import com.example.kolibreath.shconnection.base.TeacherLoginToken
@@ -99,7 +100,7 @@ interface RetrofitService{
    * 上传一个动态
    */
 
-  @POST()
-  fun postNews(content:String,pictures:List<String>)
-
+  @POST("feed/")
+  fun postFeed(@Header("token")token:String,@Body feedBody: FeedBody):
+      Observable<Any>
 }

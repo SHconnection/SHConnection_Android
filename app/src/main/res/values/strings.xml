@@ -3,4 +3,15 @@
 
   <string name="scan_from_actual_view">扫一扫进入班级</string>
   <string name="scan_from_system_gallery">从系统相册读取</string>
+
+  <string name="navigation_address">通讯录</string>
+  <string name="navigation_home">家校圈</string>
+  <string name="navigation_comment">孩子评价</string>
+
+  <string name="address_search">搜索</string>
+  <string name="news_cancel">取消</string>
+  <string name="news_send">发表</string>
+  <string name="news_read">已读</string>
+  <string name="news_unread">未读</string>
+  <string name="news_comment">留下评论</string>
 </resources>

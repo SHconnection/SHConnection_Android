@@ -1,17 +1,15 @@
 package com.example.kolibreath.shconnection.ui.main;
 
 import android.graphics.Color;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.widget.Toolbar;
+import android.support.v4.view.ViewPager;
+
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
-import com.ashokvarma.bottomnavigation.ShapeBadgeItem;
 import com.ashokvarma.bottomnavigation.TextBadgeItem;
 import com.example.kolibreath.shconnection.R;
 import com.example.kolibreath.shconnection.base.ui.ToolbarActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +43,7 @@ public class MainActivity extends ToolbarActivity implements
     mBtmBar.addItem(mItemList.get(0)).addItem(mItemList.get(1)).addItem(mItemList.get(2))
         .setFirstSelectedPosition(1)
         .initialise();
-git   }
+  }
 
   //todo set it for the new navigation item
   private void initBottomNavigationItem(){

@@ -53,7 +53,7 @@ class UserProfileDetailActivity :ToolbarActivity(){
 
     val linkedList = LinkedList<String>()
     NetFactory.retrofitService
-        .teacherProfile(tid = id,token = token)
+        .teacherProfile(token = token)
         .observeOn(Schedulers.io())
         .subscribeOn(AndroidSchedulers.mainThread())
         .subscribe(object:Subscriber<Profile>(){

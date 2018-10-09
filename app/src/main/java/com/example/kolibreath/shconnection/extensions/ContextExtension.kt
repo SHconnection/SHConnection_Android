@@ -183,5 +183,5 @@ var Context.isLogin :Boolean
   set(value) {
 
   }
-  get() = this.getValue(CLASS_ID,"").isEmpty
+  get() = getValue(CLASS_ID,"").isEmpty
 

@@ -25,6 +25,7 @@ import android.widget.EditText
 import android.widget.GridView
 import android.widget.TextView
 import com.example.kolibreath.shconnection.R
+import com.example.kolibreath.shconnection.base.App
 import com.example.kolibreath.shconnection.base.FeedBody
 import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.extensions.QiniuExtension
@@ -37,14 +38,10 @@ import com.example.kolibreath.shconnection.ui.main.MainActivity
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.entity.LocalMedia
-import com.luck.picture.lib.rxbus2.Subscribe
-import rx.Scheduler
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
-import rx.functions.Func1
 import rx.schedulers.Schedulers
 import java.util.LinkedList
-import java.util.Observable
 
 //发送一张新的动态
 class ViewPictureActivity: AppCompatActivity(){
@@ -55,7 +52,7 @@ class ViewPictureActivity: AppCompatActivity(){
     }
   }
 
-  private val teacherId = getValue(ID,-1)
+  private val teacherId = getValue(ID,"")
   private val token = getValue(LOGIN_TOKEN,"")
   private val classid = getValue(CLASS_ID,"")
 

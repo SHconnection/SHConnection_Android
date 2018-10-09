@@ -2,9 +2,10 @@ package com.example.kolibreath.shconnection.extensions
 
 import android.content.Context
 import android.preference.PreferenceManager
+import com.example.kolibreath.shconnection.base.App
 
 fun <T>Context.putValue(key:String,value:T){
-  val editor = PreferenceManager.getDefaultSharedPreferences(this).edit()
+  val editor = PreferenceManager.getDefaultSharedPreferences(App.getContext()).edit()
 
   when(value){
     is Int -> {
@@ -31,7 +32,8 @@ fun <T>Context.putValue(key:String,value:T){
 }
 
 
-fun <T> Context.getValue(key:String,default:T):T = with(PreferenceManager.getDefaultSharedPreferences(this)){
+fun <T> getValue(key:String,default:T):T = with(PreferenceManager.getDefaultSharedPreferences(
+    App.getContext())){
   val value:Any = when(default){
     is Int ->  getInt(key,default)
     is Long -> getLong(key,default)

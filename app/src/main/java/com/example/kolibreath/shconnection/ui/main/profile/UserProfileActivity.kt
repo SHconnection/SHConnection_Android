@@ -32,10 +32,10 @@ class UserProfileActivity: ToolbarActivity(){
       context.startActivity(Intent(context,UserProfileActivity::class.java))
     }
   }
-  private var mUserType = App.getContext().getValue(USER_TYPE,USER_NONE)
+  private var mUserType = getValue(USER_TYPE,USER_NONE)
 
-  private val id = App.getContext().getValue(ID,"")
-  private val token = App.getContext().getValue(LOGIN_TOKEN,"")
+  private val id = getValue(ID,"")
+  private val token = getValue(LOGIN_TOKEN,"")
 
   private var names = arrayListOf<String>("个人资料","加入新的班级","注销帐号")
   private var mUserProfileAdapter = UserProfileAdapter(names)
@@ -58,7 +58,7 @@ class UserProfileActivity: ToolbarActivity(){
     var observale:Observable<Profile> = when(mUserType){
       USER_PARENT ->{
         NetFactory.retrofitService
-            .teacherProfile(tid = id,token = token)
+            .teacherProfile(token = token)
       }
       USER_TEACHER ->{
         NetFactory.retrofitService

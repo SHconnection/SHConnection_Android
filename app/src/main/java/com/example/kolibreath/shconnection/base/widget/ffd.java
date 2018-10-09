@@ -61,36 +61,4 @@ public class ffd {
     return picture_urls;
   }
 
-  public void setPicture_urls(List<String> picture_urls) {
-    this.picture_urls = picture_urls;
-  }
-
-  public void test(){
-    QiniuExtension.Companion.postPictures(new ArrayList<String>())
-        .flatMap(new Func1<String, Observable<LinkedList<String>>>() {
-          @Override public Observable<LinkedList<String>> call(String s) {
-
-          }
-        };
-
-        ArrayList<String> list = new ArrayList<>();
-
-    Observable.zip(list, new FuncN(){
-      public String call(java.lang.Object... args){
-        //ReturnType result; //to be made
-        //preparatory code for using the args
-        for (Object obj : args){
-          //ReturnType retObj = (ReturnType)obj;
-          //code to use the arg once at a time to combine N of them into one.
-        }
-        return null;
-      }
-    });
-
-    Observable.create(new Observable.OnSubscribe<Object>() {
-      @Override public void call(Subscriber<? super Object> subscriber) {
-
-      }
-    });
-  }
 }

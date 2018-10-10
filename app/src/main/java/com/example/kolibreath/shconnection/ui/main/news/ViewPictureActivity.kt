@@ -27,6 +27,8 @@ import android.widget.TextView
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.base.App
 import com.example.kolibreath.shconnection.base.FeedBody
+import com.example.kolibreath.shconnection.base.QiniuUploadFinishEvent
+import com.example.kolibreath.shconnection.base.RxBus
 import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.extensions.QiniuExtension
 import com.example.kolibreath.shconnection.extensions.findView
@@ -199,29 +201,38 @@ class ViewPictureActivity: AppCompatActivity(){
     }
 
     mBtnConfirm.setOnClickListener {
-      if(TextUtils.isEmpty(mContent))
+      if (TextUtils.isEmpty(mContent))
         return@setOnClickListener
 
       //todo 异步 ！！！！
-      val pictures = QiniuExtension.postPictures(pictures = mPicList,
-          context = this@ViewPictureActivity)
+      //todo refractor 这样的代码写的很差
+      val pictures = QiniuExtension.postPictures(pictures = mPicList)
+      RxBus.getDefault()
+          .toObservable(QiniuUploadFinishEvent::class.java)
+          .subscribe {
 
-      val feedBody = FeedBody(classId = classid.toInt()
-      ,teacherId = teacherId,type = mTag, content = mContent!!, picture_urls = pictures)
-      NetFactory.retrofitService
-          .postFeed(token = token, feedBody = feedBody  )
-          .subscribeOn(Schedulers.io())
-          .observeOn(AndroidSchedulers.mainThread())
-          .subscribe(object : Subscriber<Any> (){
-            override fun onNext(t: Any?) {}
+            val feedBody = FeedBody(
+                classId = classid.toInt()
+                , teacherId = teacherId.toInt(), type = mTag, content = mContent!!,
+                picture_urls = pictures
+            )
+            //暂时500
+//      NetFactory.retrofitService
+//          .postFeed(token = token, feedBody = feedBody  )
+//          .subscribeOn(Schedulers.io())
+//          .observeOn(AndroidSchedulers.mainThread())
+//          .subscribe(object : Subscriber<Any> (){
+//            override fun onNext(t: Any?) {}
+//
+//            override fun onCompleted() {
+//              showSnackBarShort("发送成功")
+//              MainActivity.start(this@ViewPictureActivity)
+//            }
+//
+//            override fun onError(e: Throwable?) {e!!.printStackTrace()}
+//          })
+          }
 
-            override fun onCompleted() {
-              showSnackBarShort("发送成功")
-              MainActivity.start(this@ViewPictureActivity)
-            }
-
-            override fun onError(e: Throwable?) {e!!.printStackTrace()}
-          })
     }
 
     mBtnCancel.setOnClickListener {  finish()}

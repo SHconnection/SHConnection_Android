@@ -3,6 +3,8 @@ package com.example.kolibreath.shconnection.extensions
 import android.content.Context
 import android.support.annotation.VisibleForTesting
 import android.util.Log
+import com.example.kolibreath.shconnection.base.QiniuUploadFinishEvent
+import com.example.kolibreath.shconnection.base.RxBus
 import com.qiniu.android.common.FixedZone
 import com.qiniu.android.http.ResponseInfo
 import com.qiniu.android.storage.Configuration
@@ -68,7 +70,7 @@ class QiniuExtension{
     //todo 这个是一个异步的操作 如果上传所有东西写好了最好改成flatmap的形式
     var urls : LinkedList<String> = LinkedList()
 
-    fun postPictures(pictures: ArrayList<String>,context:Context):LinkedList<String> {
+    fun postPictures(pictures: ArrayList<String>) :LinkedList<String>{
       val map = HashMap<String, File>()
       pictures.forEachIndexed { index, picture ->
         try {
@@ -79,44 +81,25 @@ class QiniuExtension{
           e.printStackTrace()
         }
       }
-      val observables = ArrayList<Observable<String>>()
-      map.forEach {
-        val data = it.value
-        val name = it.key
-        val observable = Observable.create(Observable.OnSubscribe<String> {
-          upload(data = data, name = name) { key, _, _ ->
-            run {
-              Log.d("qiniu","fuck$key")
-              it.onNext(key)
-              it.onCompleted()
-            }
-          }
-        })
-        observables.add(observable)
-      }
 
       val urls = LinkedList<String>()
       map.forEach {
         val data = it.value
         val name = it.key
-        lateinit var value: String
 
-        launch(context = UI) {
-
-          value = async(context = context.bgContext) {
-            lateinit var reponse: String
-            upload(data = data, name = name) { key, _, _ ->
-              run {
-                reponse = "http://http://ogbvujd8z.bkt.clouddn.com/$key"
-              }
+        var counter = 0
+        upload(data = data, name = name) { key, _, _ ->
+          run {
+            val response = "http://http://ogbvujd8z.bkt.clouddn.com/$key"
+            Log.d("fuck", response)
+            counter ++;
+            if(counter == map.size){
+              RxBus.getDefault().send(QiniuUploadFinishEvent())
             }
-            reponse
-          }.await()
+          }
         }
-        urls.add(value)
       }
-
-      return urls;
+      return urls
     }
   }
 }

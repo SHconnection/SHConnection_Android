@@ -90,7 +90,7 @@ class LoginActivity:ToolbarActivity(){
             mCurrentId = t.getClasses_id()!!.last()
 
             this@LoginActivity.putValue(ID,mEdtInputNumber.editableText.toString())
-            this@LoginActivity.putValue(CLASS_ID,mCurrentId)
+            this@LoginActivity.putValue(CLASS_ID,mCurrentId.toString())
 
             this@LoginActivity.finish()
             MainActivity.start(this@LoginActivity)
@@ -121,7 +121,7 @@ class LoginActivity:ToolbarActivity(){
 
             this@LoginActivity.putValue(ID,mEdtInputNumber.editableText.toString())
             this@LoginActivity.putValue(LOGIN_TOKEN,mToken)
-            this@LoginActivity.putValue(CLASS_ID,mCurrentId)
+            this@LoginActivity.putValue(CLASS_ID,mCurrentId.toString())
 
             MainActivity.start(this@LoginActivity)
             this@LoginActivity.finish()

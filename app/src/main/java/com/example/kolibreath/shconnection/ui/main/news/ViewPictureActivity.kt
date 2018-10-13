@@ -38,10 +38,12 @@ import com.example.kolibreath.shconnection.ui.main.MainActivity
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.entity.LocalMedia
+import com.luck.picture.lib.rxbus2.Subscribe
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import java.util.LinkedList
+import java.util.Observable
 
 //发送一张新的动态
 class ViewPictureActivity: AppCompatActivity(){
@@ -203,16 +205,17 @@ class ViewPictureActivity: AppCompatActivity(){
         return@setOnClickListener
 
       //todo 异步 ！！！！
-      val pictures = QiniuExtension.postPictures(pictures = mPicList,
-          context = this@ViewPictureActivity)
-
-      val feedBody = FeedBody(classId = classid.toInt()
-      ,teacherId = teacherId,type = mTag, content = mContent!!, picture_urls = pictures)
-      NetFactory.retrofitService
-          .postFeed(token = token, feedBody = feedBody  )
-          .subscribeOn(Schedulers.io())
-          .observeOn(AndroidSchedulers.mainThread())
-          .subscribe(object : Subscriber<Any> (){
+      QiniuExtension.postPictures(pictures = mPicList)
+          .flatMap {
+            val feedBody = FeedBody(classId = classid.toInt()
+                ,teacherId = teacherId.toInt()
+                , type = mTag, content = mContent!!, picture_urls = it)
+            NetFactory.retrofitService
+                .postFeed(token = token, feedBody = feedBody  )
+          }
+          .subscribeOn(AndroidSchedulers.mainThread())
+          .observeOn(Schedulers.io())
+          .subscribe(object : Subscriber<Any>() {
             override fun onNext(t: Any?) {}
 
             override fun onCompleted() {
@@ -220,7 +223,9 @@ class ViewPictureActivity: AppCompatActivity(){
               MainActivity.start(this@ViewPictureActivity)
             }
 
-            override fun onError(e: Throwable?) {e!!.printStackTrace()}
+            override fun onError(e: Throwable?) {
+              e!!.printStackTrace()
+            }
           })
     }
 

@@ -251,7 +251,7 @@ class CreatedClassId(){
 /**
  * 发送一个新的feed
  */
-class FeedBody(
+class FeedBody  (
     /**
      * classId : 0
      * teacherId : 0

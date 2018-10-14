@@ -18,7 +18,7 @@ const val MAX_SELECT_PIC_NUM  = 5
 const val REQUEST_CODE_MAIN = 0xFA
 
 /**
- * 班级id的String
+ * 班级id的 String
  */
 const val CLASS_ID  = "sClassID"
 /**

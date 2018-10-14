@@ -107,7 +107,7 @@ class TeacherCreateClassActivity :ToolbarActivity() {
             if (t != null) {
               mClassId = t.getClass_id().toString()
 
-              this@TeacherCreateClassActivity.putValue(CLASS_ID,mClassId)
+              this@TeacherCreateClassActivity.putValue(CLASS_ID,mClassId.toString())
 
               showSnackBarShort("班级创建成功")
             }

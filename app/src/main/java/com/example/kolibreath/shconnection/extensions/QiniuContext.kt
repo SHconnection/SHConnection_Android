@@ -88,7 +88,7 @@ class QiniuExtension{
             val observable = Observable.create(Observable.OnSubscribe<String>{
               upload(data = data, name = name) { key, _, _ ->
                 run {
-                  val response = "http://http://ogbvujd8z.bkt.clouddn.com/$key"
+                  val response = "http://ogbvujd8z.bkt.clouddn.com/$key"
                   it.onNext(response)
                   it.onCompleted()
                 }

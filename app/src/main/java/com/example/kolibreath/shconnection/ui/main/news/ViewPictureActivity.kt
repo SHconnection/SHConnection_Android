@@ -20,6 +20,7 @@ import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.GridView
@@ -206,15 +207,16 @@ class ViewPictureActivity: AppCompatActivity(){
 
       //todo 异步 ！！！！
       QiniuExtension.postPictures(pictures = mPicList)
+          .subscribeOn(Schedulers.io())
           .flatMap {
             val feedBody = FeedBody(classId = classid.toInt()
                 ,teacherId = teacherId.toInt()
                 , type = mTag, content = mContent!!, picture_urls = it)
             NetFactory.retrofitService
                 .postFeed(token = token, feedBody = feedBody  )
+                .subscribeOn(Schedulers.io())
           }
-          .subscribeOn(AndroidSchedulers.mainThread())
-          .observeOn(Schedulers.io())
+          .observeOn(AndroidSchedulers.mainThread())
           .subscribe(object : Subscriber<Any>() {
             override fun onNext(t: Any?) {}
 

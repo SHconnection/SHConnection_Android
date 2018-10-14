@@ -23,8 +23,20 @@
   <string name="class_name">班级名称</string>
   <string name="import_students_info">导入学生信息</string>
   <string name="import_teacher_info">导入科任老师信息</string>
-
+  <string name="login_directly_info">已经注册过的老师和家长可以直接登录</string>
+  <string name="join_class_info">没有帐号的老师和家长扫码并且加入班级</string>
+  <string name="create_class_info">班主任老师创建班级并且导入信息</string>
 
   <string name="scan_from_actual_view">扫一扫进入班级</string>
   <string name="scan_from_system_gallery">从系统相册读取</string>
+
+  <string name="teacher_create_account">没有帐号?注册一个！</string>
+
+  <string name="register">注册</string>
+
+  <!--班主任注册-->
+  <string name="mainteacher_name">班主任姓名</string>
+  <string name="mainteacher_number">班主任工号</string>
+  <string name="mainn_teacher_password">班主任密码</string>
+
 </resources>

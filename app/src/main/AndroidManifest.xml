@@ -40,6 +40,7 @@
 
     <activity android:name=".ui.main.profile.UserProfileActivity"/>
     <activity android:name=".ui.main.profile.UserProfileDetailActivity"/>
+    <activity android:name=".ui.auth.TeacherCreateAccountActivity"/>
 
     <!--解决7.0照相机崩溃问题-->
     <provider

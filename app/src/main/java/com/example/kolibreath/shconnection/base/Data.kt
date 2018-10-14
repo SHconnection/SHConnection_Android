@@ -309,3 +309,7 @@ class FeedBody  (
     this.picture_urls = picture_urls
   }
 }
+
+
+data class MainTeacherSignUpBody(val wid:String,
+    val password:String,val name:String)

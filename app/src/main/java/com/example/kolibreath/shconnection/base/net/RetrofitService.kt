@@ -2,6 +2,7 @@ package com.example.kolibreath.shconnection.base.net
 
 import com.example.kolibreath.shconnection.base.CreatedClassId
 import com.example.kolibreath.shconnection.base.FeedBody
+import com.example.kolibreath.shconnection.base.MainTeacherSignUpBody
 import com.example.kolibreath.shconnection.base.ParentInit
 import com.example.kolibreath.shconnection.base.TeacherLoginBody
 import com.example.kolibreath.shconnection.base.TeacherLoginToken
@@ -93,7 +94,7 @@ interface RetrofitService{
    * 获取家长资料
    */
   @POST("parent/info/")
-  fun parentProfile(@Header("token") token:String,pid:String):Observable<Profile>
+  fun parentProfile(@Header("token") token:String):Observable<Profile>
 
 
   /**
@@ -103,4 +104,10 @@ interface RetrofitService{
   @POST("feed/")
   fun postFeed(@Header("token")token:String,@Body feedBody: FeedBody):
       Observable<Any>
+
+  /***
+   * 注册一个班主任帐号
+   */
+  @POST("mainteacher/signup/")
+fun signUpMainTeacher(@Body mainTeacherSignUpBody: MainTeacherSignUpBody):Observable<Any>
 }

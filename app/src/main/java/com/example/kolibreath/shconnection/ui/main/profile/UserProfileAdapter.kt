@@ -33,15 +33,17 @@ class UserProfileAdapter(val list: ArrayList<String>) : Adapter<ViewHolder>(){
     position: Int
   ) {
     (viewholder as UserProfileAdapter).mItemName.text = list[position]
-    when(position){
+    viewholder.mItemName.setOnClickListener {
+      when(position){
       //todo 个人资料具体界面
-      PROFILE_DETAIL -> UserProfileDetailActivity.start(mCtx)
-      JOIN_CLASS -> JoinClassActivity.start(mCtx)
-      LOG_OUT ->{
-        //清除token 和 班级id
-        mCtx.putValue(LOGIN_TOKEN,"")
-        mCtx.putValue(CLASS_ID,"")
-        NavigationActivity.start(mCtx)
+        PROFILE_DETAIL -> UserProfileDetailActivity.start(mCtx)
+        JOIN_CLASS -> JoinClassActivity.start(mCtx)
+        LOG_OUT ->{
+          //清除token 和 班级id
+          mCtx.putValue(LOGIN_TOKEN,"")
+          mCtx.putValue(CLASS_ID,"")
+          NavigationActivity.start(mCtx)
+        }
       }
     }
   }

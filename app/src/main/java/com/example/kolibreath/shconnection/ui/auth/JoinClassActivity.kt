@@ -29,6 +29,9 @@ import com.uuzuche.lib_zxing.activity.CodeUtils
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
+import java.io.File
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
 
 class JoinClassActivity:ToolbarActivity() {
 
@@ -90,7 +93,8 @@ class JoinClassActivity:ToolbarActivity() {
   ) {
     when(requestCode){
       REQUEST_SCAN ->{
-        val bundle = data!!.extras
+        val bundle = data?.extras ?: return
+
         if(bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS){
           val result = bundle.getString(CodeUtils.RESULT_STRING )
           mClassId =decode(result)
@@ -98,10 +102,16 @@ class JoinClassActivity:ToolbarActivity() {
       }
 
       REQUEST_IMAGE ->{
-        if(data != null){
-          val uri = data.data
+        if(data == null)
+          return
 
-          CodeUtils.analyzeBitmap(uri.path,object:CodeUtils.AnalyzeCallback{
+         val uri = data.data
+         val inputStream= contentResolver.openInputStream(uri)
+
+        val file = File.createTempFile("temp",".jpg")
+        Files.copy(inputStream,file.toPath(),StandardCopyOption.REPLACE_EXISTING)
+
+          CodeUtils.analyzeBitmap(file.path,object:CodeUtils.AnalyzeCallback{
             override fun onAnalyzeSuccess(
               mBitmap: Bitmap?,
               result: String?
@@ -113,7 +123,6 @@ class JoinClassActivity:ToolbarActivity() {
               showSnackBarShort("解析失败")
             }
           })
-        }
       }
     }
     super.onActivityResult(requestCode, resultCode, data)

@@ -13,6 +13,7 @@ import android.support.annotation.RequiresApi
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.base.CreatedClassId
 import com.example.kolibreath.shconnection.base.TeacherCreateClassBody
@@ -26,6 +27,7 @@ import com.example.kolibreath.shconnection.extensions.putValue
 import com.example.kolibreath.shconnection.extensions.showSnackBarShort
 import com.example.kolibreath.shconnection.extensions.uiContext
 import com.example.kolibreath.shconnection.ui.auth.LoginActivity
+import com.example.kolibreath.shconnection.ui.auth.TeacherCreateAccountActivity
 import com.example.kolibreath.shconnection.ui.auth.isEmpty
 import com.google.zxing.BarcodeFormat.QR_CODE
 import com.google.zxing.MultiFormatWriter
@@ -57,6 +59,7 @@ class TeacherCreateClassActivity :ToolbarActivity() {
   private lateinit var mBtnImportStudent:Button
   private lateinit var mBtnImportTeacher:Button
   private lateinit var mBtnConfirm :Button
+
 
   private  lateinit var mClassId:String
   companion object{
@@ -181,6 +184,11 @@ class TeacherCreateClassActivity :ToolbarActivity() {
       mBtnConfirm =   findViewById<Button>(R.id.btn_confirm)
       mBtnConfirm.setOnClickListener{
         mTeacherCreateClassApi()
+      }
+
+      findViewById<TextView>(R.id.btn_create_account).setOnClickListener {
+        TeacherCreateAccountActivity.start(this@TeacherCreateClassActivity)
+        finish()
       }
     }
 

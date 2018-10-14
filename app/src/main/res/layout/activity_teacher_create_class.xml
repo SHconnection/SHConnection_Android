@@ -21,7 +21,7 @@
         android:hint="@string/teacher_number"
         android:inputType="number"
         android:layout_below="@+id/edt_teacher_name"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="70dp"
         android:layout_marginLeft="70dp"
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
         android:hint="@string/class_name"
         android:inputType="text"
         android:layout_below="@id/edt_teacher_number"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="70dp"
         android:layout_marginLeft="70dp"
         android:layout_width="match_parent"
@@ -42,7 +42,7 @@
         android:id="@+id/btn_import_students_info"
         android:hint="@string/import_students_info"
         android:layout_below="@+id/edt_class_name"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="70dp"
         android:layout_marginLeft="70dp"
         android:layout_width="match_parent"
@@ -52,7 +52,7 @@
         android:id="@+id/btn_import_teacher_info"
         android:hint="@string/import_teacher_info"
         android:layout_below="@+id/btn_import_students_info"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="70dp"
         android:layout_marginLeft="70dp"
         android:layout_width="match_parent"
@@ -60,13 +60,24 @@
 
   <Button
       android:id="@+id/btn_confirm"
-      android:hint="@string/import_teacher_info"
+      android:hint="@string/picture_confirm"
       android:layout_below="@+id/btn_import_teacher_info"
-      android:layout_marginTop="30dp"
+      android:layout_marginTop="20dp"
       android:layout_marginRight="100dp"
       android:layout_marginLeft="100dp"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"/>
+
+  <TextView
+      android:id="@+id/btn_create_account"
+      android:layout_below="@id/btn_confirm"
+      android:layout_marginTop="20dp"
+      android:layout_centerInParent="true"
+      android:textColor="@color/colorAccent"
+      android:text="@string/teacher_create_account"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      />
 
 
 </RelativeLayout>

@@ -62,7 +62,7 @@ class UserProfileActivity: ToolbarActivity(){
       }
       USER_TEACHER ->{
         NetFactory.retrofitService
-            .parentProfile( pid= id,token = token)
+            .parentProfile(token = token)
       }else -> {
         throw  Exception("用户类型初始化错误")
       }

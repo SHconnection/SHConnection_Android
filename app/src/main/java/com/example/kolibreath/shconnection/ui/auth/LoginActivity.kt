@@ -158,6 +158,14 @@ class LoginActivity:ToolbarActivity(){
 
     mCbTeacher.isChecked = true
 
+    mCbTeacher.setOnClickListener{
+      mCbStudent.isChecked = false
+    }
+
+    mCbStudent.setOnClickListener {
+      mCbTeacher.isChecked =false
+    }
+
     mBtnConfirm.setOnClickListener{
       if(TextUtils.isEmpty(mEdtInputNumber.editableText.toString())||
           TextUtils.isEmpty(mEdtInputPassword.editableText.toString()))

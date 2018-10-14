@@ -51,14 +51,20 @@ fun Activity.showErrorSnackbarShort(msg: String) {
   snackbar.show()
 }
 
-fun Activity.showErrorSnackbarShort(msg: String,listener: (view: View) -> Unit) {
-  val snackbar: Snackbar = Snackbar.make(findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT).apply{
+fun Activity.showErrorSnackbar(msg: String,listener: (view: View) -> Unit) {
+ Snackbar.make(findViewById(android.R.id.content), msg, Snackbar.LENGTH_INDEFINITE).apply{
     setText(msg)
-  }
-  val view = snackbar.view
+    setAction("确定",listener)
+  val view = this.view
   view.setBackgroundColor(resources.getColor(color.red))
-  snackbar.setAction("确定",listener)
-  snackbar.show()
+  }.show()
+}
+
+fun Activity.showSnackbar(msg: String,listener: (view: View) -> Unit) {
+  Snackbar.make(findViewById(android.R.id.content), msg, Snackbar.LENGTH_INDEFINITE).apply{
+    setText(msg)
+    setAction("确定",listener)
+  }.show()
 }
 
 /**

@@ -1,5 +1,6 @@
 package com.example.kolibreath.shconnection.base.net
 
+import com.example.kolibreath.shconnection.base.net.RetrofitService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -9,7 +10,7 @@ import java.util.concurrent.TimeUnit.SECONDS
 
 object RetrofitWrapper{
 
-  fun retrofit():RetrofitService{
+  fun retrofit(): RetrofitService {
     val interceptor = HttpLoggingInterceptor();
     interceptor.level = HttpLoggingInterceptor.Level.BODY
     val client = OkHttpClient.Builder().apply {
@@ -28,5 +29,6 @@ object RetrofitWrapper{
     }.build()
 
     return retrofit.create(RetrofitService::class.java)
+
   }
 }

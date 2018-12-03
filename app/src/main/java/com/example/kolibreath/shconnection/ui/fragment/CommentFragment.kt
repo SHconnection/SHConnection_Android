@@ -12,6 +12,7 @@ import com.example.kolibreath.shconnection.adapter.AddressAdapter
 import com.example.kolibreath.shconnection.adapter.CommentsAdapter
 import com.example.kolibreath.shconnection.base.AddressBean
 import com.example.kolibreath.shconnection.base.ParentList
+import com.example.kolibreath.shconnection.base.Person
 import com.example.kolibreath.shconnection.base.TeacherList
 import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.base.ui.BaseFragment
@@ -28,7 +29,7 @@ class CommentFragment: BaseFragment() , View.OnClickListener {
     lateinit var elv: ExpandableListView
     lateinit var mAdapter: AddressAdapter
     lateinit var mList: MutableList<String>
-    lateinit var mComment: MutableList<MutableList<String>>
+    lateinit var mComment: MutableList<MutableList<Person>>
 //    lateinit var
 
     override fun getLayoutResources(): Int {

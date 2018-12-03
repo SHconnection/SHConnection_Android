@@ -20,18 +20,26 @@ class FeedBean(
      * liked: true,
      * picture_urls": ["string"]  }]
      */
-    var id:Int,
+    var pagenum:Int,
+    var nums:Int,
+    var hasnext:Boolean,
+    var feeds: List<Feeds>
+    ){
+    class Feeds(
+        var id:Int,
         var classId: Int,
         var teacherSimpleInfo: TeacherSimpleInfo,
         var type: String,
         var content: String,
         var likes: Int,
         var liked: Boolean,
-        var picture_urls: List<String>){
-    class TeacherSimpleInfo(
-        var id:Int,
-        var name:String,
-        var avatar: String)
+        var picture_urls: List<String>
+    ){
+        class TeacherSimpleInfo(
+                var id:Int,
+                var name:String,
+                var avatar: String)
+    }
 }
 
 class FeedDetails(
@@ -51,7 +59,7 @@ class FeedDetails(
          */
         var id: Int,
         var classId: Int,
-        var teacherSimpleInfo: FeedBean.TeacherSimpleInfo
+        var teacherSimpleInfo: FeedBean.Feeds.TeacherSimpleInfo
     )
 }
 

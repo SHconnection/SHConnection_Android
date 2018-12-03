@@ -1,6 +1,7 @@
 package com.example.kolibreath.shconnection.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,8 @@ import android.widget.BaseExpandableListAdapter
 import android.widget.TextView
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.base.AddressBean
+import com.example.kolibreath.shconnection.base.Person
+import com.example.kolibreath.shconnection.ui.UserProfile
 import org.jetbrains.anko.find
 
 /**
@@ -17,10 +20,10 @@ class AddressAdapter: BaseExpandableListAdapter {
 
     var context: Context? = null
     var group: List<String>? = null
-    var child: List<List<String>>? = null
+    var child: List<List<Person>>? = null
     var inflater: LayoutInflater? = null
 
-    constructor(context: Context, parent: List<String>,child: List<List<String>>){
+    constructor(context: Context, parent: List<String>,child: List<List<Person>>){
         this.child = child
         this.group = parent
         this.context = context
@@ -56,6 +59,7 @@ class AddressAdapter: BaseExpandableListAdapter {
             val inflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             convertView = inflater.inflate(R.layout.item_address_group, parent, false)
         }
+        val group = convertView?.findViewById<TextView>(R.id.tv_address_group)
         (convertView as TextView).text = getGroup(groupPosition) as String
 
         return convertView
@@ -66,11 +70,15 @@ class AddressAdapter: BaseExpandableListAdapter {
         var convertView = convertView
         if (convertView == null){
             val inflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            val itemType = getChildType(groupPosition, childPosition)
-            when(itemType){
-                0 -> convertView
-            }
+            convertView = inflater.inflate(R.layout.item_address_child,parent,false)
+
         }
+        val name = convertView?.findViewById<TextView>(R.id.tv_address_child_name)
+        name?.text = child?.get(groupPosition)?.get(childPosition)?.name
+//        name?.setOnClickListener {
+//            val intent = Intent()
+//            intent.setClass(convertView?.context,UserProfile::class.java)
+//        }
         return convertView as View
     }
 
@@ -82,12 +90,4 @@ class AddressAdapter: BaseExpandableListAdapter {
         return true
     }
 
-    class GroupHolder(convertView: View?){
-        var textView:TextView = convertView!!.find(R.id.tv_address_group)
-
-    }
-
-    class ChildHolder(convertView: View?){
-        var textView:TextView = convertView!!.find(R.id.tv_address_child_name)
-    }
 }

@@ -19,4 +19,10 @@ class CommentActivity : ToolbarActivity() {
             return Intent(context, ParentsCommentActivity::class.java)
         }
     }
+
+    fun initView(){
+
+    }
+
+
 }

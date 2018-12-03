@@ -19,9 +19,9 @@ import rx.schedulers.Schedulers
 /**
  * feed流
  */
-class HomeAdapter(context: Context, list: MutableList<FeedBean>): RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
+class HomeAdapter(context: Context, list: List<FeedBean.Feeds>): RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
-    var list: MutableList<FeedBean>? = null
+    var list: List<FeedBean.Feeds>? = null
     var context: Context? = null
     var inflater: LayoutInflater? = null
 

@@ -2,23 +2,32 @@ package com.example.kolibreath.shconnection.ui.main;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.ashokvarma.bottomnavigation.TextBadgeItem;
 import com.example.kolibreath.shconnection.R;
-import com.example.kolibreath.shconnection.base.ui.ToolbarActivity;
+import com.example.kolibreath.shconnection.adapter.FragmentAdapter;
+import com.example.kolibreath.shconnection.ui.main.fragment.AddressFragment;
+import com.example.kolibreath.shconnection.ui.main.fragment.CommentFragment;
+import com.example.kolibreath.shconnection.ui.main.fragment.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends ToolbarActivity implements
+public class MainActivity extends AppCompatActivity implements
     BottomNavigationBar.OnTabSelectedListener {
 
+  private static int index;
   private BottomNavigationBar mBtmBar;
   private ViewPager mViewPager;
+  private FragmentAdapter mAdapter;
   private List<BottomNavigationItem> mItemList = new ArrayList<>();
+  private List<Fragment> mFragments = new ArrayList<>();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +35,7 @@ public class MainActivity extends ToolbarActivity implements
     setContentView(R.layout.activity_main);
 
     initView();
+    initFragment();
   }
 
   private void initView(){
@@ -43,14 +53,43 @@ public class MainActivity extends ToolbarActivity implements
     mBtmBar.addItem(mItemList.get(0)).addItem(mItemList.get(1)).addItem(mItemList.get(2))
         .setFirstSelectedPosition(1)
         .initialise();
+//    mBtmBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
+//      @Override
+//      public void onTabSelected(int position) {
+//        switch (position){
+//          case 0:
+//            index = 0;
+//            replaceFragment(MainActivity.this,mFragments.get(index),R.id.viewpager);
+//            break;
+//          case 1:
+//            index = 1;
+//            replaceFragment(MainActivity.this,mFragments.get(index),R.id.viewpager);
+//            break;
+//          case 2:
+//            index = 2;
+//            replaceFragment(MainActivity.this,mFragments.get(index),R.id.viewpager);
+//
+//        }
+//      }
+//
+//      @Override
+//      public void onTabUnselected(int position) {
+//
+//      }
+//
+//      @Override
+//      public void onTabReselected(int position) {
+//
+//      }
+//    });
   }
 
   //todo set it for the new navigation item
   private void initBottomNavigationItem(){
 
-    BottomNavigationItem item1 = new BottomNavigationItem(R.drawable.ic_launcher_background,"通讯录");
-    BottomNavigationItem item2 = new BottomNavigationItem(R.drawable.ic_launcher_background,"家校圈");
-    BottomNavigationItem item3 = new BottomNavigationItem(R.drawable.ic_launcher_background,"孩子评价");
+    BottomNavigationItem item1 = new BottomNavigationItem(R.drawable.ic_address,"通讯录");
+    BottomNavigationItem item2 = new BottomNavigationItem(R.drawable.ic_home,"家校圈");
+    BottomNavigationItem item3 = new BottomNavigationItem(R.drawable.ic_comment,"孩子评价");
 
     mItemList.add(item1);
     mItemList.add(item2);
@@ -73,5 +112,18 @@ public class MainActivity extends ToolbarActivity implements
 
   @Override public void onTabReselected(int position) {
 
+  }
+
+  private void initFragment(){
+      AddressFragment addressFragment = new AddressFragment();
+      HomeFragment homeFragment = new HomeFragment();
+      CommentFragment commentFragment = new CommentFragment();
+      FragmentManager manager = getSupportFragmentManager();
+      mAdapter = new FragmentAdapter(manager);
+      mFragments.add(addressFragment);
+      mFragments.add(homeFragment);
+      mFragments.add(commentFragment);
+      mAdapter.addFragment(mFragments);
+      mViewPager.setAdapter(mAdapter);
   }
 }

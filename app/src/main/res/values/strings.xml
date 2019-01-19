@@ -14,4 +14,12 @@
   <string name="news_read">已读</string>
   <string name="news_unread">未读</string>
   <string name="news_comment">留下评论</string>
+
+  <string name="parent_comment_hint">我的孩子……</string>
+  <string name="parent_comment_text1">活动水平</string>
+  <string name="parent_comment_text2">作息规律</string>
+  <string name="parent_comment_text3">情绪状况</string>
+  <string name="parent_comment_text4">专注力</string>
+  <string name="parent_comment_text5">礼貌素质</string>
+
 </resources>

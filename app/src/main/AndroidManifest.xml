@@ -10,21 +10,23 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:supportsRtl="true"
       android:theme="@style/AppTheme">
-    <activity android:name=".ui.main.MainActivity"/>
+    <activity android:name=".ui.auth.LoginActivity"/>
 
     <activity android:name=".base.ui.ToolbarActivity"/>
     <activity android:name=".base.ui.BaseActivity"/>
+    <activity android:name=".ui.ShareActivity"/>
     <!--auth-->
     <activity android:name=".ui.auth.RegisterActivity"/>
-    <activity android:name=".ui.auth.LoginActivity">
+    <activity android:name=".ui.main.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
-
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
 
     <activity android:name=".ui.auth.ScanActivity"/>
+    <activity
+        android:name=".ui.ParentsCommentActivity"/>
 b  </application>
 
 </manifest>

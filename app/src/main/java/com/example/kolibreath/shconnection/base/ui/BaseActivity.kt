@@ -15,6 +15,7 @@ import rx.subscriptions.CompositeSubscription
 
 open class BaseActivity : AppCompatActivity() {
 
+
   private val mMenu: Menu? = null
   private var mActionBar: ActionBar? = null
 

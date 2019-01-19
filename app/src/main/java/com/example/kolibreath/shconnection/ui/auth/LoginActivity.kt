@@ -30,7 +30,7 @@ class LoginActivity : ToolbarActivity(){
   private var mPermissionGranted = false;
   private val IMAGE_TYPE = "image/*";
 
-  override fun canBack(): Boolean  = false
+//  override fun canBack(): Boolean  = false
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
     menuInflater.inflate(R.menu.menu_scan,menu)

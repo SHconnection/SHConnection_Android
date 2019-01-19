@@ -3,9 +3,12 @@
 buildscript {
   ext.kotlin_version = '1.2.71'
 
-    repositories {
+
+
+  repositories {
         google()
         jcenter()
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
@@ -17,9 +20,13 @@ buildscript {
 }
 
 allprojects {
-    repositories {
+
+  repositories {
         google()
         jcenter()
+        maven{
+          url 'https://jitpack.io'
+       }
     }
 }
 
@@ -28,5 +35,6 @@ task clean(type: Delete) {
 }
 
 ext{
+  poiVersion = '3.17'
   anko_version='0.10.5'
 }

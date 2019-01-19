@@ -6,10 +6,16 @@
 
   <!--basic colors-->
   <color name="red">#dc0c0c</color>
+  <color name="white">#ffffff</color>
+  <color name="black">#000000</color>
+  <color name="gray">#958f8f</color>
 
   <!--color for scanner-->
   <color name="scan_corner_color">#0cdca8</color>
 
 <color name="colorBlack">#000000</color>
+  <!--color for text-->
+  <color name="text_color_black">#000000</color>
+  <color name="text_color_gray">#958f8f</color>
 
 </resources>

@@ -67,3 +67,4 @@ const val SCAN_RESULT = "sScanResult"
 const val JOIN_CLASS_ACTIVITY = 0xFF
 
 const val PAGE_NAME = 0
+

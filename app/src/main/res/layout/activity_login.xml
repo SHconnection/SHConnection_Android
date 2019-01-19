@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <include layout="@layout/view_toolbar"/>
+
+  <EditText
+      android:id="@+id/edt_number"
+      android:inputType="number"
+      android:hint="@string/input_number_"
+      android:layout_marginTop="156dp"
+      android:layout_marginLeft="70dp"
+      android:layout_marginRight="70dp"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"/>
+
+  <EditText
+      android:id="@+id/edt_password"
+      android:inputType="textPassword"
+      android:layout_below="@id/edt_number"
+      android:hint="输入密码"
+      android:layout_marginTop="20dp"
+      android:layout_marginLeft="70dp"
+      android:layout_marginRight="70dp"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"/>
+
+
+  <Button
+      android:id="@+id/btn_confirm"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="140dp"
+      android:background="@color/colorPrimary"
+      android:text="@string/text__confirm"
+      android:textColor="@color/white"
+      android:textSize="18sp"
+      android:layout_below="@id/edt_number"
+      android:layout_width="170dp"
+      android:layout_height="wrap_content"/>
+
+  <CheckBox
+      android:id="@+id/cb_teacher"
+      android:text="@string/txt_teacher"
+      android:layout_below="@+id/edt_password"
+      android:layout_marginLeft="70dp"
+      android:layout_marginTop="25dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"/>
+
+  <CheckBox
+      android:id="@+id/cb_student"
+      android:layout_alignParentRight="true"
+      android:layout_marginRight="70dp"
+      android:text="@string/txt_student"
+      android:layout_below="@+id/edt_password"
+      android:layout_marginTop="25dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"/>
+
+
+
+
+</RelativeLayout>

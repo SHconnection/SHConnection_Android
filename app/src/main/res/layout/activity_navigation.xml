@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <include layout="@layout/view_toolbar"/>
+
+  <Button
+      android:id="@+id/btn_login_directly"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="200dp"
+      android:text="@string/login_directly"
+      android:layout_width="196dp"
+      android:layout_height="wrap_content"/>
+  <TextView
+      android:layout_below="@+id/btn_login_directly"
+      android:text="@string/login_directly_info"
+      android:layout_centerInParent="true"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"/>
+
+  <Button
+      android:id="@+id/btn_join_new_class"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="20dp"
+      android:text="@string/add_new_class"
+      android:layout_below="@+id/btn_login_directly"
+      android:layout_width="196dp"
+      android:layout_height="wrap_content"/>
+  <TextView
+      android:layout_below="@+id/btn_join_new_class"
+      android:text="@string/join_class_info"
+      android:layout_centerInParent="true"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"/>
+
+  <Button
+      android:id="@+id/btn_create_class"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="20dp"
+      android:text="@string/create_class"
+      android:layout_below="@+id/btn_join_new_class"
+      android:layout_width="196dp"
+      android:layout_height="wrap_content"/>
+  <TextView
+      android:layout_below="@+id/btn_create_class"
+      android:text="@string/create_class_info"
+      android:layout_centerInParent="true"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"/>
+
+</RelativeLayout>

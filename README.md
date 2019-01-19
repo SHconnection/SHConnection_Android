@@ -1,9 +1,11 @@
 # 使用doc
 > 推荐代码使用Kotlin编写，可以体验到扩展函数等一系列语法糖的丝滑体验
-
+          
 ## Foreword:
  + 如果需要复写ToolbarActivity 或者其他父类中的方法，需要手动标注``open`` 关键字[reference](https://www.kotlincn.net/docs/reference/classes.html)
+ 
 
+<<<<<<< HEAD
  + 命名规范：
   > 动态 News ： 发送动态的Activity, PostNewsActivity
 
@@ -11,6 +13,8 @@
  基本内容： Retrofit RxJava Gson 
  Kotlin 相关 Anko
  View   相关 materialedittext bottom-navigation-bar 
+=======
+>>>>>>> kolibreath
 ## base Package:
 ``BaseActivity.kt`` 
 
@@ -44,8 +48,6 @@ eg:
 封装对于Activity的扩展方法，在Kotlin代码中直接使用，在Java代码中需要使用``receiver``显式声明扩展对象
 
 ## main package 内容的代码
-- MainActivity 包含一个BottomNavigationBar 用于放置主要的三个Navigation Fragments
-- 发送新的动态: PostNewsActivity
 
 # 任务和进度
 - 任务依赖情况

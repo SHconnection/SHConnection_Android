@@ -3,7 +3,13 @@
     package="com.example.kolibreath.shconnection">
 
   <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.CAMERA" />
+  <uses-permission android:name="android.permission.VIBRATE"/>
+
   <application
+      android:name=".base.App"
       android:allowBackup="true"
       android:icon="@mipmap/ic_launcher"
       android:label="@string/app_name"
@@ -16,17 +22,42 @@
     <activity android:name=".base.ui.BaseActivity"/>
     <activity android:name=".ui.ShareActivity"/>
     <!--auth-->
-    <activity android:name=".ui.auth.RegisterActivity"/>
-    <activity android:name=".ui.main.MainActivity">
+    <activity android:name=".ui.main.MainActivity"/>
+
+    <activity android:name=".ui.scan.ScanActivity"/>
+
+    <activity android:name=".ui.auth.JoinClassActivity"/>
+
+    <activity android:name=".ui.main.news.ViewPictureActivity"/>
+    <activity android:name=".ui.main.TeacherCreateClassActivity"/>
+    <activity android:name=".ui.main.news.PlusImageActivity"/>
+
+    <activity android:name=".ui.auth.NavigationActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
 
-    <activity android:name=".ui.auth.ScanActivity"/>
     <activity
         android:name=".ui.ParentsCommentActivity"/>
-b  </application>
 
-</manifest>
+
+  <activity android:name=".ui.main.profile.UserProfileActivity"/>
+  <activity android:name=".ui.main.profile.UserProfileDetailActivity"/>
+  <activity android:name=".ui.auth.TeacherCreateAccountActivity"/>
+
+  <!--解决7.0照相机崩溃问题-->
+  <provider
+      android:name="android.support.v4.content.FileProvider"
+      android:authorities="${applicationId}.provider"
+      android:exported="false"
+      android:grantUriPermissions="true">
+    <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/file_paths" />
+  </provider>
+</application>
+
+
+    </manifest>

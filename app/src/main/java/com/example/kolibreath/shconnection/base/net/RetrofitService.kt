@@ -1,21 +1,91 @@
 package com.example.kolibreath.shconnection.base.net
 
+<<<<<<< HEAD
 import com.example.kolibreath.shconnection.base.*
 import retrofit2.http.*
+=======
+import com.example.kolibreath.shconnection.base.CreatedClassId
+import com.example.kolibreath.shconnection.base.FeedBody
+import com.example.kolibreath.shconnection.base.MainTeacherSignUpBody
+import com.example.kolibreath.shconnection.base.ParentInit
+import com.example.kolibreath.shconnection.base.TeacherLoginBody
+import com.example.kolibreath.shconnection.base.TeacherLoginToken
+import com.example.kolibreath.shconnection.base.ParentLoginBody
+import com.example.kolibreath.shconnection.base.ParentLoginToken
+import com.example.kolibreath.shconnection.base.Profile
+import com.example.kolibreath.shconnection.base.TeacherCreateClassBody
+import com.example.kolibreath.shconnection.base.TeacherInit
+import com.example.kolibreath.shconnection.base.TeacherSignupBody
+import com.example.kolibreath.shconnection.base.TeacherSignupToken
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.POST
+import retrofit2.http.Path
+>>>>>>> kolibreath
 import rx.Observable
 
 interface RetrofitService{
 
   companion object {
+<<<<<<< HEAD
     val BASE_URL = "http://112.74.88.136:2000/api/"
+=======
+    const val BASE_URL = "http://112.74.88.136:2000/api/"
+>>>>>>> kolibreath
   }
 
-  @GET("{id}")
-  fun test(@Path("id") idRes:Int): Observable<Any>
 
+  /***
+   * 经过加密的用户名和用户密码
+   */
+  @POST("teacher/signin/")
+  fun teacherLogin(@Body loginInfo: TeacherLoginBody):Observable<TeacherLoginToken>
 
-  //todo modify this
+  /**
+   * 老师注册
+   */
+  @POST("teacher/signup/")
+  fun teacherSignUp(@Body teacherSignupBody: TeacherSignupBody):Observable<TeacherSignupToken>
+
+  /**
+   * 老师修改个人资料
+   */
+  @POST("teacher/profile/")
+  fun teacherChangeProfile(@Header("token") token:String,@Body profile: Profile):Observable<Any>
+
+  /**
+   * 获取老师的通讯录信息
+   */
+  @GET("teacher/info/")
+  fun teacherProfile(@Header("token") token: String):Observable<Profile>
+
+  /**
+   * 老师注册并且加入一个班级
+   * 此时老师是没有注册的
+   */
+  @POST("teacher/init/addclass/{classid}/")
+  fun teacherInitJoinClass(@Path("classid") classId:String,
+      @Body teacherInit: TeacherInit):Observable<Any>
+
+  /**
+   * 家长在没有注册的情况下
+   * 同时初始化并且加入一个班级
+   */
+  @POST("parent/addclass/{classid}/")
+  fun parentInitJoinClass(@Path("classid") classId: String,
+      @Body parentInit: ParentInit):Observable<Any>
+
+  /**
+   * 老师创建一个班级
+   */
+  @POST("init/class/")
+  fun teacherCreateClass(@Body teacherCreateClassBody: TeacherCreateClassBody):Observable<CreatedClassId>
+  /**
+   * 上传图片
+   */
   @POST()
+<<<<<<< HEAD
   fun login():Observable<Any>
 
 
@@ -131,4 +201,40 @@ interface RetrofitService{
    */
   @GET("class/info/")
   fun classAddress(@Header("token")token: String):Observable<AddressBean>
+=======
+  fun storePicture():Observable<Any>
+
+  /**
+   * 家长登录
+   */
+  @POST("parent/signin/")
+  fun parentLogin(@Body loginBody: ParentLoginBody):Observable<ParentLoginToken>
+
+  /**
+   * 家长修改资料
+   */
+  @POST("parent/profile/")
+  fun parentChangeProfile(@Header("token") token :String,@Body profile: Profile):Observable<Any>
+
+  /**
+   * 获取家长资料
+   */
+  @POST("parent/info/")
+  fun parentProfile(@Header("token") token:String):Observable<Profile>
+
+
+  /**
+   * 上传一个动态
+   */
+
+  @POST("feed/")
+  fun postFeed(@Header("token")token:String,@Body feedBody: FeedBody):
+      Observable<Any>
+
+  /***
+   * 注册一个班主任帐号
+   */
+  @POST("mainteacher/signup/")
+fun signUpMainTeacher(@Body mainTeacherSignUpBody: MainTeacherSignUpBody):Observable<Any>
+>>>>>>> kolibreath
 }

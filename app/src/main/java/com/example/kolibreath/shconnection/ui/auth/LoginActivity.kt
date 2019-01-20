@@ -38,12 +38,10 @@ class LoginActivity:ToolbarActivity(){
 
   private lateinit  var mToken :String
 
-<<<<<<< HEAD
+  //todo 这个需要重写吗
 //  override fun canBack(): Boolean  = false
-=======
   //保存当前所在地班级id
   private  var mCurrentId:Int = -1
->>>>>>> kolibreath
 
   private var mUserType :Int = USER_TEACHER
 

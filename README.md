@@ -3,9 +3,7 @@
           
 ## Foreword:
  + 如果需要复写ToolbarActivity 或者其他父类中的方法，需要手动标注``open`` 关键字[reference](https://www.kotlincn.net/docs/reference/classes.html)
- 
 
-<<<<<<< HEAD
  + 命名规范：
   > 动态 News ： 发送动态的Activity, PostNewsActivity
 
@@ -13,8 +11,7 @@
  基本内容： Retrofit RxJava Gson 
  Kotlin 相关 Anko
  View   相关 materialedittext bottom-navigation-bar 
-=======
->>>>>>> kolibreath
+
 ## base Package:
 ``BaseActivity.kt`` 
 

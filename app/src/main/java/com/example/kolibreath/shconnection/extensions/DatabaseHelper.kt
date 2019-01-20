@@ -3,9 +3,9 @@ package com.example.kolibreath.shconnection.extensions
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import org.jetbrains.anko.db.ManagedSQLiteOpenHelper
-import org.jetbrains.anko.db.PRIMARY_KEY
-import org.jetbrains.anko.db.createTable
 
+
+//todo what is the point of data bast helper?
 class DatabaseHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "LibraryDatabase", null, 1) {
     private lateinit var database: SQLiteDatabase
   companion object {

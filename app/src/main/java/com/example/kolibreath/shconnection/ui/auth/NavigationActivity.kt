@@ -1,7 +1,5 @@
 package com.example.kolibreath.shconnection.ui.auth
 
-import JOIN_CLASS_ACTIVITY
-import USER_PARENT
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -9,13 +7,11 @@ import android.util.Log
 import android.widget.Button
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.base.ui.BaseActivity
-import com.example.kolibreath.shconnection.base.ui.ToolbarActivity
 import com.example.kolibreath.shconnection.extensions.REQUEST_CODE
 import com.example.kolibreath.shconnection.extensions.findView
 import com.example.kolibreath.shconnection.extensions.isGranted
 import com.example.kolibreath.shconnection.extensions.requestPermissions
 import com.example.kolibreath.shconnection.ui.main.TeacherCreateClassActivity
-import com.example.kolibreath.shconnection.ui.scan.ScanActivity
 
 class NavigationActivity:BaseActivity(){
 

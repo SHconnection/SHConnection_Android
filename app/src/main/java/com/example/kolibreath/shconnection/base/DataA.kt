@@ -5,6 +5,7 @@ package com.example.kolibreath.shconnection.base
  * feed流
  */
 
+//todo what is the point of this thing?
 class FeedBean(
         /**
      * pagenum: 0,

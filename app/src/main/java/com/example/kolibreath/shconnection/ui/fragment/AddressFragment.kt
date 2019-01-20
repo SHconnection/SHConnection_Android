@@ -34,7 +34,9 @@ class AddressFragment: BaseFragment(){
 
     override fun initView() {
         elv = find(R.id.elv_address)
+
         initData()
+
         mList.add("老师")
         mList.add("家长")
         mAddress.add(mAddressBean.getTeacher()!!)

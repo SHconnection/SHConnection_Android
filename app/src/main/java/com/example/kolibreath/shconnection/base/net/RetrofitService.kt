@@ -1,38 +1,15 @@
 package com.example.kolibreath.shconnection.base.net
 
-<<<<<<< HEAD
+
 import com.example.kolibreath.shconnection.base.*
 import retrofit2.http.*
-=======
-import com.example.kolibreath.shconnection.base.CreatedClassId
-import com.example.kolibreath.shconnection.base.FeedBody
-import com.example.kolibreath.shconnection.base.MainTeacherSignUpBody
-import com.example.kolibreath.shconnection.base.ParentInit
-import com.example.kolibreath.shconnection.base.TeacherLoginBody
-import com.example.kolibreath.shconnection.base.TeacherLoginToken
-import com.example.kolibreath.shconnection.base.ParentLoginBody
-import com.example.kolibreath.shconnection.base.ParentLoginToken
-import com.example.kolibreath.shconnection.base.Profile
-import com.example.kolibreath.shconnection.base.TeacherCreateClassBody
-import com.example.kolibreath.shconnection.base.TeacherInit
-import com.example.kolibreath.shconnection.base.TeacherSignupBody
-import com.example.kolibreath.shconnection.base.TeacherSignupToken
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.Path
->>>>>>> kolibreath
+
 import rx.Observable
 
 interface RetrofitService{
 
   companion object {
-<<<<<<< HEAD
-    val BASE_URL = "http://112.74.88.136:2000/api/"
-=======
-    const val BASE_URL = "http://112.74.88.136:2000/api/"
->>>>>>> kolibreath
+    const val BASE_URL = "http://39.108.79.110:2000/api/"
   }
 
 
@@ -85,7 +62,6 @@ interface RetrofitService{
    * 上传图片
    */
   @POST()
-<<<<<<< HEAD
   fun login():Observable<Any>
 
 
@@ -201,7 +177,7 @@ interface RetrofitService{
    */
   @GET("class/info/")
   fun classAddress(@Header("token")token: String):Observable<AddressBean>
-=======
+//todo 奇怪的代码
   fun storePicture():Observable<Any>
 
   /**
@@ -236,5 +212,4 @@ interface RetrofitService{
    */
   @POST("mainteacher/signup/")
 fun signUpMainTeacher(@Body mainTeacherSignUpBody: MainTeacherSignUpBody):Observable<Any>
->>>>>>> kolibreath
 }

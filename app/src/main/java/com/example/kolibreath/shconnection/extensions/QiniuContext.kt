@@ -1,29 +1,17 @@
 package com.example.kolibreath.shconnection.extensions
 
-import android.content.Context
-import android.support.annotation.VisibleForTesting
-import android.util.Log
 import com.qiniu.android.common.FixedZone
 import com.qiniu.android.http.ResponseInfo
 import com.qiniu.android.storage.Configuration
-import com.qiniu.android.storage.UpCompletionHandler
-import com.qiniu.android.storage.UpProgressHandler
 import com.qiniu.android.storage.UploadManager
-import com.qiniu.android.storage.UploadOptions
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.launch
 import org.json.JSONObject
 import rx.Observable
-import rx.Scheduler
-import rx.Subscriber
-import rx.android.schedulers.AndroidSchedulers
-import rx.functions.FuncN
-import rx.schedulers.Schedulers
 import java.io.File
-import java.util.LinkedList
-import javax.xml.transform.Templates
+import java.util.*
 
+
+//todo what is the point of Qiniu????
+//todo 移动图片图床到稳定平台！
 class QiniuExtension{
 
 

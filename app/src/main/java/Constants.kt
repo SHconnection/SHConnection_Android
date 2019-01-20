@@ -61,7 +61,10 @@ const val CLASSES_IDS  = "sClassesIDs"
  * 从ScanActivity 到另外地一个ACtivity 中
  * 路由 表示从那一个Activity 中 路由过来的值
  */
-   //表示这个Intent 键地名字
+//表示这个Intent 键地名字
 const val ROUTER_NAME = "sRouterNamne"
 const val SCAN_RESULT = "sScanResult"
- const val JOIN_CLASS_ACTIVITY = 0xFF
+const val JOIN_CLASS_ACTIVITY = 0xFF
+
+const val PAGE_NAME = 0
+

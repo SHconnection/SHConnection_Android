@@ -57,6 +57,7 @@ open class BaseActivity : AppCompatActivity() {
     window.decorView.setBackgroundColor(color)
   }
 
+
   override fun getLayoutInflater(): LayoutInflater {
     return LayoutInflater.from(this)
   }

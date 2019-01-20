@@ -30,6 +30,23 @@
   <string name="scan_from_actual_view">扫一扫进入班级</string>
   <string name="scan_from_system_gallery">从系统相册读取</string>
 
+  <string name="navigation_address">通讯录</string>
+  <string name="navigation_home">家校圈</string>
+  <string name="navigation_comment">孩子评价</string>
+
+  <string name="address_search">搜索</string>
+  <string name="news_cancel">取消</string>
+  <string name="news_send">发表</string>
+  <string name="news_read">已读</string>
+  <string name="news_unread">未读</string>
+  <string name="news_comment">留下评论</string>
+
+  <string name="parent_comment_hint">我的孩子……</string>
+  <string name="parent_comment_text1">活动水平</string>
+  <string name="parent_comment_text2">作息规律</string>
+  <string name="parent_comment_text3">情绪状况</string>
+  <string name="parent_comment_text4">专注力</string>
+  <string name="parent_comment_text5">礼貌素质</string>
   <string name="teacher_create_account">没有帐号?注册一个！</string>
 
   <string name="register">注册</string>

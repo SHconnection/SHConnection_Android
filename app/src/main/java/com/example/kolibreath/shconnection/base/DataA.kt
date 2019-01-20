@@ -103,6 +103,22 @@ class AddressBean {
         return parent
     }
 
+    override fun toString(): String {
+        var teacherString = ""
+        for(t in teacher!!){
+            teacherString += "teacher avatar "+t.avatar+"\n"
+            teacherString += "teacher name   "+t.name +"\n"
+            teacherString += "teacher tel    " +t.tel+"\n"
+        }
+
+        var parentString = ""
+        for(t in parent!!){
+            parentString += "parent avatar   "+t.avatar+"\n"
+            parentString += "parent name     "+t.name +"\n"
+            parentString += "parent tel      " +   t.tel+"\n"
+        }
+            return teacherString + parentString
+    }
 }
 
 /**

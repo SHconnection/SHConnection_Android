@@ -176,8 +176,9 @@ interface RetrofitService{
    * 返回班级通讯录
    */
   @GET("class/info/")
-  fun classAddress(@Header("token")token: String):Observable<AddressBean>
-//todo 奇怪的代码
+  fun classAddress(@Header("token")token: String,@Query("cid") cid:String):Observable<AddressBean>
+
+    //todo 奇怪的代码
   fun storePicture():Observable<Any>
 
   /**

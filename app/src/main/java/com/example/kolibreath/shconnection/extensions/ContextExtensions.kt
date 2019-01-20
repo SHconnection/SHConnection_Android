@@ -184,6 +184,7 @@ get() = this.database.writableDatabase
     get() = CommonPool
 
 
+
 //Todo 可能会有错误
 var Context.isLogin :Boolean
   set(value) {

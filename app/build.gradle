@@ -58,7 +58,9 @@ dependencies {
   implementation 'com.android.support:multidex:1.0.3'
 
     //腾讯云
-  implementation 'com.tencent.qcloud:cosxml:5.4.19'
+    implementation ('com.tencent.qcloud:cosxml-lite:5.4.19'){
+        exclude group:'com.tencent.qcloud', module: 'mtaUtils' //关闭mta上报功能
+    }
   implementation 'de.hdodenhof:circleimageview:2.2.0'
   implementation 'com.squareup.picasso:picasso:2.71828'
 }

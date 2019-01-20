@@ -20,31 +20,21 @@ import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.GridView
 import android.widget.TextView
 import com.example.kolibreath.shconnection.R
-import com.example.kolibreath.shconnection.base.App
-import com.example.kolibreath.shconnection.base.FeedBody
-import com.example.kolibreath.shconnection.base.net.NetFactory
-import com.example.kolibreath.shconnection.extensions.QiniuExtension
 import com.example.kolibreath.shconnection.extensions.findView
 import com.example.kolibreath.shconnection.extensions.getValue
 import com.example.kolibreath.shconnection.extensions.setBgColor
 import com.example.kolibreath.shconnection.extensions.setTxColor
-import com.example.kolibreath.shconnection.extensions.showSnackBarShort
-import com.example.kolibreath.shconnection.ui.main.MainActivity
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.entity.LocalMedia
-import com.luck.picture.lib.rxbus2.Subscribe
-import rx.Subscriber
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
 import java.util.LinkedList
-import java.util.Observable
+import kotlin.collections.ArrayList
+import kotlin.collections.List
 
 //发送一张新的动态
 class ViewPictureActivity: AppCompatActivity(){
@@ -204,31 +194,34 @@ class ViewPictureActivity: AppCompatActivity(){
     mBtnConfirm.setOnClickListener {
       if(TextUtils.isEmpty(mContent))
         return@setOnClickListener
+//
+//      //todo 异步 ！！！！
+//      QiniuExtension.postPictures(pictures = mPicList)
+//          .subscribeOn(Schedulers.io())
+//          .flatMap {
+//            val feedBody = FeedBody(classId = classid.toInt()
+//                ,teacherId = teacherId.toInt()
+//                , type = mTag, content = mContent!!, picture_urls = it)
+//            NetFactory.retrofitService
+//                .postFeed(token = token, feedBody = feedBody  )
+//                .subscribeOn(Schedulers.io())
+//          }
+//          .observeOn(AndroidSchedulers.mainThread())
+//          .subscribe(object : Subscriber<Any>() {
+//            override fun onNext(t: Any?) {}
+//
+//            override fun onCompleted() {
+//              showSnackBarShort("发送成功")
+//              MainActivity.start(this@ViewPictureActivity)
+//            }
+//
+//            override fun onError(e: Throwable?) {
+//              e!!.printStackTrace()
+//            }
+//          })
 
-      //todo 异步 ！！！！
-      QiniuExtension.postPictures(pictures = mPicList)
-          .subscribeOn(Schedulers.io())
-          .flatMap {
-            val feedBody = FeedBody(classId = classid.toInt()
-                ,teacherId = teacherId.toInt()
-                , type = mTag, content = mContent!!, picture_urls = it)
-            NetFactory.retrofitService
-                .postFeed(token = token, feedBody = feedBody  )
-                .subscribeOn(Schedulers.io())
-          }
-          .observeOn(AndroidSchedulers.mainThread())
-          .subscribe(object : Subscriber<Any>() {
-            override fun onNext(t: Any?) {}
+        //上传图片
 
-            override fun onCompleted() {
-              showSnackBarShort("发送成功")
-              MainActivity.start(this@ViewPictureActivity)
-            }
-
-            override fun onError(e: Throwable?) {
-              e!!.printStackTrace()
-            }
-          })
     }
 
     mBtnCancel.setOnClickListener {  finish()}

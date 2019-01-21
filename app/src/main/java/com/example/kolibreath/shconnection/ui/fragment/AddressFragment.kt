@@ -3,7 +3,6 @@ package com.example.kolibreath.shconnection.ui.main.fragment
 import CLASS_ID
 import LOGIN_TOKEN
 import android.content.Intent
-import android.util.Log
 import android.widget.ExpandableListView
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.adapter.AddressAdapter
@@ -12,7 +11,6 @@ import com.example.kolibreath.shconnection.base.Person
 import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.base.ui.BaseFragment
 import com.example.kolibreath.shconnection.extensions.getValue
-import com.example.kolibreath.shconnection.ui.UserProfile
 import org.jetbrains.anko.support.v4.find
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers

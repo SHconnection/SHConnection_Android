@@ -25,13 +25,17 @@ import android.widget.EditText
 import android.widget.GridView
 import android.widget.TextView
 import com.example.kolibreath.shconnection.R
-import com.example.kolibreath.shconnection.extensions.findView
-import com.example.kolibreath.shconnection.extensions.getValue
-import com.example.kolibreath.shconnection.extensions.setBgColor
-import com.example.kolibreath.shconnection.extensions.setTxColor
+import com.example.kolibreath.shconnection.base.FeedBody
+import com.example.kolibreath.shconnection.base.net.NetFactory
+import com.example.kolibreath.shconnection.extensions.*
+import com.example.kolibreath.shconnection.ui.main.MainActivity
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.entity.LocalMedia
+import com.luck.picture.lib.rxbus2.Subscribe
+import rx.Subscriber
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 import java.util.LinkedList
 import kotlin.collections.ArrayList
 import kotlin.collections.List
@@ -194,33 +198,43 @@ class ViewPictureActivity: AppCompatActivity(){
     mBtnConfirm.setOnClickListener {
       if(TextUtils.isEmpty(mContent))
         return@setOnClickListener
-//
-//      //todo 异步 ！！！！
-//      QiniuExtension.postPictures(pictures = mPicList)
-//          .subscribeOn(Schedulers.io())
-//          .flatMap {
-//            val feedBody = FeedBody(classId = classid.toInt()
-//                ,teacherId = teacherId.toInt()
-//                , type = mTag, content = mContent!!, picture_urls = it)
-//            NetFactory.retrofitService
-//                .postFeed(token = token, feedBody = feedBody  )
-//                .subscribeOn(Schedulers.io())
-//          }
-//          .observeOn(AndroidSchedulers.mainThread())
-//          .subscribe(object : Subscriber<Any>() {
-//            override fun onNext(t: Any?) {}
-//
-//            override fun onCompleted() {
-//              showSnackBarShort("发送成功")
-//              MainActivity.start(this@ViewPictureActivity)
-//            }
-//
-//            override fun onError(e: Throwable?) {
-//              e!!.printStackTrace()
-//            }
-//          })
 
-        //上传图片
+
+        //访问的时候需要使用这个url1
+        //可能的问题：
+        //
+
+        CosXmlUtils(this@ViewPictureActivity)
+                .cosUpload(mPicList)
+                .flatMap {
+                    //cos生成的url
+                    //http://muxixyz-1258093397.cos.ap-chengdu.myqcloud.com/1548034613601.jpeg
+                    //要变成这样的url
+                    //https://muxixyz-1258093397.cos-website.ap-chengdu.myqcloud.com/1548034613601.jpeg
+
+                    val feedBody = FeedBody(classId = classid.toInt()
+                ,teacherId = teacherId.toInt()
+                , type = mTag, content = mContent!!, picture_urls = it)
+
+            NetFactory.retrofitService
+                .postFeed(token = token, feedBody = feedBody  )
+                .subscribeOn(Schedulers.io())
+                }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : Subscriber<Any>() {
+                override fun onNext(t: Any?) {
+                    print("fuck")
+                }
+
+                override fun onCompleted() {
+                  showSnackBarShort("发送成功")
+                  MainActivity.start(this@ViewPictureActivity)
+                }
+
+                override fun onError(e: Throwable?) {
+                  e!!.printStackTrace()
+                }
+              })
 
     }
 

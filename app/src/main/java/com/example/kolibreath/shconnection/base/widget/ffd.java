@@ -1,13 +1,6 @@
 package com.example.kolibreath.shconnection.base.widget;
 
-import com.example.kolibreath.shconnection.extensions.QiniuExtension;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Func1;
-import rx.functions.FuncN;
 
 public class ffd {
 

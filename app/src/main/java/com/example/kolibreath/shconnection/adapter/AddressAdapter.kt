@@ -1,17 +1,13 @@
 package com.example.kolibreath.shconnection.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
 import android.widget.TextView
 import com.example.kolibreath.shconnection.R
-import com.example.kolibreath.shconnection.base.AddressBean
 import com.example.kolibreath.shconnection.base.Person
-import com.example.kolibreath.shconnection.ui.UserProfile
-import org.jetbrains.anko.find
 
 /**
  * 班级通讯录elvAdapter

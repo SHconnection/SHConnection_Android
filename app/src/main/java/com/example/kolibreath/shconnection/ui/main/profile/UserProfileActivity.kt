@@ -37,7 +37,7 @@ class UserProfileActivity: ToolbarActivity(){
   private val id = getValue(ID,"")
   private val token = getValue(LOGIN_TOKEN,"")
 
-  private var names = arrayListOf<String>("个人资料","加入新的班级","注销帐号")
+  private var names = arrayListOf("个人资料","加入新的班级","注销帐号")
   private var mUserProfileAdapter = UserProfileAdapter(names)
 
   //views

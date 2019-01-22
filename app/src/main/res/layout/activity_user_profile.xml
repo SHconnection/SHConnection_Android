@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
@@ -131,7 +131,21 @@
                 android:layout_below="@+id/edt_name"
                 android:layout_alignBaseline="@+id/tv_title"
                 android:layout_marginLeft="100dp" />
+
+
+            <!--教师的职称 班主任 科任老师等-->
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/tv_setting"
+                android:textColor="@color/black"
+                android:layout_marginTop="310dp"
+                android:layout_marginLeft="30dp"
+                android:text="设置"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </RelativeLayout>
+
+
 
 
     </ScrollView>

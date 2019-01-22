@@ -12,6 +12,7 @@ import android.support.design.widget.BottomSheetDialog
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.base.Person
 import com.example.kolibreath.shconnection.base.net.NetFactory
@@ -106,6 +107,12 @@ class UserProfileActivity : ToolbarActivity(){
             edtUserTitle.isCursorVisible = false
             edtUserSubject.isCursorVisible = false
 
+        }
+
+        findViewById<TextView>(R.id.tv_setting).apply {
+            setOnClickListener {
+                showBottomDialog()
+            }
         }
 
     }

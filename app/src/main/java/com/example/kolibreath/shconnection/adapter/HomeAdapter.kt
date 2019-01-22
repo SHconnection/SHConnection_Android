@@ -19,15 +19,14 @@ import rx.schedulers.Schedulers
 /**
  * feed流
  */
-class HomeAdapter(context: Context, list: List<FeedBean.Feeds>): RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
+class HomeAdapter(var context: Context, var list: List<FeedBean.Feeds>): RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
-    var list: List<FeedBean.Feeds>? = null
-    var context: Context? = null
+
     var inflater: LayoutInflater? = null
 
     init {
         this.context = context
-        this.list = list
+        //todo 这个inflater 有点奇怪？
         this.inflater = inflater
     }
 

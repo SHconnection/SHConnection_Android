@@ -114,18 +114,6 @@ data class ParentInit(
   val sid:String,
     val password:String
 )
-/**
- * 老师修改个人资料（通讯录）
- * 需要token
- */
-data class Profile(
-  val tel: String,
-    val name:String,
-    val wechat:String,
-    val intro:String,
-    val avatar:String,
-    val subject: String
-)
 
 /**
  * 班主任创建班级
@@ -135,7 +123,7 @@ class TeacherCreateClassBody{
   /**
    * main_teacher_wid : string
    * class_name : string
-   * teachers_list : [{"tvName":"string","wid":"string"}]
+   * teachers_list : [{"tvName":"string","id":"string"}]
    * children_list : [{"tvName":"string","sid":"string"}]
    */
 
@@ -186,7 +174,7 @@ class TeacherCreateClassBody{
   class TeachersListBean
   /**
    * tvName : string
-   * wid : string
+   * id : string
    */(
     name: String,
     wid: String

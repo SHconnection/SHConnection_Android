@@ -3,24 +3,7 @@ package com.example.kolibreath.shconnection.base
 
 
 
-/**
- * 返回班级通讯录
- */
-class Person
-/**
- * tel : string
- * tvName : string
- * tvAvatar : string
- */(
-        tel: String,
-        name: String,
-        avatar: String
-) {
-    var tel: String? = tel
-    var name: String? = name
-    var avatar: String? = avatar
 
-}
 
 class AddressBean {
 
@@ -60,34 +43,6 @@ class AddressBean {
     }
 }
 
-/**
- * 某个feed的所有评论
- */
-class FeedComments(
-    /**
-     *
-     */
-    var comments: List<Comments>
-){
-    class Comments(
-        /**
-         * id : int
-         *
-         */
-        var id: Int,
-        var feedInt: Int,
-        var content: String,
-        var like: Int,
-        var userSimpleInfo: UserSimpleInfo
-    ){
-        class UserSimpleInfo(
-            var utype: Int,
-            var uid: Int,
-            var uname: String,
-            var avatar: String
-        )
-    }
-}
 
 
 /**

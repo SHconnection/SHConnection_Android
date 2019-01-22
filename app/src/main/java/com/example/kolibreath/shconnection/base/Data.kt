@@ -327,3 +327,16 @@ data class Comment(
     val content: String,
     val username: String
 )
+
+/**
+ * 老师和家长的信息数据结构
+ */
+ data class Person(
+    val avatar: String,
+    val intro: String,
+    val name: String,
+    val subject: String,
+    val tel: String,
+    val title: String,
+    val wechat: String
+)

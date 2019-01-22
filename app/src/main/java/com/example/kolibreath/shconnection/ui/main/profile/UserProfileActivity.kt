@@ -1,6 +1,5 @@
 package com.example.kolibreath.shconnection.ui.main.profile
 
-import ID
 import LOGIN_TOKEN
 import USER_PARENT
 import USER_TEACHER
@@ -9,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.ImageView
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.base.Person
 import com.example.kolibreath.shconnection.base.net.NetFactory
@@ -36,6 +36,14 @@ class UserProfileActivity : ToolbarActivity(){
     lateinit var edtUserSubject :EditText
     lateinit var edtUserTitle :EditText
 
+    lateinit var ivEdit:ImageView
+
+    //保存获取的信息
+    lateinit var mPerson: Person
+
+    val EDITABLE = "editable"
+    val PERSON_INFO:String = "person_info"
+
     //todo test 这样在companion中传递参数是否可行
     companion object {
         //老师或者是家长的id的id默认为-1
@@ -53,25 +61,34 @@ class UserProfileActivity : ToolbarActivity(){
             this.id = wid
             this.mUserType = userType
         }
+
+        //从这个页面跳转到修改信息的页面
+        fun start(context: Context,person: Person){
+            context.startActivity(Intent(context,UserProfileActivity::class.java).apply {
+                putExtra("editable",true)
+                putExtra("person_info",person)
+            })
+        }
     }
 
 
-    private fun initView(modifiable : Boolean) {
+    private fun initView() {
         edtUserName = findViewById(R.id.edt_name)
-
         ivAvatar = findViewById(R.id.iv_avatar)
-
         edtUserTel = findViewById(R.id.edt_tel)
-
         edtUserWechat = findViewById(R.id.edt_wechat)
-
         edtUserIntro = findViewById(R.id.edt_intro)
-
         edtUserSubject = findViewById(R.id.edt_subject)
+        edtUserTitle = findViewById(R.id.edt_title)
 
-        edtUserTitle = findViewById(R.id.edt_rate)
+        ivEdit = findViewById(R.id.iv_edit)
+        ivEdit.setOnClickListener {
+            //重新启动这个页面进行个人信息的修改
+            UserProfileActivity.start(this@UserProfileActivity,mPerson)
+            finish()
+        }
 
-        if (modifiable) {
+        if (isEditable()) {
             edtUserTel.isFocusable = false
             edtUserWechat.isFocusable = false
             edtUserIntro.isFocusable = false
@@ -83,8 +100,13 @@ class UserProfileActivity : ToolbarActivity(){
     }
 
 
-    //todo 根据api文档拿到相关的数据结构
-    private fun getProfile(userType :Int){
+    //如果是从这个页面直接过来编辑的话 不需要加载
+    private fun getProfile(){
+        val userType = mUserType
+        if(isEditable()){
+            setViews(intent.getSerializableExtra(PERSON_INFO) as Person)
+            return
+        }
         when(userType){
             USER_TEACHER ->{
               NetFactory.retrofitService
@@ -93,7 +115,8 @@ class UserProfileActivity : ToolbarActivity(){
                       .observeOn(AndroidSchedulers.mainThread())
                       .subscribe(object:Subscriber<Person>(){
                           override fun onNext(t: Person?) {
-                              setViews(person = t!!)
+                              mPerson = t!!
+                              setViews(person = t)
                           }
                           override fun onCompleted() {}
                           override fun onError(e: Throwable?) { e!!.printStackTrace() }
@@ -106,13 +129,20 @@ class UserProfileActivity : ToolbarActivity(){
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(object:Subscriber<Person>(){
                             override fun onNext(t: Person?) {
-                                setViews(person = t!!)
+                                mPerson = t!!
+                                setViews(person = t)
                             }
                             override fun onCompleted() {}
                             override fun onError(e: Throwable?) { e!!.printStackTrace() }
                         })
             }
         }
+    }
+
+    val isEditable = {
+        val intent = intent
+        val editable = intent.getBooleanExtra(EDITABLE,false)
+        editable
     }
 
     //设置一下相关信息
@@ -133,7 +163,7 @@ class UserProfileActivity : ToolbarActivity(){
         setContentView(R.layout.activity_user_profile)
 
         //初始化
-        initView(intent.getBooleanExtra("modifiable",false))
-        getProfile(UserProfileActivity.mUserType)
+        initView()
+        getProfile()
     }
 }

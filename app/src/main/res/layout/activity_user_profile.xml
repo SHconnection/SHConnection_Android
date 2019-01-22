@@ -14,6 +14,14 @@
         android:layout_marginTop="70dp"
         android:src="@drawable/ic_launcher_background" />
 
+    <ImageView
+        android:id="@+id/iv_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/iv_avatar"
+        android:layout_alignBottom="@+id/iv_avatar"
+        android:src="@drawable/ic_edit" />
+
     <ScrollView
         android:layout_marginTop="200dp"
         android:layout_width="match_parent"
@@ -102,13 +110,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/edt_name"
-                android:layout_alignBaseline="@+id/tv_intro"
+                android:layout_alignBaseline="@+id/tv_subject"
                 android:layout_marginLeft="100dp" />
 
 
             <!--教师的职称 班主任 科任老师等-->
             <TextView
-                android:id="@+id/tv_rate"
+                android:id="@+id/tv_title"
                 android:layout_marginTop="260dp"
                 android:layout_marginLeft="30dp"
                 android:text="职称"
@@ -116,13 +124,29 @@
                 android:layout_height="wrap_content" />
 
             <EditText
-                android:id="@+id/edt_rate"
+                android:id="@+id/edt_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/edt_name"
-                android:layout_alignBaseline="@+id/tv_intro"
+                android:layout_alignBaseline="@+id/tv_title"
                 android:layout_marginLeft="100dp" />
 
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/edt_title"
+                android:background="@color/black" />
+
+            <!--教师的职称 班主任 科任老师等-->
+            <TextView
+                android:id="@+id/tv_settings"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_below="@+id/divider"
+                android:text="设置"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
 
 

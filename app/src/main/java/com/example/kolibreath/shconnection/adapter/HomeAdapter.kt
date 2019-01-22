@@ -1,6 +1,7 @@
 package com.example.kolibreath.shconnection.adapter
 
 import LOGIN_TOKEN
+import USER_TEACHER
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
@@ -20,6 +21,7 @@ import com.example.kolibreath.shconnection.base.Feed
 import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.extensions.getValue
 import com.example.kolibreath.shconnection.extensions.showSnackBarShort
+import com.example.kolibreath.shconnection.ui.main.profile.UserProfileActivity
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import org.jetbrains.anko.layoutInflater
@@ -51,7 +53,9 @@ class HomeAdapter(val feed: Feed): RecyclerView.Adapter<HomeAdapter.HomeViewHold
     @SuppressLint("SimpleDateFormat")
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
 
-        Picasso.get().load(list[position].teacherSimpleInfo.avatar).into(holder.tvAvatar)
+        Picasso.get().load(list[position].teacherSimpleInfo.avatar).into(holder.ivAvatar)
+        holder.ivAvatar.setOnClickListener { UserProfileActivity.start(
+                context = context, wid = list[position].id, userType = USER_TEACHER) }
 
         holder.tvName.text = list[position].teacherSimpleInfo.name
         holder.tvType.text = list[position].type
@@ -115,7 +119,7 @@ class HomeAdapter(val feed: Feed): RecyclerView.Adapter<HomeAdapter.HomeViewHold
 
     //展示feed内容
     class HomeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val tvAvatar: CircleImageView  =   itemView.findViewById(R.id.iv_news_avatar)
+        val ivAvatar: CircleImageView  =   itemView.findViewById(R.id.iv_news_avatar)
         val tvName: TextView          =   itemView.findViewById(R.id.tv_news_name)
         val tvType: TextView          =   itemView.findViewById(R.id.tv_news_type)
         val tvComment: TextView       =   itemView.findViewById(R.id.tv_comment)

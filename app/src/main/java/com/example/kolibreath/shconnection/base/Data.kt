@@ -1,5 +1,8 @@
 package com.example.kolibreath.shconnection.base
 
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
+
 /**
  * 教师登录 的 body
  */
@@ -319,6 +322,7 @@ data class Comment(
 /**
  * 老师和家长的信息数据结构
  */
+
  data class Person(
     val avatar: String,
     val intro: String,
@@ -327,4 +331,4 @@ data class Comment(
     val tel: String,
     val title: String,
     val wechat: String
-)
+):Serializable

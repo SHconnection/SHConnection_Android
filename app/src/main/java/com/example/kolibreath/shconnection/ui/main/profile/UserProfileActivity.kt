@@ -6,14 +6,21 @@ import USER_TEACHER
 import USER_TYPE
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.support.annotation.RequiresApi
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.BottomSheetDialog
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.text.InputType
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.kolibreath.shconnection.R
+import com.example.kolibreath.shconnection.adapter.SettingAdapter
 import com.example.kolibreath.shconnection.base.Person
 import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.base.ui.ToolbarActivity
@@ -76,6 +83,7 @@ class UserProfileActivity : ToolbarActivity(){
     }
 
 
+
     private fun initView() {
         edtUserName = findViewById(R.id.edt_name)
         ivAvatar = findViewById(R.id.iv_avatar)
@@ -92,21 +100,16 @@ class UserProfileActivity : ToolbarActivity(){
             finish()
         }
 
+        val editTextViews = arrayOf(edtUserTel,edtUserName,edtUserTitle,edtUserWechat,edtUserSubject
+        ,edtUserIntro)
         if (isEditable()) {
-            edtUserTel.isFocusable = false
-            edtUserWechat.isFocusable = false
-            edtUserIntro.isFocusable = false
-            edtUserSubject.isFocusable = false
-            edtUserName.isFocusable = false
-            edtUserTitle.isFocusable = false
-
-            edtUserTel.isCursorVisible  = false
-            edtUserWechat.isCursorVisible = false
-            edtUserIntro.isCursorVisible = false
-            edtUserName.isCursorVisible = false
-            edtUserTitle.isCursorVisible = false
-            edtUserSubject.isCursorVisible = false
-
+            for(edit in editTextViews){
+                edit.setFocusable(false)
+                edit.isFocusableInTouchMode = false
+                edit.isLongClickable = false
+                edit.inputType = InputType.TYPE_NULL
+                edit.setCursorVisible(true);
+            }
         }
 
         findViewById<TextView>(R.id.tv_setting).apply {
@@ -114,6 +117,7 @@ class UserProfileActivity : ToolbarActivity(){
                 showBottomDialog()
             }
         }
+
 
     }
 
@@ -181,6 +185,20 @@ class UserProfileActivity : ToolbarActivity(){
         val view = this@UserProfileActivity.layoutInflater.inflate(R.layout.view_bottom_dialog,null)
         bottomDialog.setContentView(view)
         bottomDialog.show()
+
+
+        val list = when(mUserType){
+            USER_PARENT ->{
+                listOf<String>("退出登录")
+            }else ->{
+                listOf<String>("退出登录","切换班级")
+            }
+        }
+
+        val rvSetting :RecyclerView = view.findViewById(R.id.rv_setting)
+        val adapter = SettingAdapter(list)
+        rvSetting.layoutManager = LinearLayoutManager(this@UserProfileActivity)
+        rvSetting.adapter = adapter
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

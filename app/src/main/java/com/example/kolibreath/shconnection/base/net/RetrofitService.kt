@@ -29,13 +29,13 @@ interface RetrofitService{
    * 老师修改个人资料
    */
   @POST("teacher/profile/")
-  fun teacherChangeProfile(@Header("token") token:String,@Body profile: Profile):Observable<Any>
+  fun teacherChangeProfile(@Header("token") token:String,@Body person: Person):Observable<Any>
 
   /**
    * 获取老师的通讯录信息
    */
   @GET("teacher/info/")
-  fun teacherProfile(@Header("token") token: String):Observable<Profile>
+  fun teacherProfile(@Header("token") token: String):Observable<Person>
 
   /**
    * 老师注册并且加入一个班级
@@ -177,13 +177,13 @@ interface RetrofitService{
    * 家长修改资料
    */
   @POST("parent/profile/")
-  fun parentChangeProfile(@Header("token") token :String,@Body profile: Profile):Observable<Any>
+  fun parentChangeProfile(@Header("token") token :String,@Body person: Person):Observable<Any>
 
   /**
    * 获取家长资料
    */
   @POST("parent/info/")
-  fun parentProfile(@Header("token") token:String):Observable<Profile>
+  fun parentProfile(@Header("token") token:String):Observable<Person>
 
 
   /**

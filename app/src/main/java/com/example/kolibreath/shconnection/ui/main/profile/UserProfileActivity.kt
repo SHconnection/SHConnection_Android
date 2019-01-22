@@ -7,6 +7,9 @@ import USER_TYPE
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.BottomSheetBehavior
+import android.support.design.widget.BottomSheetDialog
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import com.example.kolibreath.shconnection.R
@@ -96,7 +99,15 @@ class UserProfileActivity : ToolbarActivity(){
             edtUserName.isFocusable = false
             edtUserTitle.isFocusable = false
 
+            edtUserTel.isCursorVisible  = false
+            edtUserWechat.isCursorVisible = false
+            edtUserIntro.isCursorVisible = false
+            edtUserName.isCursorVisible = false
+            edtUserTitle.isCursorVisible = false
+            edtUserSubject.isCursorVisible = false
+
         }
+
     }
 
 
@@ -156,6 +167,13 @@ class UserProfileActivity : ToolbarActivity(){
 
         Picasso.get().load(person.avatar).into(ivAvatar)
 
+    }
+
+    private fun showBottomDialog(){
+        val bottomDialog = BottomSheetDialog(this@UserProfileActivity)
+        val view = this@UserProfileActivity.layoutInflater.inflate(R.layout.view_bottom_dialog,null)
+        bottomDialog.setContentView(view)
+        bottomDialog.show()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

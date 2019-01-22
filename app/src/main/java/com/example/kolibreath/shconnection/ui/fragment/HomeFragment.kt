@@ -12,7 +12,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.adapter.HomeAdapter
-import com.example.kolibreath.shconnection.base.FeedBean
+import com.example.kolibreath.shconnection.base.Feed
 import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.base.ui.BaseFragment
 import com.example.kolibreath.shconnection.ui.ViewPictureActivity
@@ -24,15 +24,17 @@ import rx.schedulers.Schedulers
 /**
  * 家校圈主页
  */
+
+//todo 查看这里的代码修改这里！
 class HomeFragment: BaseFragment(), SwipeRefreshLayout.OnRefreshListener{
 
     var mIsRefresh: Boolean = false
     lateinit var mAdapter: HomeAdapter
-    lateinit var mList :List<FeedBean.Feeds>
+    lateinit var mList :List<Feed>
     lateinit var recyclerView: RecyclerView
     lateinit var button: FloatingActionButton
     lateinit var swipeRefreshLayout: SwipeRefreshLayout
-    lateinit var mFeedBean: FeedBean
+    lateinit var mFeedBean: Feed
 
 
     override fun getLayoutResources(): Int {
@@ -56,7 +58,7 @@ class HomeFragment: BaseFragment(), SwipeRefreshLayout.OnRefreshListener{
         NetFactory.retrofitService.feed(pagenum = PAGE_NAME,classId = CLASS_ID)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : Subscriber<FeedBean>() {
+                .subscribe(object : Subscriber<Feed>() {
                     override fun onCompleted() {
                     }
 
@@ -64,10 +66,10 @@ class HomeFragment: BaseFragment(), SwipeRefreshLayout.OnRefreshListener{
                         e?.printStackTrace()
                     }
 
-                    override fun onNext(t: FeedBean?) {
-                        mFeedBean = t!!
-                        mList = mFeedBean.feeds
-                        mAdapter = HomeAdapter(context!!,mList)
+                    override fun onNext(t: Feed?) {
+//                        mFeedBean = t!!
+//                        mList = mFeedBean.feeds
+//                        mAdapter = HomeAdapter(context!!,mList)
                     }
                 })
                 

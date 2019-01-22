@@ -91,7 +91,7 @@ class LoginActivity:ToolbarActivity(){
             //储存老师当前地班级
             mCurrentId = t.getClasses_id()!!.last()
 
-            this@LoginActivity.putValue(ID,mEdtInputNumber.editableText.toString())
+            this@LoginActivity.putValue(ID,mEdtInputNumber.editableText.toString().toInt())
             this@LoginActivity.putValue(CLASS_ID,mCurrentId.toString())
 
             this@LoginActivity.finish()
@@ -121,7 +121,7 @@ class LoginActivity:ToolbarActivity(){
             mCurrentId = t!!.getClass_id()
             mToken = t.getToken()!!
 
-            this@LoginActivity.putValue(ID,mEdtInputNumber.editableText.toString())
+            this@LoginActivity.putValue(ID,mEdtInputNumber.editableText.toString().toInt())
             this@LoginActivity.putValue(LOGIN_TOKEN,mToken)
             this@LoginActivity.putValue(CLASS_ID,mCurrentId.toString())
 

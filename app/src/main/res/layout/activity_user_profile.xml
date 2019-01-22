@@ -23,9 +23,10 @@
         android:src="@drawable/ic_edit" />
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_marginTop="200dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -130,28 +131,11 @@
                 android:layout_below="@+id/edt_name"
                 android:layout_alignBaseline="@+id/tv_title"
                 android:layout_marginLeft="100dp" />
-
-            <View
-                android:id="@+id/divider"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_below="@+id/edt_title"
-                android:background="@color/black" />
-
-            <!--教师的职称 班主任 科任老师等-->
-            <TextView
-                android:id="@+id/tv_settings"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="30dp"
-                android:layout_below="@+id/divider"
-                android:text="设置"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-
-
         </RelativeLayout>
+
+
     </ScrollView>
+
 
 
 

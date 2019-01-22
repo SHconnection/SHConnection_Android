@@ -43,7 +43,7 @@ const val PROFILE_TYPE=  "user_profile"
 /**
  * preference 登录之后保存的用户信息
  */
-//id 保存为一个String
+//id 保存为一个 Int
 const val ID =  "sWidOrSid"
 const val LOGIN_TOKEN = "sLoginToken"
 const val CUR_CLASS = "sCurrentClassId"

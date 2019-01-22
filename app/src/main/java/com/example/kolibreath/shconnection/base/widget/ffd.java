@@ -7,7 +7,7 @@ public class ffd {
   /**
    * classId : 0
    * teacherId : 0
-   * type : string
+   * tvType : string
    * content : string
    * picture_urls : ["string"]
    */

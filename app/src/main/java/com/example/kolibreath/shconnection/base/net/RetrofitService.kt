@@ -68,6 +68,8 @@ interface RetrofitService{
   /**
    * feed流
    */
+
+  //todo 修改feed 的api
   @GET("feeds/{pagenum}/class/{class_id}/")
   fun feed(@Path("pagenum") pagenum: Int,
            @Path("class_id") classId: String):Observable<FeedBean>
@@ -96,7 +98,7 @@ interface RetrofitService{
   /**
    * 发送评论
    */
-  @POST("feed/{feedid}/comment/")
+  @POST("feed/{feedid}/tvComment/")
   fun feedComment(@Path("feedid")feedId: Int,
                   @Header("token")token: String,
                   @Body content: String):Observable<Any>

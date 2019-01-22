@@ -1,68 +1,7 @@
 package com.example.kolibreath.shconnection.base
 
 
-/**
- * feed流
- */
 
-//todo what is the point of this thing?
-class FeedBean(
-        /**
-     * pagenum: 0,
-     * nums": 0,
-     * hasnext": true,
-     * feeds": [{
-     * id: 0,
-     * classId: 0,
-     * teacherSimpleInfo: {"id": 0,"name": "string","avatar": "string"},
-     * type: string,
-     * content: "string",
-     * likes: 0,
-     * liked: true,
-     * picture_urls": ["string"]  }]
-     */
-    var pagenum:Int,
-    var nums:Int,
-    var hasnext:Boolean,
-    var feeds: List<Feeds>
-    ){
-    class Feeds(
-        var id:Int,
-        var classId: Int,
-        var teacherSimpleInfo: TeacherSimpleInfo,
-        var type: String,
-        var content: String,
-        var likes: Int,
-        var liked: Boolean,
-        var picture_urls: List<String>
-    ){
-        class TeacherSimpleInfo(
-                var id:Int,
-                var name:String,
-                var avatar: String)
-    }
-}
-
-class FeedDetails(
-        /**
-     *
-     */
-    var feedInfo: List<FeedInfo>,
-        var type: String,
-        var content: String,
-        var likes: Int,
-        var liked: Boolean,
-        var picture_urls: List<String>
-){
-    class FeedInfo(
-        /**
-         *
-         */
-        var id: Int,
-        var classId: Int,
-        var teacherSimpleInfo: FeedBean.Feeds.TeacherSimpleInfo
-    )
-}
 
 /**
  * 返回班级通讯录
@@ -70,8 +9,8 @@ class FeedDetails(
 class Person
 /**
  * tel : string
- * name : string
- * avatar : string
+ * tvName : string
+ * tvAvatar : string
  */(
         tel: String,
         name: String,
@@ -106,15 +45,15 @@ class AddressBean {
     override fun toString(): String {
         var teacherString = ""
         for(t in teacher!!){
-            teacherString += "teacher avatar "+t.avatar+"\n"
-            teacherString += "teacher name   "+t.name +"\n"
+            teacherString += "teacher tvAvatar "+t.avatar+"\n"
+            teacherString += "teacher tvName   "+t.name +"\n"
             teacherString += "teacher tel    " +t.tel+"\n"
         }
 
         var parentString = ""
         for(t in parent!!){
-            parentString += "parent avatar   "+t.avatar+"\n"
-            parentString += "parent name     "+t.name +"\n"
+            parentString += "parent tvAvatar   "+t.avatar+"\n"
+            parentString += "parent tvName     "+t.name +"\n"
             parentString += "parent tel      " +   t.tel+"\n"
         }
             return teacherString + parentString
@@ -222,8 +161,8 @@ class ParentPerComment(
  */
 class CommentBody{
     /**
-     * comment : string,
-     * score : [{"name": "string","score": 0}]
+     * tvComment : string,
+     * score : [{"tvName": "string","score": 0}]
      */
 
     private var comment: String ?= null
@@ -252,7 +191,7 @@ class ScoreComment(
     /**
      * evals: [{
      * time : string,
-     * score : [{name : string, score : 0}]
+     * score : [{tvName : string, score : 0}]
      * content : string
      * }]
      */

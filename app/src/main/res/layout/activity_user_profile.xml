@@ -5,30 +5,130 @@
     android:layout_height="match_parent">
   <include
     layout="@layout/view_toolbar"/>
-  <de.hdodenhof.circleimageview.CircleImageView
-      android:id="@+id/iv_avatar"
-      android:src="@drawable/ic_launcher_background"
-      android:layout_centerHorizontal="true"
-      android:layout_marginTop="100dp"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"/>
 
-  <View
-      android:id="@+id/divider"
-     android:layout_marginTop="149dp"
-      android:background="@color/gray"
-      android:layout_width="match_parent"
-      android:layout_height="1dp"
-      android:layout_marginLeft="20dp"
-      android:layout_marginRight="20dp"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:src="@drawable/ic_launcher_background" />
 
-  <android.support.v7.widget.RecyclerView
-      android:id="@+id/rv_items"
-      android:layout_below="@+id/divider"
-      android:layout_marginTop="80dp"
-      android:layout_marginLeft="10dp"
-      android:layout_marginRight="10dp"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      />
+    <ScrollView
+        android:layout_marginTop="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/tv_name"
+                android:layout_marginLeft="30dp"
+                android:text="姓名"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/edt_name"
+                android:layout_alignBaseline="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp" />
+
+
+            <TextView
+                android:id="@+id/tv_tel"
+                android:layout_marginTop="60dp"
+                android:layout_marginLeft="30dp"
+                android:text="电话"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/edt_tel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_name"
+                android:layout_alignBaseline="@+id/tv_tel"
+                android:layout_marginLeft="100dp" />
+
+
+
+            <TextView
+                android:id="@+id/tv_wechat"
+                android:layout_marginTop="110dp"
+                android:layout_marginLeft="30dp"
+                android:text="微信"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/edt_wechat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_name"
+                android:layout_alignBaseline="@+id/tv_wechat"
+                android:layout_marginLeft="100dp" />
+
+            <TextView
+                android:id="@+id/tv_intro"
+                android:layout_marginTop="160dp"
+                android:layout_marginLeft="30dp"
+                android:text="简介"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/edt_intro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_name"
+                android:layout_alignBaseline="@+id/tv_intro"
+                android:layout_marginLeft="100dp" />
+
+
+            <TextView
+                android:id="@+id/tv_subject"
+                android:layout_marginTop="210dp"
+                android:layout_marginLeft="30dp"
+                android:text="科目"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/edt_subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_name"
+                android:layout_alignBaseline="@+id/tv_intro"
+                android:layout_marginLeft="100dp" />
+
+
+            <!--教师的职称 班主任 科任老师等-->
+            <TextView
+                android:id="@+id/tv_rate"
+                android:layout_marginTop="260dp"
+                android:layout_marginLeft="30dp"
+                android:text="职称"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/edt_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_name"
+                android:layout_alignBaseline="@+id/tv_intro"
+                android:layout_marginLeft="100dp" />
+
+
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+
 </RelativeLayout>

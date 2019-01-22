@@ -24,7 +24,7 @@ class TeacherLoginToken(){
   /**
    * classes_id : [0]
    * token : string
-   * name : string
+   * tvName : string
    */
 
   private var token: String? = null
@@ -127,24 +127,6 @@ data class Profile(
     val subject: String
 )
 
-data class TeacherInfoBody(
-  val tid:String,
-    val token: String
-)
-/**
- * 老师的个人
- * 显示个人界面的信息相关
- * todo 需要去掉这个重复的类
- */
-data class TeacherInfoData(
-   var name:String,
-    var tel:String,
-    var intro:String,
-    var avatar: String,
-    var star:List<String>?,
-    var comment:List<String>?
-)
-
 /**
  * 班主任创建班级
  */
@@ -153,8 +135,8 @@ class TeacherCreateClassBody{
   /**
    * main_teacher_wid : string
    * class_name : string
-   * teachers_list : [{"name":"string","wid":"string"}]
-   * children_list : [{"name":"string","sid":"string"}]
+   * teachers_list : [{"tvName":"string","wid":"string"}]
+   * children_list : [{"tvName":"string","sid":"string"}]
    */
 
   private var main_teacher_wid: String? = null
@@ -203,7 +185,7 @@ class TeacherCreateClassBody{
 
   class TeachersListBean
   /**
-   * name : string
+   * tvName : string
    * wid : string
    */(
     name: String,
@@ -216,7 +198,7 @@ class TeacherCreateClassBody{
 
   class ChildrenListBean
   /**
-   * name : string
+   * tvName : string
    * sid : string
    */(
     name: String,
@@ -255,7 +237,7 @@ class FeedBody  (
     /**
      * classId : 0
      * teacherId : 0
-     * type : string
+     * tvType : string
      * content : string
      * picture_urls : ["string"]
      */
@@ -313,3 +295,35 @@ class FeedBody  (
 
 data class MainTeacherSignUpBody(val wid:String,
     val password:String,val name:String)
+
+
+data class Feed(
+    public val feeds: List<FeedX>,
+    public val hasnext: Boolean,
+    val nums: Int,
+    val pagenum: Int
+)
+
+data class FeedX(
+    val commentnum: Int,
+    val comments: List<Comment>,
+    val content: String,
+    val id: Int,
+    val picture_urls: List<String>,
+    val read_status: String,
+    val readed: Boolean,
+    val teacherSimpleInfo: TeacherSimpleInfo,
+    val time: Int,
+    val type: String
+)
+
+data class TeacherSimpleInfo(
+    val avatar: String,
+    val name: String,
+    val wid: Int
+)
+
+data class Comment(
+    val content: String,
+    val username: String
+)

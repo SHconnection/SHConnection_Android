@@ -71,7 +71,7 @@ class AddressAdapter: BaseExpandableListAdapter {
         }
         val name = convertView?.findViewById<TextView>(R.id.tv_address_child_name)
         name?.text = child?.get(groupPosition)?.get(childPosition)?.name
-//        name?.setOnClickListener {
+//        tvName?.setOnClickListener {
 //            val intent = Intent()
 //            intent.setClass(convertView?.context,UserProfile::class.java)
 //        }

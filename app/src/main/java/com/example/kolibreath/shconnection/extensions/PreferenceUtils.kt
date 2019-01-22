@@ -24,7 +24,7 @@ fun <T>Context.putValue(key:String,value:T){
       editor.putLong(key,value)
     }
     else ->{
-    throw IllegalArgumentException("no such type")
+    throw IllegalArgumentException("no such tvType")
     }
   }
 

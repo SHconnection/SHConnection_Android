@@ -79,7 +79,7 @@ interface RetrofitService{
   /**
    * 发送评论
    */
-  @POST("feed/{feedid}/tvComment/")
+  @POST("feed/{feedid}/comment/")
   fun feedComment(@Path("feedid")feedId: Int,
                   @Header("token")token: String,
                   @Body content: String):Observable<Any>

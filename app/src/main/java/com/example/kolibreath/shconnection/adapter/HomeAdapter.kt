@@ -91,7 +91,8 @@ class HomeAdapter(val list: List<FeedX>): RecyclerView.Adapter<HomeAdapter.HomeV
                     setTitle("编写新的评论")
                     .setView(context.layoutInflater.inflate(R.layout.view_home_comment_dialog, null, false))
                     .setPositiveButton("确定发送") { dialog, which ->
-                        NetFactory.retrofitService.feedComment(feedId = position, token = LOGIN_TOKEN, content = "content")
+                        NetFactory.retrofitService.feedComment(feedId = position, token = getValue(LOGIN_TOKEN,""), content = "content")
+
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(object : Subscriber<Any>() {

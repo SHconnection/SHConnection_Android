@@ -21,6 +21,7 @@ abstract class BaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        initData()
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {

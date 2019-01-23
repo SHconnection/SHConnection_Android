@@ -49,7 +49,7 @@ class ViewPictureActivity: AppCompatActivity(){
     }
   }
 
-  private val teacherId = getValue(ID,"")
+  private val teacherId = getValue(ID,-1)
   private val token = getValue(LOGIN_TOKEN,"")
   private val classid = getValue(CLASS_ID,"")
 
@@ -213,7 +213,7 @@ class ViewPictureActivity: AppCompatActivity(){
                     //https://muxixyz-1258093397.cos-website.ap-chengdu.myqcloud.com/1548034613601.jpeg
 
                     val feedBody = FeedBody(classId = classid.toInt()
-                ,teacherId = teacherId.toInt()
+                ,teacherId = teacherId
                 , type = mTag, content = mContent!!, picture_urls = it)
 
             NetFactory.retrofitService

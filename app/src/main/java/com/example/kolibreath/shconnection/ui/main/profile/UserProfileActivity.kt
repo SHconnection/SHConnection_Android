@@ -76,7 +76,7 @@ class UserProfileActivity : ToolbarActivity(){
         //从这个页面跳转到修改信息的页面
         fun start(context: Context,person: Person){
             context.startActivity(Intent(context,UserProfileActivity::class.java).apply {
-                putExtra("editable",true)
+                putExtra("editable",false)
                 putExtra("person_info",person)
             })
         }

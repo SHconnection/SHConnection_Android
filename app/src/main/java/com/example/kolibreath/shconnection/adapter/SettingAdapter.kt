@@ -20,6 +20,14 @@ class SettingAdapter(val list: List<String>): RecyclerView.Adapter<SettingAdapte
 
     override fun onBindViewHolder(holder: SettingViewHolder, position: Int) {
         holder.tvSettingItem.text = list[position]
+        when(position){
+            0 ->{
+                //todo 退出登录
+            }
+            1 ->{
+                //todo 切换班级
+            }
+        }
     }
 
     class SettingViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){

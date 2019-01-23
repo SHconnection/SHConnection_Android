@@ -20,6 +20,7 @@ import org.jetbrains.anko.support.v4.find
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
+import java.util.*
 
 /**
  * 评价fragment
@@ -28,8 +29,8 @@ class CommentFragment: BaseFragment() , View.OnClickListener {
 
     lateinit var elv: ExpandableListView
     lateinit var mAdapter: AddressAdapter
-    lateinit var mList: MutableList<String>
-    lateinit var mComment: MutableList<MutableList<Person>>
+    var mList: MutableList<String>  = LinkedList<String>()
+    var mComment: MutableList<MutableList<Person>> = LinkedList()
 //    lateinit var
 
     override fun getLayoutResources(): Int {

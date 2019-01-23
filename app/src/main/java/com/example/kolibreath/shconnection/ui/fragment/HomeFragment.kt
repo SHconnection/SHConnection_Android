@@ -18,14 +18,17 @@ import android.view.View
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.adapter.HomeAdapter
 import com.example.kolibreath.shconnection.base.Feed
+import com.example.kolibreath.shconnection.base.FeedX
 import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.base.ui.BaseFragment
 import com.example.kolibreath.shconnection.extensions.getValue
 import com.example.kolibreath.shconnection.ui.ViewPictureActivity
 import org.jetbrains.anko.support.v4.find
+import org.jetbrains.anko.timePicker
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
+import java.util.*
 
 /**
  * 家校圈主页
@@ -35,12 +38,11 @@ import rx.schedulers.Schedulers
 class HomeFragment: BaseFragment(), SwipeRefreshLayout.OnRefreshListener{
 
     lateinit var mHomeAdapter: HomeAdapter
-    lateinit var mList :List<Feed>
     lateinit var recyclerView: RecyclerView
     lateinit var button: FloatingActionButton
-//    lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
+    lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
     lateinit var mFeedBean: Feed
-
+    var mList: LinkedList<FeedX> = LinkedList()
     var pagenum = 1
 
 
@@ -54,12 +56,12 @@ class HomeFragment: BaseFragment(), SwipeRefreshLayout.OnRefreshListener{
         button = find(R.id.share_btn) as FloatingActionButton
 
         //设置swipeRefreshLayout相关属性
-//        mSwipeRefreshLayout = find(R.id.srl_news) as SwipeRefreshLayout
-//        mSwipeRefreshLayout.setColorSchemeColors(Color.BLUE,Color.GREEN,Color.RED)
-//        mSwipeRefreshLayout.setDistanceToTriggerSync(300)
-//        mSwipeRefreshLayout.setProgressBackgroundColorSchemeColor(Color.WHITE)
-//        mSwipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE)
-//        mSwipeRefreshLayout.setOnRefreshListener(this@HomeFragment)
+        mSwipeRefreshLayout = find(R.id.srl_news) as SwipeRefreshLayout
+        mSwipeRefreshLayout.setColorSchemeColors(Color.BLUE,Color.GREEN,Color.RED)
+        mSwipeRefreshLayout.setDistanceToTriggerSync(300)
+        mSwipeRefreshLayout.setProgressBackgroundColorSchemeColor(Color.WHITE)
+        mSwipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE)
+        mSwipeRefreshLayout.setOnRefreshListener(this@HomeFragment)
 
         when(USER_TYPE){
             USER_PARENT.toString() ->  button.visibility = View.GONE
@@ -75,8 +77,7 @@ class HomeFragment: BaseFragment(), SwipeRefreshLayout.OnRefreshListener{
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Subscriber<Feed>() {
-                    override fun onCompleted() {
-                    }
+                    override fun onCompleted() {mSwipeRefreshLayout.isRefreshing = false}
 
                     override fun onError(e: Throwable?) {
                         e?.printStackTrace()
@@ -85,7 +86,11 @@ class HomeFragment: BaseFragment(), SwipeRefreshLayout.OnRefreshListener{
                     override fun onNext(t: Feed?) {
                         Log.d("fuck","已经加载了！")
                         mFeedBean = t!!
-                        mHomeAdapter = HomeAdapter(mFeedBean)
+                        val curlist = LinkedList(mFeedBean.feeds).reversed()
+                        for(item in curlist)
+                            mList.addFirst(item)
+
+                        mHomeAdapter = HomeAdapter(mList)
                         recyclerView.adapter = mHomeAdapter
                         recyclerView.layoutManager = LinearLayoutManager(activity)
 
@@ -100,7 +105,7 @@ class HomeFragment: BaseFragment(), SwipeRefreshLayout.OnRefreshListener{
     }
 
     override fun onRefresh() {
-       initData()
+        initData()
         pagenum++
     }
 }

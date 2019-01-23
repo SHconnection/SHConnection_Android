@@ -6,8 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
@@ -22,12 +20,10 @@ import com.example.kolibreath.shconnection.extensions.replaceFragment
 import com.example.kolibreath.shconnection.ui.main.fragment.AddressFragment
 import com.example.kolibreath.shconnection.ui.main.fragment.CommentFragment
 import com.example.kolibreath.shconnection.ui.main.fragment.HomeFragment
-import com.example.kolibreath.shconnection.ui.main.news.ViewPictureActivity
 import com.example.kolibreath.shconnection.ui.main.profile.UserProfileActivity
 import java.util.*
 
 class MainActivity : AppCompatActivity(), BottomNavigationBar.OnTabSelectedListener {
-    private var mFab: FloatingActionButton? = null
     private var mBtmBar: BottomNavigationBar? = null
     private var mViewPager: ViewPager? = null
     private var mAdapter: FragmentAdapter? = null
@@ -44,7 +40,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationBar.OnTabSelectedListe
 
     private fun initView() {
 
-        mFab = findViewById(R.id.fab)
         mBtmBar = findViewById(R.id.bottom_navigation_bar)
         mViewPager = findViewById(R.id.viewpager)
 
@@ -56,8 +51,10 @@ class MainActivity : AppCompatActivity(), BottomNavigationBar.OnTabSelectedListe
         mBtmBar!!.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_RIPPLE)
         //todo to change the main color of it
         mBtmBar!!.backgroundColor = Color.BLACK
-        mBtmBar!!.addItem(mItemList[0]).addItem(mItemList[1]).addItem(mItemList[2])
-                .setFirstSelectedPosition(1)
+        mBtmBar!!.addItem(mItemList[0])
+                .addItem(mItemList[1])
+                .addItem(mItemList[2])
+                .setFirstSelectedPosition(0)
                 .initialise()
 
 
@@ -88,7 +85,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationBar.OnTabSelectedListe
             UserProfileActivity.start(this@MainActivity, getValue(ID,-1), getValue(USER_TYPE,-1))
         }
 
-        mFab!!.setOnClickListener { ViewPictureActivity.start(this@MainActivity) }
     }
 
     //todo set it for the new navigation item
@@ -127,10 +123,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationBar.OnTabSelectedListe
         val commentFragment = CommentFragment()
         val manager = supportFragmentManager
         mAdapter = FragmentAdapter(manager)
+
         mFragments.add(addressFragment)
         mFragments.add(homeFragment)
         mFragments.add(commentFragment)
         mAdapter!!.addFragment(mFragments)
+
         mViewPager!!.adapter = mAdapter
     }
 

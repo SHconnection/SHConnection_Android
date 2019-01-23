@@ -15,7 +15,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import com.example.kolibreath.shconnection.R
-import com.example.kolibreath.shconnection.base.Feed
+import com.example.kolibreath.shconnection.base.FeedX
 import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.extensions.getValue
 import com.example.kolibreath.shconnection.extensions.showSnackBarShort
@@ -26,14 +26,12 @@ import org.jetbrains.anko.layoutInflater
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
-import java.text.SimpleDateFormat
 
 /**
  * feed流
  */
-class HomeAdapter(val feed: Feed): RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
+class HomeAdapter(val list: List<FeedX>): RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
-    val list = feed.feeds
     lateinit var context: Context
     lateinit var inflater: LayoutInflater
 

@@ -32,7 +32,6 @@ import com.example.kolibreath.shconnection.ui.main.MainActivity
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.entity.LocalMedia
-import com.luck.picture.lib.rxbus2.Subscribe
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -212,9 +211,7 @@ class ViewPictureActivity: AppCompatActivity(){
                     //要变成这样的url
                     //https://muxixyz-1258093397.cos-website.ap-chengdu.myqcloud.com/1548034613601.jpeg
 
-                    val feedBody = FeedBody(classId = classid.toInt()
-                ,teacherId = teacherId
-                , type = mTag, content = mContent!!, picture_urls = it)
+                    val feedBody = FeedBody(class_id = classid.toInt(), type = mTag, content = mContent!!, picture_urls = it)
 
             NetFactory.retrofitService
                 .postFeed(token = token, feedBody = feedBody  )

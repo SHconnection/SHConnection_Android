@@ -58,11 +58,6 @@ interface RetrofitService{
    */
   @POST("init/class/")
   fun teacherCreateClass(@Body teacherCreateClassBody: TeacherCreateClassBody):Observable<CreatedClassId>
-  /**
-   * 上传图片
-   */
-  @POST()
-  fun login():Observable<Any>
 
 
   /**
@@ -71,7 +66,8 @@ interface RetrofitService{
 
   @GET("feeds/{pagenum}/class/{class_id}/")
   fun feed(@Path("pagenum") pagenum: Int,
-           @Path("class_id") classId: String):Observable<Feed>
+           @Path("class_id") class_id: String,
+           @Header("token") token:String):Observable<Feed>
   /**
    * 阅读某个feed
    */
@@ -79,12 +75,6 @@ interface RetrofitService{
   fun feedRead(@Path("feedid")feedId: Int,
                @Header("token") token:String):Observable<Any>
 
-  /**
-   * 喜欢某个feed
-   */
-  @POST("feed/{feedid}/like/")
-  fun feedLike(@Path("feedid")feedId: Int,
-               @Header("token") token:String):Observable<Any>
 
   /**
    * 发送评论

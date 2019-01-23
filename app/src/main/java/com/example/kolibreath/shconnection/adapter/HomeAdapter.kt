@@ -6,7 +6,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -14,7 +13,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.base.Feed
@@ -59,9 +57,11 @@ class HomeAdapter(val feed: Feed): RecyclerView.Adapter<HomeAdapter.HomeViewHold
 
         holder.tvName.text = list[position].teacherSimpleInfo.name
         holder.tvType.text = list[position].type
-        val newsTime = SimpleDateFormat("YYYYMMDDHHMM").format(list[position].time)
-        holder.tvNewtime.text = newsTime
+        //todo make this data correct
+//        val newsTime = SimpleDateFormat("YYYYMMDDHHMM").format(list[position].time)
+//        holder.tvNewtime.text = newsTime
 
+        holder.tvNews.text = list[position].content
         //评论的相关list
         val commentList = list[position].comments
         val commentAdapter = HomeCommentsAdapter(commentList)
@@ -122,7 +122,6 @@ class HomeAdapter(val feed: Feed): RecyclerView.Adapter<HomeAdapter.HomeViewHold
         val ivAvatar: CircleImageView  =   itemView.findViewById(R.id.iv_news_avatar)
         val tvName: TextView          =   itemView.findViewById(R.id.tv_news_name)
         val tvType: TextView          =   itemView.findViewById(R.id.tv_news_type)
-        val tvComment: TextView       =   itemView.findViewById(R.id.tv_comment)
         val btnUnread: Button       =   itemView.findViewById(R.id.btn_news_unread)
         val tvNewtime:TextView     = itemView.findViewById(R.id.tv_new_time)
         val tvNews:TextView = itemView.findViewById(R.id.tv_news)

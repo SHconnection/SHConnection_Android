@@ -1,6 +1,5 @@
 package com.example.kolibreath.shconnection.base
 
-import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 /**
@@ -224,64 +223,12 @@ class CreatedClassId(){
 /**
  * 发送一个新的feed
  */
-class FeedBody  (
-    /**
-     * classId : 0
-     * teacherId : 0
-     * tvType : string
-     * content : string
-     * picture_urls : ["string"]
-     */
-  private var classId: Int,
-  private var teacherId: Int,
-  type: String,
-  content: String,
-  picture_urls: List<String>
-) {
-  private var type: String? = type
-  private var content: String? = content
-  private var picture_urls: List<String>? = picture_urls
-
-  fun getClassId(): Int {
-    return classId
-  }
-
-  fun setClassId(classId: Int) {
-    this.classId = classId
-  }
-
-  fun getTeacherId(): Int {
-    return teacherId
-  }
-
-  fun setTeacherId(teacherId: Int) {
-    this.teacherId = teacherId
-  }
-
-  fun getType(): String? {
-    return type
-  }
-
-  fun setType(type: String) {
-    this.type = type
-  }
-
-  fun getContent(): String? {
-    return content
-  }
-
-  fun setContent(content: String) {
-    this.content = content
-  }
-
-  fun getPicture_urls(): List<String>? {
-    return picture_urls
-  }
-
-  fun setPicture_urls(picture_urls: List<String>) {
-    this.picture_urls = picture_urls
-  }
-}
+data class FeedBody(
+    val class_id: Int,
+    val content: String,
+    val picture_urls: List<String>,
+    val type: String
+)
 
 
 data class MainTeacherSignUpBody(val wid:String,
@@ -304,7 +251,7 @@ data class FeedX(
     val read_status: String,
     val readed: Boolean,
     val teacherSimpleInfo: TeacherSimpleInfo,
-    val time: Int,
+    val time: String,
     val type: String
 )
 

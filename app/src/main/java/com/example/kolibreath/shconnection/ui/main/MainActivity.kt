@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
@@ -17,6 +18,7 @@ import com.ashokvarma.bottomnavigation.TextBadgeItem
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.adapter.FragmentAdapter
 import com.example.kolibreath.shconnection.extensions.getValue
+import com.example.kolibreath.shconnection.extensions.replaceFragment
 import com.example.kolibreath.shconnection.ui.main.fragment.AddressFragment
 import com.example.kolibreath.shconnection.ui.main.fragment.CommentFragment
 import com.example.kolibreath.shconnection.ui.main.fragment.HomeFragment
@@ -57,36 +59,29 @@ class MainActivity : AppCompatActivity(), BottomNavigationBar.OnTabSelectedListe
         mBtmBar!!.addItem(mItemList[0]).addItem(mItemList[1]).addItem(mItemList[2])
                 .setFirstSelectedPosition(1)
                 .initialise()
-        //todo 这个需要作为页面切换
-        //    mBtmBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
-        //      @Override
-        //      public void onTabSelected(int position) {
-        //        switch (position){
-        //          case 0:
-        //            index = 0;
-        //            replaceFragment(MainActivity.this,mFragments.get(index),R.id.viewpager);
-        //            break;
-        //          case 1:
-        //            index = 1;
-        //            replaceFragment(MainActivity.this,mFragments.get(index),R.id.viewpager);
-        //            break;
-        //          case 2:
-        //            index = 2;
-        //            replaceFragment(MainActivity.this,mFragments.get(index),R.id.viewpager);
-        //
-        //        }
-        //      }
-        //
-        //      @Override
-        //      public void onTabUnselected(int position) {
-        //
-        //      }
-        //
-        //      @Override
-        //      public void onTabReselected(int position) {
-        //
-        //      }
-        //    });
+
+
+        mBtmBar!!.setTabSelectedListener(object : BottomNavigationBar.OnTabSelectedListener{
+            override fun onTabReselected(position: Int) {
+                when(position){
+                    0 ->{
+                        index = 0;
+                        replaceFragment(mFragments[index],R.id.viewpager);
+                    }
+                    1 ->{
+                        index = 1
+                        replaceFragment(mFragments[index],R.id.viewpager);
+                    }
+                    2 ->{
+                        index = 2
+                        replaceFragment(mFragments[index],R.id.viewpager);
+                    }
+                }
+            }
+
+            override fun onTabUnselected(position: Int) {}
+            override fun onTabSelected(position: Int) {}
+        })
 
         val mBtnProfile = findViewById<ImageView>(R.id.btn_profile)
         mBtnProfile.setOnClickListener {
@@ -141,7 +136,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationBar.OnTabSelectedListe
 
     companion object {
 
-        private val index: Int = 0
+        private var index: Int = 0
 
         fun start(context: Context) {
             context.startActivity(Intent(context, MainActivity::class.java))

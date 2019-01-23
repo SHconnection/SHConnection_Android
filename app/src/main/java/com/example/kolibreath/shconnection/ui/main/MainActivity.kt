@@ -59,7 +59,9 @@ class MainActivity : AppCompatActivity(), BottomNavigationBar.OnTabSelectedListe
 
 
         mBtmBar!!.setTabSelectedListener(object : BottomNavigationBar.OnTabSelectedListener{
-            override fun onTabReselected(position: Int) {
+            override fun onTabReselected(position: Int) {}
+            override fun onTabUnselected(position: Int) {}
+            override fun onTabSelected(position: Int) {
                 when(position){
                     0 ->{
                         index = 0;
@@ -75,9 +77,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationBar.OnTabSelectedListe
                     }
                 }
             }
-
-            override fun onTabUnselected(position: Int) {}
-            override fun onTabSelected(position: Int) {}
         })
 
         val mBtnProfile = findViewById<ImageView>(R.id.btn_profile)

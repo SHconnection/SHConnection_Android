@@ -82,7 +82,7 @@ interface RetrofitService{
   @POST("feed/{feedid}/comment/")
   fun feedComment(@Path("feedid")feedId: Int,
                   @Header("token")token: String,
-                  @Body content: String):Observable<Any>
+                  @Body content: HomeComment):Observable<Any>
 
   /**
    * 获取某个老师对某个孩子的评价

@@ -22,9 +22,8 @@ import com.example.kolibreath.shconnection.base.FeedX
 import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.base.ui.BaseFragment
 import com.example.kolibreath.shconnection.extensions.getValue
-import com.example.kolibreath.shconnection.ui.ViewPictureActivity
+import com.example.kolibreath.shconnection.ui.main.news.ViewPictureActivity
 import org.jetbrains.anko.support.v4.find
-import org.jetbrains.anko.timePicker
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -54,6 +53,10 @@ class HomeFragment: BaseFragment(), SwipeRefreshLayout.OnRefreshListener{
     override fun initView() {
         recyclerView = find(R.id.rv_news) as RecyclerView
         button = find(R.id.share_btn) as FloatingActionButton
+
+        button.setOnClickListener {
+            ViewPictureActivity.start(activity!!)
+        }
 
         //设置swipeRefreshLayout相关属性
         mSwipeRefreshLayout = find(R.id.srl_news) as SwipeRefreshLayout

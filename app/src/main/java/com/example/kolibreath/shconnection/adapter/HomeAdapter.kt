@@ -13,9 +13,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.base.FeedX
+import com.example.kolibreath.shconnection.base.HomeComment
 import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.extensions.getValue
 import com.example.kolibreath.shconnection.extensions.showSnackBarShort
@@ -87,11 +89,16 @@ class HomeAdapter(val list: List<FeedX>): RecyclerView.Adapter<HomeAdapter.HomeV
                 })
 
         holder.btnComment.setOnClickListener {
+            val contentView = context.layoutInflater.inflate(R.layout.view_home_comment_dialog, null, false)
+            val editTextView = contentView.findViewById<EditText>(R.id.edt_new_comment)
             AlertDialog.Builder(context).apply {
                     setTitle("编写新的评论")
-                    .setView(context.layoutInflater.inflate(R.layout.view_home_comment_dialog, null, false))
-                    .setPositiveButton("确定发送") { dialog, which ->
-                        NetFactory.retrofitService.feedComment(feedId = position, token = getValue(LOGIN_TOKEN,""), content = "content")
+                    .setView(contentView)
+                    .setPositiveButton("确定发送") { _, _ ->
+                        NetFactory.retrofitService.feedComment(
+                                feedId = list[position].id,
+                                token = getValue(LOGIN_TOKEN,""),
+                                content = HomeComment(content = editTextView.text.toString()))
 
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())

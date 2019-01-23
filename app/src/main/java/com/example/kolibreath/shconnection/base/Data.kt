@@ -279,3 +279,11 @@ data class Comment(
     val title: String,
     val wechat: String
 ):Serializable
+
+
+/**
+ * 动态评论
+ */
+data class HomeComment(
+    val content: String
+)

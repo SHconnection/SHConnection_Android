@@ -34,15 +34,13 @@ class MainActivity : AppCompatActivity(), BottomNavigationBar.OnTabSelectedListe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        initView()
         initFragment()
+        initView()
     }
 
     private fun initView() {
 
         mBtmBar = findViewById(R.id.bottom_navigation_bar)
-        mViewPager = findViewById(R.id.viewpager)
-
         mBtmBar!!.setTabSelectedListener(this)
 
         initBottomNavigationItem()
@@ -57,28 +55,29 @@ class MainActivity : AppCompatActivity(), BottomNavigationBar.OnTabSelectedListe
                 .setFirstSelectedPosition(0)
                 .initialise()
 
-
-        mBtmBar!!.setTabSelectedListener(object : BottomNavigationBar.OnTabSelectedListener{
-            override fun onTabReselected(position: Int) {
-                when(position){
-                    0 ->{
-                        index = 0;
-                        replaceFragment(mFragments[index],R.id.viewpager);
-                    }
-                    1 ->{
-                        index = 1
-                        replaceFragment(mFragments[index],R.id.viewpager);
-                    }
-                    2 ->{
-                        index = 2
-                        replaceFragment(mFragments[index],R.id.viewpager);
-                    }
-                }
-            }
-
-            override fun onTabUnselected(position: Int) {}
-            override fun onTabSelected(position: Int) {}
-        })
+//        mBtmBar!!.setTabSelectedListener(object : BottomNavigationBar.OnTabSelectedListener{
+//            override fun onTabReselected(position: Int) {
+////                when(position){
+//////                    0 ->{
+//////                        index = 0;
+//////                        replaceFragment(mFragments[index],R.id.viewpager)
+//////                    }
+//////                    1 ->{
+//////                        index = 1
+//////                        replaceFragment(mFragments[index],R.id.viewpager)
+//////                    }
+//////                    2 ->{
+//////                        index = 2
+//////                        replaceFragment(mFragments[index],R.id.viewpager)
+//////                    }
+//////                }
+//            }
+//
+//            override fun onTabUnselected(position: Int) {}
+//            override fun onTabSelected(position: Int) {
+//
+//            }
+//        })
 
         val mBtnProfile = findViewById<ImageView>(R.id.btn_profile)
         mBtnProfile.setOnClickListener {
@@ -106,7 +105,20 @@ class MainActivity : AppCompatActivity(), BottomNavigationBar.OnTabSelectedListe
     }
 
     override fun onTabSelected(position: Int) {
-
+        when(position){
+            0 ->{
+                index = 0
+                replaceFragment(mFragments[index],R.id.viewpager)
+            }
+            1 ->{
+                index = 1
+                replaceFragment(mFragments[index],R.id.viewpager)
+            }
+            2 ->{
+                index = 2
+                replaceFragment(mFragments[index],R.id.viewpager)
+            }
+        }
     }
 
     override fun onTabUnselected(position: Int) {
@@ -118,6 +130,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationBar.OnTabSelectedListe
     }
 
     private fun initFragment() {
+        mViewPager = findViewById(R.id.viewpager)
         val addressFragment = AddressFragment()
         val homeFragment = HomeFragment()
         val commentFragment = CommentFragment()

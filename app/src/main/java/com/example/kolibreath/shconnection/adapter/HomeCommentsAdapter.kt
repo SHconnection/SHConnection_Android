@@ -18,7 +18,7 @@ class HomeCommentsAdapter(val list : List<Comment>) :RecyclerView.Adapter<HomeCo
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): HomeCommentViewHolder {
         context = parent.context
         inflater = context.layoutInflater
-        return HomeCommentViewHolder(inflater.inflate(R.layout.item_comment,parent,false))
+        return HomeCommentViewHolder(inflater.inflate(R.layout.item_home_comment,parent,false))
     }
 
     override fun onBindViewHolder(holder: HomeCommentViewHolder, position: Int) {

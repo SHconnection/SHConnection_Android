@@ -20,7 +20,6 @@
 
     <activity android:name=".base.ui.ToolbarActivity"/>
     <activity android:name=".base.ui.BaseActivity"/>
-    <activity android:name=".ui.ShareActivity"/>
     <!--auth-->
 
       <activity android:name=".ui.scan.ScanActivity"/>
@@ -39,11 +38,12 @@
     </activity>
 
     <activity
-        android:name=".ui.ParentsCommentActivity"/>
+        android:name=".ui.SendCommentActivity"/>
 
     <activity android:name=".ui.main.MainActivity"/>
   <activity android:name=".ui.main.profile.UserProfileActivity"/>
   <activity android:name=".ui.auth.TeacherCreateAccountActivity"/>
+      <activity android:name=".ui.CommentActivity"/>
 
   <!--解决7.0照相机崩溃问题-->
   <provider

@@ -1,5 +1,7 @@
 package com.example.kolibreath.shconnection.adapter
 
+import ID
+import USER_TYPE
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +9,9 @@ import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
 import android.widget.TextView
 import com.example.kolibreath.shconnection.R
-import com.example.kolibreath.shconnection.base.Person
+import com.example.kolibreath.shconnection.base.People
+import org.jetbrains.anko.layoutInflater
+
 
 /**
  * 班级通讯录elvAdapter
@@ -16,13 +20,14 @@ class AddressAdapter: BaseExpandableListAdapter {
 
     var context: Context? = null
     var group: List<String>? = null
-    var child: List<List<Person>>? = null
+    var child: List<List<People>>? = null
     var inflater: LayoutInflater? = null
 
-    constructor(context: Context, parent: List<String>,child: List<List<Person>>){
+    constructor(context: Context, parent: List<String>,child: List<List<People>>){
         this.child = child
         this.group = parent
         this.context = context
+        this.inflater = context.layoutInflater
     }
 
     override fun getGroupCount(): Int {
@@ -30,11 +35,11 @@ class AddressAdapter: BaseExpandableListAdapter {
     }
 
     override fun getChildrenCount(groupPosition: Int): Int {
-        return group!![groupPosition].length
+        return child!![groupPosition].size
     }
 
     override fun getChild(groupPosition: Int, childPosition: Int): Any {
-        return group!![groupPosition][childPosition]
+        return child!![groupPosition][childPosition]
     }
 
     override fun getChildId(groupPosition: Int, childPosition: Int): Long {
@@ -51,30 +56,31 @@ class AddressAdapter: BaseExpandableListAdapter {
 
     override fun getGroupView(groupPosition: Int, isExpanded: Boolean, convertView: View?, parent: ViewGroup?): View {
         var convertView = convertView
+        var groupHolder: GroupHolder
         if (convertView == null) {
-            val inflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            convertView = inflater.inflate(R.layout.item_address_group, parent, false)
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_address_group, parent, false)
+            groupHolder = GroupHolder(convertView)
+            groupHolder.textView = convertView.findViewById(R.id.tv_address_group) as TextView
+            convertView.tag = groupHolder
+        } else {
+            groupHolder = convertView.tag as GroupHolder
         }
-        val group = convertView?.findViewById<TextView>(R.id.tv_address_group)
-        (convertView as TextView).text = getGroup(groupPosition) as String
-
-        return convertView
-
+        groupHolder.textView.text = group!![groupPosition]
+        return convertView as View
     }
 
     override fun getChildView(groupPosition: Int, childPosition: Int, isLastChild: Boolean, convertView: View?, parent: ViewGroup?): View {
         var convertView = convertView
+        var childHolder :ChildHolder
         if (convertView == null){
-            val inflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            convertView = inflater.inflate(R.layout.item_address_child,parent,false)
-
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_address_child,parent,false)
+            childHolder = ChildHolder(convertView)
+            childHolder.textView = convertView.findViewById(R.id.tv_address_child_name) as TextView
+            convertView.tag = childHolder
+        }else{
+            childHolder = convertView.tag as ChildHolder
         }
-        val name = convertView?.findViewById<TextView>(R.id.tv_address_child_name)
-        name?.text = child?.get(groupPosition)?.get(childPosition)?.name
-//        tvName?.setOnClickListener {
-//            val intent = Intent()
-//            intent.setClass(convertView?.context,UserProfile::class.java)
-//        }
+        childHolder.textView.text = child!![groupPosition][childPosition].name
         return convertView as View
     }
 
@@ -84,6 +90,13 @@ class AddressAdapter: BaseExpandableListAdapter {
 
     override fun isChildSelectable(groupPosition: Int, childPosition: Int): Boolean {
         return true
+    }
+
+    class GroupHolder(convertView: View?){
+         var textView: TextView = convertView!!.findViewById(R.id.tv_address_group)
+    }
+    class ChildHolder(convertView: View?){
+        var textView: TextView = convertView!!.findViewById(R.id.tv_address_child_name)
     }
 
 }

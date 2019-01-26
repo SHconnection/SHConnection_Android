@@ -279,3 +279,44 @@ data class Comment(
     val title: String,
     val wechat: String
 ):Serializable
+
+/**
+ * 评价列表
+ */
+data class CommentList(
+        val detail: String,
+        val name: String,
+        val scores: List<Score>,
+        val time: String
+)
+
+data class Score(
+        val key: String,
+        val score: Int
+)
+
+/**
+ * 发送评价body
+ */
+data class CommentBody(
+        val comment: String,
+        val score: List<Score>
+)
+
+/**
+ * 返回班级通讯录
+ */
+data class ClassAddress(
+    val parent: List<People>,
+    val teacher: List<People>
+)
+
+data class People(
+    val avatar: String,
+    val intro: Any,
+    val name: String,
+    val subjects: String,
+    val tel: Any,
+    val title: String,
+    val wechat: Any
+)

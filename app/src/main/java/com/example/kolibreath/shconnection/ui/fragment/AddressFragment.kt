@@ -1,13 +1,13 @@
 package com.example.kolibreath.shconnection.ui.main.fragment
 
+
 import CLASS_ID
 import LOGIN_TOKEN
-import android.content.Intent
 import android.widget.ExpandableListView
 import com.example.kolibreath.shconnection.R
 import com.example.kolibreath.shconnection.adapter.AddressAdapter
-import com.example.kolibreath.shconnection.base.AddressBean
-import com.example.kolibreath.shconnection.base.Person
+import com.example.kolibreath.shconnection.base.ClassAddress
+import com.example.kolibreath.shconnection.base.People
 import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.base.ui.BaseFragment
 import com.example.kolibreath.shconnection.extensions.getValue
@@ -23,44 +23,35 @@ import rx.schedulers.Schedulers
 class AddressFragment: BaseFragment(){
 
     var mList = ArrayList<String>()
-    var mAddress : MutableList<List<Person>> = ArrayList()
+    var mAddress : MutableList<List<People>> = ArrayList()
     var mAdapter : AddressAdapter? = null
     var elv: ExpandableListView? = null
-    lateinit var mAddressBean: AddressBean
-    var click:  Int = -1
+    lateinit var mAddressBean: ClassAddress
 
     override fun getLayoutResources(): Int {
         return R.layout.fragment_address
     }
 
     override fun initView() {
-        elv = find(R.id.elv_address)
-
+        elv = find(R.id.elv_address) as ExpandableListView
         initData()
-
-
     }
 
     override fun initData(){
-        NetFactory.retrofitService.classAddress(token = getValue(LOGIN_TOKEN,""),cid = getValue(CLASS_ID,""))
+        mList.clear()
+        mAddress.clear()
+        mList.add("家长")
+        mList.add("老师")
+        NetFactory.retrofitService.classAddress(token = getValue(LOGIN_TOKEN,""),cid = getValue(CLASS_ID,"").toInt())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : Subscriber<AddressBean>() {
-                    override fun onNext(t: AddressBean?) {
+                .subscribe(object : Subscriber<ClassAddress>() {
+                    override fun onNext(t: ClassAddress?) {
                         mAddressBean = t!!
-                        mList.add("老师")
-                        mList.add("家长")
-                        mAddress.add(mAddressBean.getTeacher()!!)
-                        mAddress.add(mAddressBean.getParent()!!)
+                        mAddress.add(mAddressBean.parent)
+                        mAddress.add(mAddressBean.teacher)
                         mAdapter = AddressAdapter(context!!, mList, mAddress)
-                        val intent = Intent()
-                        elv?.setOnGroupClickListener { parent, v, groupPosition, id ->
-                            TODO("Group点击事件，点击一个Group隐藏其他的(只显示一个)")
-                        }
-//        子项点击事件
-                        elv?.setOnChildClickListener { parent, v, groupPosition, childPosition, id ->
-                            TODO("点击进入UserProfile")
-                        }
+                        elv!!.setAdapter(mAdapter)
 
                     }
                     override fun onCompleted() { }

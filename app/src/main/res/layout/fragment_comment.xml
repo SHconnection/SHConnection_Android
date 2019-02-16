@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:focusableInTouchMode="false">
 
     <EditText
         android:id="@+id/et_search"
@@ -17,21 +17,23 @@
         android:layout_height="48dp"
         android:layout_margin="8dp"
         android:paddingLeft="64dp"
-        android:paddingRight="64dp"/>
+        android:paddingRight="64dp" />
 
-    <ImageView
-        android:src="@drawable/search"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"/>
-
-    <ExpandableListView
-        android:id="@+id/elv_comment"
-        android:layout_below="@+id/et_search"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/eval_rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ExpandableListView>
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:layout_below="@id/et_search">
 
+    </android.support.v7.widget.RecyclerView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/send_comment_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/add"
+        />
 </RelativeLayout>

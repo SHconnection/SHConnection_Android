@@ -4,76 +4,87 @@ import LOGIN_TOKEN
 import USER_PARENT
 import USER_TEACHER
 import USER_TYPE
-import android.support.v4.widget.SwipeRefreshLayout
+import android.support.design.widget.FloatingActionButton
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.ExpandableListView
 import com.example.kolibreath.shconnection.R
-import com.example.kolibreath.shconnection.adapter.AddressAdapter
-import com.example.kolibreath.shconnection.adapter.CommentsAdapter
-import com.example.kolibreath.shconnection.base.AddressBean
-import com.example.kolibreath.shconnection.base.ParentList
-import com.example.kolibreath.shconnection.base.Person
-import com.example.kolibreath.shconnection.base.TeacherList
+import com.example.kolibreath.shconnection.adapter.CommentAdapter
+import com.example.kolibreath.shconnection.base.CommentList
 import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.base.ui.BaseFragment
+import com.example.kolibreath.shconnection.extensions.getValue
+import com.example.kolibreath.shconnection.ui.SendCommentActivity
+import okhttp3.logging.HttpLoggingInterceptor
 import org.jetbrains.anko.support.v4.find
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
-import java.util.*
+import java.util.logging.Logger
 
 /**
  * 评价fragment
  */
 class CommentFragment: BaseFragment() , View.OnClickListener {
 
-    lateinit var elv: ExpandableListView
-    lateinit var mAdapter: AddressAdapter
-    var mList: MutableList<String>  = LinkedList<String>()
-    var mComment: MutableList<MutableList<Person>> = LinkedList()
-//    lateinit var
+    lateinit var recyclerView: RecyclerView
+    lateinit var mAdapter: CommentAdapter
+    lateinit var mButton:FloatingActionButton
 
     override fun getLayoutResources(): Int {
         return R.layout.fragment_comment
     }
 
     override fun initView() {
-        elv = find(R.id.elv_comment) as ExpandableListView
 
+        recyclerView = find(R.id.eval_rv) as RecyclerView
+        mButton = find(R.id.send_comment_btn) as FloatingActionButton
+        recyclerView.layoutManager = LinearLayoutManager(context)
         initData()
-        mAdapter = AddressAdapter(context!!,mList,mComment)
+        mButton.setOnClickListener(this)
     }
 
-    override fun initData(){
-        when (USER_TYPE){
-            USER_PARENT.toString() ->
-                NetFactory.retrofitService.parentList(token = LOGIN_TOKEN)
+    override fun initData() {
+        when(getValue(USER_TYPE,-1)){
+            USER_TEACHER ->
+                NetFactory.retrofitService.teacherList(token = getValue(LOGIN_TOKEN,""))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(object : Subscriber<ParentList>() {
-                            override fun onNext(t: ParentList?) {
-
+                        .subscribe(object : Subscriber<List<CommentList>>() {
+                            override fun onNext(t: List<CommentList>?) {
+                                mAdapter = CommentAdapter(t!!)
+                                recyclerView.adapter = mAdapter
                             }
-                            override fun onCompleted() { }
-                            override fun onError(e: Throwable?) { e?.printStackTrace() }
+                            override fun onCompleted() {}
+                            override fun onError(e: Throwable?) {
+                                e?.printStackTrace()
+                            }
                         })
-            USER_TEACHER.toString() ->
-                NetFactory.retrofitService.teacherList(token = LOGIN_TOKEN)
+            USER_PARENT ->
+                NetFactory.retrofitService.parentList(token = getValue(LOGIN_TOKEN,""))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(object : Subscriber<TeacherList>() {
-                            override fun onNext(t: TeacherList?) {
+                        .subscribe(object : Subscriber<List<CommentList>>() {
+                            override fun onNext(t: List<CommentList>?) {
+                                mAdapter = CommentAdapter(t!!)
 
                             }
-                            override fun onCompleted() { }
-                            override fun onError(e: Throwable?) { e?.printStackTrace() }
+
+                            override fun onCompleted() {}
+                            override fun onError(e: Throwable?) {
+                                e?.printStackTrace()
+                            }
                         })
+
         }
 
     }
 
     override fun onClick(v: View?) {
-
+        when(v?.id){
+            R.id.send_comment_btn ->
+                SendCommentActivity.newIntent(context!!)
+        }
 
     }
 

@@ -2,6 +2,7 @@ package com.example.kolibreath.shconnection.base.net
 
 
 import com.example.kolibreath.shconnection.base.*
+import okhttp3.ResponseBody
 import retrofit2.http.*
 
 import rx.Observable
@@ -84,75 +85,6 @@ interface RetrofitService{
                   @Header("token")token: String,
                   @Body content: HomeComment):Observable<Any>
 
-  /**
-   * 获取某个老师对某个孩子的评价
-   */
-  @GET("evaluation/teacher/all/")
-  fun teacherPerComment(@Header("token")token: String):Observable<ScoreComment>
-
-
-  /**
-   * 获取家长对孩子的评价
-   */
-  @GET("evaluation/parent/all/")
-  fun parentPerComment(@Header("token")token: String):Observable<ScoreComment>
-
-  /**
-   * 老师端孩子评论list
-   */
-  @GET("evaluation/teacher/view/")
-  fun teacherList(@Header("token")token: String):Observable<TeacherList>
-
-  /**
-   * 家长端评论list
-   */
-  @GET("evaluation/parent/view/")
-  fun parentList(@Header("token")token: String):Observable<ParentList>
-
-  /**
-   * 老师发送孩子评价
-   */
-  @POST("evaluation/teacher/")
-  fun teacherComment(@Body commentBody: CommentBody,
-                     @Header("token")token: String):Observable<Any>
-
-
-  /**
-   * 家长发送孩子评价
-   */
-  @POST("evaluation/parent/")
-  fun parentComment(@Body commentBody: CommentBody,
-                    @Header("token")token: String):Observable<Any>
-
-  /**
-   * 老师端 某个老师所发的所有评价
-   */
-  @GET("evaluation/teacher/teacher/")
-  fun teacherPerAll(@Header("token")token: String):Observable<TeacherCommentAll>
-
-  /**
-   * 老师端 所有老师对某个家长孩子的所有评价
-   */
-  @GET("evaluation/teacher/parent/")
-  fun teacherChildAll(@Header("token")token: String):Observable<ChildCommentAll>
-
-  /**
-   * 家长端 某个老师对该家长孩子的所有评价
-   */
-  @GET("evaluation/parent/teacher/")
-  fun parentTeacherComment(@Header("token")token: String):Observable<TeacherPerComment>
-
-  /**
-   * 家长端 家长自己的所有评价
-   */
-  @GET("evaluation/parent/parent/")
-  fun parentSelfComment(@Header("token")token: String):Observable<ParentPerComment>
-
-  /**
-   * 返回班级通讯录
-   */
-  @GET("class/info/")
-  fun classAddress(@Header("token")token: String,@Query("cid") cid:String):Observable<AddressBean>
 
     //todo 奇怪的代码
   fun storePicture():Observable<Any>
@@ -188,5 +120,39 @@ interface RetrofitService{
    * 注册一个班主任帐号
    */
   @POST("mainteacher/signup/")
-fun signUpMainTeacher(@Body mainTeacherSignUpBody: MainTeacherSignUpBody):Observable<Any>
+  fun signUpMainTeacher(@Body mainTeacherSignUpBody: MainTeacherSignUpBody):Observable<Any>
+
+  /**
+   * 老师端孩子评论list
+   */
+  @GET("evaluation/view/teacher/")
+  fun teacherList(@Header("token")token: String):Observable<List<CommentList>>
+
+  /**
+   * 家长端评论list
+   */
+  @GET("evaluation/view/parent/")
+  fun parentList(@Header("token")token: String):Observable<List<CommentList>>
+
+  /**
+   * 老师发送孩子评价
+   */
+  @POST("evaluation/teacher/")
+  fun teacherComment(@Body commentBody: CommentBody,
+                     @Header("token")token: String,@Query("sid")sid:Int):Observable<Any>
+
+  /**
+   * 家长发送孩子评价
+   */
+  @POST("evaluation/parent/")
+  fun parentComment(@Body commentBody: CommentBody,
+                    @Header("token")token: String,@Query("sid")sid:Int):Observable<Any>
+
+
+  /**
+   * 返回班级通讯录
+   */
+  @GET("class/info/")
+  fun classAddress(@Header("token")token: String,@Query("cid")cid:Int):Observable<ClassAddress>
+
 }

@@ -3,23 +3,201 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/bg_content"
+    >
 
-    <ImageButton
-        android:id="@+id/img_statistics"
+    <include layout="@layout/view_toolbar"/>
+
+    <TextView
+        android:id="@+id/eval_d_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/ic_statistics"
-        />
+        android:text="姓名"
+        android:textSize="24sp"
+        android:padding="16dp"
+        android:textColor="@color/colorPrimary"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/comment_ryc"
+
+    <TextView
+        android:id="@+id/eval_d_detail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:text="详情"
+        android:textSize="18sp"
+        android:padding="6dp"/>
 
-    </android.support.v7.widget.RecyclerView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="评分"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:textColor="@color/colorPrimary"
+        />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/text_score1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/evaluation_text1"
+            />
+
+        <TextView
+            android:id="@+id/eval_score1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/evaluation_score_zero"
+            android:layout_toEndOf="@id/text_score1"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:textColor="@color/colorPrimary"
+            />
+
+        <SeekBar
+            android:id="@+id/comment_score1"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_toEndOf="@+id/eval_score1"
+            android:layout_toRightOf="@id/eval_score1"
+            android:max="20"
+            android:clickable="false" />
+
+        <TextView
+            android:id="@+id/text_score2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_score1"
+            android:text="@string/evaluation_text2"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:id="@+id/eval_score2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/evaluation_score_zero"
+            android:layout_toEndOf="@id/text_score2"
+            android:layout_below="@id/comment_score1"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/colorPrimary"
+            />
+        <SeekBar
+            android:id="@+id/comment_score2"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@+id/eval_score1"
+            android:layout_toEndOf="@+id/eval_score2"
+            android:layout_toRightOf="@id/text1"
+            android:layout_marginTop="15dp"
+            android:max="20"/>
+
+        <TextView
+            android:id="@+id/text_score3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_score2"
+            android:text="@string/evaluation_text3"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:id="@+id/eval_score3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/evaluation_score_zero"
+            android:layout_toEndOf="@id/text_score3"
+            android:layout_below="@id/comment_score2"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/colorPrimary"
+            />
+        <SeekBar
+            android:id="@+id/comment_score3"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@+id/eval_score2"
+            android:layout_toEndOf="@+id/eval_score3"
+            android:layout_toRightOf="@id/text1"
+            android:layout_marginTop="15dp"
+            android:max="20"/>
+
+        <TextView
+            android:id="@+id/text_score4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_score3"
+            android:text="@string/evaluation_text4"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:id="@+id/eval_score4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/evaluation_score_zero"
+            android:layout_toEndOf="@id/text_score3"
+            android:layout_below="@id/comment_score3"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/colorPrimary"
+            />
+        <SeekBar
+            android:id="@+id/comment_score4"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@+id/eval_score3"
+            android:layout_toEndOf="@+id/eval_score3"
+            android:layout_toRightOf="@id/text_score3"
+            android:layout_marginTop="15dp"
+            android:max="20"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_score4"
+            android:text="@string/evaluation_text5"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:id="@+id/eval_score5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/evaluation_score_zero"
+            android:layout_toEndOf="@id/text_score1"
+            android:layout_below="@id/comment_score4"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/colorPrimary"
+            />
+        <SeekBar
+            android:id="@+id/comment_score5"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@+id/eval_score4"
+            android:layout_toEndOf="@+id/eval_score1"
+            android:layout_toRightOf="@id/text1"
+            android:layout_marginTop="15dp"
+            android:max="20"/>
+
+        <TextView
+            android:id="@+id/btn_graph"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/comment_score5"
+            android:text="详情图表"
+            android:layout_marginTop="35dp"
+            android:textColor="@color/design_default_color_primary"
+            android:max="20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
 
 </LinearLayout>

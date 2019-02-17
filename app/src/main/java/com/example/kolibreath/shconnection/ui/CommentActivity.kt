@@ -15,7 +15,6 @@ import org.jetbrains.anko.find
  */
 class CommentActivity : ToolbarActivity() {
 
-    lateinit var mBtnGraph:TextView
     lateinit var name:TextView
     lateinit var detail:TextView
     lateinit var scoreList: MutableList<SeekBar>
@@ -41,8 +40,6 @@ class CommentActivity : ToolbarActivity() {
     }
 
     private fun initView(){
-        mBtnGraph = find(R.id.btn_graph)
-        mBtnGraph.setOnClickListener {  }
         name = find(R.id.eval_d_name)
         detail = find(R.id.eval_d_detail)
         name.text = mComment.name

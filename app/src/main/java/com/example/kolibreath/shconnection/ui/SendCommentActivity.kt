@@ -21,6 +21,7 @@ import com.example.kolibreath.shconnection.base.net.NetFactory
 import com.example.kolibreath.shconnection.base.ui.ToolbarActivity
 import com.example.kolibreath.shconnection.extensions.getValue
 import com.example.kolibreath.shconnection.extensions.showSnackBarShort
+import org.jetbrains.anko.find
 import org.json.JSONObject
 import rx.Subscriber
 import rx.android.schedulers.AndroidSchedulers
@@ -45,6 +46,8 @@ class SendCommentActivity : ToolbarActivity(), SeekBar.OnSeekBarChangeListener{
     lateinit var mTv5: TextView
     var scoreList : MutableList<Score> = ArrayList()
 
+
+    lateinit var mBtnGraph:TextView
     lateinit var commentBody:CommentBody
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,6 +62,8 @@ class SendCommentActivity : ToolbarActivity(), SeekBar.OnSeekBarChangeListener{
     }
 
     private fun initView(){
+        mBtnGraph =  find(R.id.btn_graph)
+        mBtnGraph.setOnClickListener { GraphActivity.start(this@SendCommentActivity) }
         mEdt = findViewById(R.id.edt_parent_comment)
         mBtnSend = findViewById(R.id.btn_send_comment)
         mSorce1 = findViewById(R.id.seekBar1)

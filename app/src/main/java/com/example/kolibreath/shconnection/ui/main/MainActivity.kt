@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
@@ -21,6 +22,9 @@ import com.example.kolibreath.shconnection.ui.main.fragment.AddressFragment
 import com.example.kolibreath.shconnection.ui.main.fragment.CommentFragment
 import com.example.kolibreath.shconnection.ui.main.fragment.HomeFragment
 import com.example.kolibreath.shconnection.ui.main.profile.UserProfileActivity
+import org.jetbrains.anko.appcompat.v7.listMenuItemView
+import org.jetbrains.anko.support.v4.onPageChangeListener
+import org.jetbrains.anko.support.v4.viewPager
 import java.util.*
 
 class MainActivity : AppCompatActivity(), BottomNavigationBar.OnTabSelectedListener {
@@ -59,22 +63,25 @@ class MainActivity : AppCompatActivity(), BottomNavigationBar.OnTabSelectedListe
             override fun onTabReselected(position: Int) {}
             override fun onTabUnselected(position: Int) {}
             override fun onTabSelected(position: Int) {
-                when(position){
-                    0 ->{
-                        index = 0;
-                        replaceFragment(mFragments[index],R.id.viewpager);
-                    }
-                    1 ->{
-                        index = 1
-                        replaceFragment(mFragments[index],R.id.viewpager);
-                    }
-                    2 ->{
-                        index = 2
-                        replaceFragment(mFragments[index],R.id.viewpager);
-                    }
-                }
+                mViewPager!!.currentItem = position
             }
         })
+
+        mViewPager!!.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+
+            override fun onPageScrollStateChanged(state: Int) {
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+
+            }
+            override fun onPageSelected(position: Int) {
+                mBtmBar!!.selectTab(position)
+                mViewPager!!.currentItem = position
+            }
+
+        })
+
 
         val mBtnProfile = findViewById<ImageView>(R.id.btn_profile)
         mBtnProfile.setOnClickListener {
@@ -102,20 +109,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationBar.OnTabSelectedListe
     }
 
     override fun onTabSelected(position: Int) {
-        when(position){
-            0 ->{
-                index = 0
-                replaceFragment(mFragments[index],R.id.viewpager)
-            }
-            1 ->{
-                index = 1
-                replaceFragment(mFragments[index],R.id.viewpager)
-            }
-            2 ->{
-                index = 2
-                replaceFragment(mFragments[index],R.id.viewpager)
-            }
-        }
+        replaceFragment(mFragments[position],R.id.viewpager)
+
     }
 
     override fun onTabUnselected(position: Int) {
@@ -134,13 +129,17 @@ class MainActivity : AppCompatActivity(), BottomNavigationBar.OnTabSelectedListe
         val manager = supportFragmentManager
         mAdapter = FragmentAdapter(manager)
 
+
         mFragments.add(addressFragment)
         mFragments.add(homeFragment)
         mFragments.add(commentFragment)
         mAdapter!!.addFragment(mFragments)
 
         mViewPager!!.adapter = mAdapter
+
     }
+
+
 
     companion object {
 

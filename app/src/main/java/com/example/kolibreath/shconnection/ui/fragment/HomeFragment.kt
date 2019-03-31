@@ -95,7 +95,7 @@ class HomeFragment: BaseFragment(), SwipeRefreshLayout.OnRefreshListener{
 
                         mHomeAdapter = HomeAdapter(mList)
                         recyclerView.adapter = mHomeAdapter
-                        recyclerView.layoutManager = LinearLayoutManager(activity)
+                        recyclerView.layoutManager = LinearLayoutManager(activity) as RecyclerView.LayoutManager?
 
                     }
                 })
